@@ -12,7 +12,10 @@ namespace TrensCidades.Classes
     class Cidade : IComparable<Cidade>
     {
         private int codigo;
-        private float x, y;
+
+        //Posição em porcentagem da imagem
+        private double x, y;
+
         private string nome;
 
         public const int COMECO_CODIGO = 0;
@@ -24,22 +27,27 @@ namespace TrensCidades.Classes
         public const int COMECO_Y = COMECO_X + TAMANHO_X;
         public const int TAMANHO_Y = 5;
 
-        public Cidade(int c, string n, int x, int y)
+        public Cidade(
+            int codigo,
+            string nome, 
+            int posicaoX,
+            int posicaoY)
         {
-            Codigo = c;
-            Nome = n;
-            X = x;
-            Y = y;
+            Codigo = codigo;
+            Nome = nome;
+            X = posicaoX;
+            Y = posicaoY;
         }
 
-        public Cidade(string linha)
+        public Cidade(
+            string linha)
         {
             try
             {
                 Codigo = int.Parse(linha.Substring(COMECO_CODIGO, TAMANHO_CODIGO).Trim());
                 Nome = linha.Substring(COMECO_NOME, TAMANHO_NOME).Trim();
-                X = int.Parse(linha.Substring(COMECO_X, TAMANHO_X).Trim());
-                Y = int.Parse(linha.Substring(COMECO_Y, TAMANHO_Y).Trim());
+                X = double.Parse(linha.Substring(COMECO_X, TAMANHO_X).Trim());
+                Y = double.Parse(linha.Substring(COMECO_Y, TAMANHO_Y).Trim());
             }
             catch
             {
@@ -47,9 +55,13 @@ namespace TrensCidades.Classes
             }
         }
 
-        public Cidade(int codC)
+        public Cidade(
+            int codigo)
         {
-            Codigo = codC;
+            Codigo = codigo;
+            x = 0.0;
+            y = 0.0;
+            nome = "";
         }
 
         public int Codigo
@@ -74,23 +86,23 @@ namespace TrensCidades.Classes
             }
         }
 
-        public int X
+        public double X
         {
             get => x;
             set
             {
-                if (value < 0)
+                if (value < 0.0 || value > 1.0)
                     throw new Exception("Coordenada x inválida");
                 x = value;
             }
         }
 
-        public int Y
+        public double Y
         {
             get => y;
             set
             {
-                if (value < 0)
+                if (value < 0.0 || value > 1.0)
                     throw new Exception("Coordenada y inválida");
                 y = value;
             }

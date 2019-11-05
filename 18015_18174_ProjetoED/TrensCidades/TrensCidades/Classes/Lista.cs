@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 
 namespace TrensCidades.Classes
@@ -25,17 +26,44 @@ namespace TrensCidades.Classes
 
         protected No<T> Atual { get => atual; }
 
-        //deprecated
+        public int Quantidade { get => qtosNos; }
+
+        public T this[int indice]
+        {
+            get
+            {
+                int cont = 0;
+                for(atual = primeiro; atual != null; atual = atual.Prox)
+                {
+                    if (cont == indice)
+                        return atual.Info;
+                    ++cont;
+                }
+                return default(T);
+            }
+            set
+            {
+                int cont = 0;
+                for (atual = primeiro; atual != null; atual = atual.Prox)
+                {
+                    if (cont == indice)
+                        atual.Info = value;
+                    ++cont;
+                }
+            }
+        }
+
         public void InserirAntesDoInicio(T d)
         {
-            if (d == null) throw new Exception("Dado nulo");
+            if (d == null)
+                throw new Exception("Dado nulo");
             InserirAntesDoInicio(new No<T>(d, null));
         }
 
-        //deprecated
         public void InserirAposFim(T d)
         {
-            if (d == null) throw new Exception("Dado nulo");
+            if (d == null)
+                throw new Exception("Dado nulo");
             InserirAposFim(new No<T>(d, null));
         }
 
@@ -119,11 +147,16 @@ namespace TrensCidades.Classes
 
         public bool ExisteDado(T d)
         {
-            if (d == null) throw new Exception("Dado nulo");
+            if (d == null)
+                throw new Exception("Dado nulo");
+
             atual = primeiro;
             anterior = null;
-            if (EstaVazia) return false;
-            if (d.CompareTo(primeiro.Info) < 0) return false;
+
+            if (EstaVazia)
+                return false;
+            if (d.CompareTo(primeiro.Info) < 0)
+                return false;
             if (d.CompareTo(ultimo.Info) > 0)
             {
                 anterior = ultimo;
@@ -132,15 +165,17 @@ namespace TrensCidades.Classes
             }
             while (atual != null)
             {
-                if (d.CompareTo(atual.Info) == 0) return true;
-                if (d.CompareTo(atual.Info) < 0) return false;
+                if (d.CompareTo(atual.Info) == 0)
+                    return true;
+                if (d.CompareTo(atual.Info) < 0)
+                    return false;
                 anterior = atual;
                 atual = atual.Prox;
             }
             return false;
         }
 
-        public void InserirOrdem(T d)
+        /*public void InserirOrdem(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
             if (ExisteDado(d)) throw new Exception("Dado já existente");
@@ -148,7 +183,7 @@ namespace TrensCidades.Classes
             if (EstaVazia || anterior == null && atual != null)
                 InserirAntesDoInicio(n);
             else InserirMeio(n);
-        }
+        }*/
 
         protected void InserirMeio(No<T> novoNo)
         {
@@ -207,8 +242,10 @@ namespace TrensCidades.Classes
         {
             antM = anterior = null;
             atuM = atual = primeiro;
-            IniciarPercursoSequencial();
-            while (PodePercorrer())
+
+            for (atual = primeiro, anterior = null;
+                atual != null;
+                anterior = atual, atual = atual.Prox)
             {
                 if (atual.Info.CompareTo(atuM.Info) < 0)
                 {
@@ -224,6 +261,28 @@ namespace TrensCidades.Classes
             for (atual = primeiro; atual != null; atual = atual.Prox)
                 ret += atual.ToString() + "\n";
             return ret;
+        }
+
+        //Métodos necessários para fazer foreach
+        public IEnumerator GetEnumerator()
+        {
+            return (IEnumerator)this;
+        }
+
+        public bool MoveNext()
+        {
+            atual = atual.Prox;
+            return atual != null;
+        }
+
+        public void Reset()
+        {
+            atual = primeiro;
+        }
+
+        public object Current
+        {
+            get => atual.Info;
         }
     }
 }
