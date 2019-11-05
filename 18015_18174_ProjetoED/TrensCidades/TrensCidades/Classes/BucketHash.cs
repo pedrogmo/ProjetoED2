@@ -69,5 +69,15 @@ namespace TrensCidades.Classes
                         Console.WriteLine(i + " " + chave);
             Console.ReadKey();
         }
+
+        public string Conteudo()
+        {
+            string ret = "";
+            for (int i = 0; i < data.GetUpperBound(0); i++)
+                if (!data[i].EstaVazia)
+                    foreach (T chave in data[i])
+                        ret += i + ": {" + chave.ToString() + "}";
+            return ret;
+        }
     }
 }

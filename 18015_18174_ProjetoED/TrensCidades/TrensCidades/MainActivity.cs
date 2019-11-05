@@ -5,6 +5,7 @@ using TrensCidades.Classes;
 using System.IO;
 using System.Text;
 using Android.Content.Res;
+using Android.Util;
 
 namespace TrensCidades
 {
@@ -41,12 +42,7 @@ namespace TrensCidades
                     bhCidade.Insert(cd);
                 }
 
-            
-
-            
-            
-            
-            
+            Log.Info("MSG", bhCidade.Conteudo());
         }
     }
 }
