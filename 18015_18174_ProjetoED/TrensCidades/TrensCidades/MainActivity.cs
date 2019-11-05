@@ -39,7 +39,7 @@ namespace TrensCidades
                 {
                     string linha = arq.ReadLine();
                     Cidade cd = new Cidade(linha);
-                    bhCidade.Insert(cd);
+                    bhCidade.Inserir(cd);
                 }
         }
     }

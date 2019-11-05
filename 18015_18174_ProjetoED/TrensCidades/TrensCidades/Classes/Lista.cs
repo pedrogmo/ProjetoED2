@@ -8,7 +8,7 @@ namespace TrensCidades.Classes
     //Gustavo Henrique de Meira - 18015
     //Pedro Gomes Moreira - 18174
 
-    class Lista<T> : IEnumerable<T> where T : IComparable<T>
+    class Lista<T> : IEnumerable<T>
     {
         protected No<T> atual, primeiro, anterior, ultimo;
         protected int qtosNos;
@@ -54,21 +54,21 @@ namespace TrensCidades.Classes
             }
         }
 
-        public void InserirAntesDoInicio(T d)
+        public void InserirInicio(T d)
         {
             if (d == null)
                 throw new Exception("Dado nulo");
-            InserirAntesDoInicio(new No<T>(d, null));
+            InserirInicio(new No<T>(d, null));
         }
 
-        public void InserirAposFim(T d)
+        public void InserirFim(T d)
         {
             if (d == null)
                 throw new Exception("Dado nulo");
-            InserirAposFim(new No<T>(d, null));
+            InserirFim(new No<T>(d, null));
         }
 
-        protected void InserirAntesDoInicio(No<T> novoNo)
+        protected void InserirInicio(No<T> novoNo)
         {
             novoNo.Prox = primeiro;
             primeiro = novoNo;
@@ -77,7 +77,7 @@ namespace TrensCidades.Classes
             qtosNos++;
         }
 
-        protected void InserirAposFim(No<T> novoNo)
+        protected void InserirFim(No<T> novoNo)
         {
             novoNo.Prox = null;
             if (EstaVazia)
@@ -108,83 +108,24 @@ namespace TrensCidades.Classes
             }
         }
 
-        public Lista<T> Casamento(Lista<T> l)
-        {
-            if (l == null) throw new Exception("Lista nula");
-            Lista<T> ret = new Lista<T>();
-            atual = primeiro;
-            l.atual = l.primeiro;
-            while (atual != null && l.atual != null)
-            {
-                if (atual.Info.CompareTo(l.atual.Info) < 0)
-                {
-                    ret.InserirAposFim(atual);
-                    atual = atual.Prox;
-                }
-                else if (atual.Info.CompareTo(l.atual.Info) > 0)
-                {
-                    ret.InserirAposFim(l.atual);
-                    l.atual = l.atual.Prox;
-                }
-                else if (atual.Info.CompareTo(l.atual.Info) == 0)
-                {
-                    ret.InserirAposFim(atual);
-                    atual = atual.Prox;
-                    l.atual = l.atual.Prox;
-                }
-            }
-            while (atual != null)
-            {
-                ret.InserirAposFim(atual);
-                atual = atual.Prox;
-            }
-            while (l.atual != null)
-            {
-                ret.InserirAposFim(l.atual);
-                l.atual = l.atual.Prox;
-            }
-            return ret;
-        }
-
         public bool ExisteDado(T d)
         {
             if (d == null)
                 throw new Exception("Dado nulo");
 
-            atual = primeiro;
-            anterior = null;
-
             if (EstaVazia)
                 return false;
-            if (d.CompareTo(primeiro.Info) < 0)
-                return false;
-            if (d.CompareTo(ultimo.Info) > 0)
+
+            for (atual = primeiro, anterior = null;
+                atual != null;
+                anterior = atual, atual = atual.Prox)
             {
-                anterior = ultimo;
-                atual = null;
-                return false;
-            }
-            while (atual != null)
-            {
-                if (d.CompareTo(atual.Info) == 0)
+                if (d.Equals(atual.Info))
                     return true;
-                if (d.CompareTo(atual.Info) < 0)
-                    return false;
-                anterior = atual;
-                atual = atual.Prox;
             }
+
             return false;
         }
-
-        /*public void InserirOrdem(T d)
-        {
-            if (d == null) throw new Exception("Dado nulo");
-            if (ExisteDado(d)) throw new Exception("Dado já existente");
-            No<T> n = new No<T>(d, null);
-            if (EstaVazia || anterior == null && atual != null)
-                InserirAntesDoInicio(n);
-            else InserirMeio(n);
-        }*/
 
         protected void InserirMeio(No<T> novoNo)
         {
@@ -217,43 +158,6 @@ namespace TrensCidades.Classes
                     ultimo = ant;
             }
             qtosNos--;
-        }
-
-        public void Ordenar()
-        {
-            if (!EstaVazia)
-            {
-                Lista<T> ord = new Lista<T>();
-                No<T> atuM = null, antM = null, novoNo;
-                while (!EstaVazia)
-                {
-                    ProcurarMenor(ref antM, ref atuM);
-                    novoNo = atuM;
-                    RemoverNo(antM, atuM);
-                    ord.InserirAposFim(novoNo);
-                }
-                primeiro = ord.primeiro;
-                ultimo = ord.ultimo;
-                qtosNos = ord.qtosNos;
-                atual = anterior = null;
-            }
-        }
-
-        protected void ProcurarMenor(ref No<T> antM, ref No<T> atuM)
-        {
-            antM = anterior = null;
-            atuM = atual = primeiro;
-
-            for (atual = primeiro, anterior = null;
-                atual != null;
-                anterior = atual, atual = atual.Prox)
-            {
-                if (atual.Info.CompareTo(atuM.Info) < 0)
-                {
-                    atuM = atual;
-                    antM = anterior;
-                }
-            }
         }
 
         public override string ToString()

@@ -108,7 +108,8 @@ namespace TrensCidades.Classes
             }
         }   
         
-        public int CompareTo(Cidade c)
+        public int CompareTo(
+            Cidade c)
         {
             return codigo - c.codigo;
         }
@@ -117,6 +118,29 @@ namespace TrensCidades.Classes
         {
             return $"{codigo} - {nome}";
         }
+
+        public override bool Equals(
+            object obj)
+        {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+
+            Cidade c = (Cidade)obj;
+
+            if (codigo != c.codigo)
+                return false;
+            if (nome != c.nome)
+                return false;
+            if (x != c.x)
+                return false;
+            if (y != c.y)
+                return false;
+
+            return true;
+        }
+
         public override int GetHashCode()
         {
             int ret = 1;

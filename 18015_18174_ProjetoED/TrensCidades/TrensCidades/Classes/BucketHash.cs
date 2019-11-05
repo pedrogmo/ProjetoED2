@@ -14,7 +14,6 @@ namespace TrensCidades.Classes
     {
         private const int SIZE = 101;
         private Lista<T>[] data;
-        
 
         public BucketHash()
         {
@@ -23,39 +22,28 @@ namespace TrensCidades.Classes
                 data[i] = new Lista<T>();
         }
 
-        /*public int Hash(
-            string s)
-        {
-            long tot = 0;
-            foreach (char c in s)
-                tot += 37 * tot + (int)c;
-            tot = tot % data.GetUpperBound(0);
-            if (tot < 0)
-                tot += data.GetUpperBound(0);
-            return (int)tot;
-        }*/
         private int Hash(T item)
         {
             return Math.Abs(item.GetHashCode() % SIZE);
         }
 
-        public void Insert(
+        public void Inserir(
             T item)
         {
-            int hash_value;
-            hash_value = Hash(item);
-            if (!data[hash_value].ExisteDado(item))
-                data[hash_value].InserirAposFim(item);
+            int hashValue;
+            hashValue = Hash(item);
+            if (!data[hashValue].ExisteDado(item))
+                data[hashValue].InserirFim(item);
         }
 
-        public bool Remove(
+        public bool Excluir(
             T item)
         {
-            int hash_value;
-            hash_value = Hash(item);
-            if (data[hash_value].ExisteDado(item))
+            int hashValue;
+            hashValue = Hash(item);
+            if (data[hashValue].ExisteDado(item))
             {
-                data[hash_value].Excluir(item);
+                data[hashValue].Excluir(item);
                 return true;
             }
             return false;
