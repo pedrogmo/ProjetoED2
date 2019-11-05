@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hashString1
+namespace TrensCidades.Classes
 {
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
+
     class BucketHash
     {
         private const int SIZE = 101;

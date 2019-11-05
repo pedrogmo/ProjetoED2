@@ -1,13 +1,18 @@
 ﻿using System;
 using System.IO;
 
-    public class ListaSimples<Dado> where Dado : IComparable<Dado>
+namespace TrensCidades.Classes
+{
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
+
+    class Lista<T> where T : IComparable<T>
     {
-        protected NoLista<Dado> atual, primeiro, anterior, ultimo;
+        protected No<T> atual, primeiro, anterior, ultimo;
         protected int qtosNos;
         protected bool primeiroAcessoDoPercurso;
 
-        public ListaSimples()
+        public Lista()
         {
             primeiro = atual = anterior = ultimo = null;
             qtosNos = 0;
@@ -15,27 +20,27 @@ using System.IO;
 
         public bool EstaVazia { get => primeiro == null; }
 
-        public NoLista<Dado> Primeiro { get => primeiro; }
+        public No<T> Primeiro { get => primeiro; }
 
-        public NoLista<Dado> Ultimo { get => ultimo; }
+        public No<T> Ultimo { get => ultimo; }
 
-        protected NoLista<Dado> Atual { get => atual; }
+        protected No<T> Atual { get => atual; }
 
         //deprecated
-        public void InserirAntesDoInicio(Dado d)
+        public void InserirAntesDoInicio(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
-            InserirAntesDoInicio(new NoLista<Dado>(d, null));
+            InserirAntesDoInicio(new No<T>(d, null));
         }
 
         //deprecated
-        public void InserirAposFim(Dado d)
+        public void InserirAposFim(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
-            InserirAposFim(new NoLista<Dado>(d, null));
+            InserirAposFim(new No<T>(d, null));
         }
 
-        protected void InserirAntesDoInicio(NoLista<Dado> novoNo)
+        protected void InserirAntesDoInicio(No<T> novoNo)
         {
             novoNo.Prox = primeiro;
             primeiro = novoNo;
@@ -44,7 +49,7 @@ using System.IO;
             qtosNos++;
         }
 
-        protected void InserirAposFim(NoLista<Dado> novoNo)
+        protected void InserirAposFim(No<T> novoNo)
         {
             novoNo.Prox = null;
             if (EstaVazia)
@@ -59,7 +64,7 @@ using System.IO;
         {
             if (!EstaVazia)
             {
-                NoLista<Dado> um, dois = null, tres;
+                No<T> um, dois = null, tres;
                 um = primeiro;
                 dois = um.Prox;
                 while (dois != null)
@@ -75,10 +80,10 @@ using System.IO;
             }
         }
 
-        public ListaSimples<Dado> Casamento(ListaSimples<Dado> l)
+        public Lista<T> Casamento(Lista<T> l)
         {
             if (l == null) throw new Exception("Lista nula");
-            ListaSimples<Dado> ret = new ListaSimples<Dado>();
+            Lista<T> ret = new Lista<T>();
             atual = primeiro;
             l.atual = l.primeiro;
             while (atual != null && l.atual != null)
@@ -113,7 +118,7 @@ using System.IO;
             return ret;
         }
 
-        public bool ExisteDado(Dado d)
+        public bool ExisteDado(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
             atual = primeiro;
@@ -136,17 +141,17 @@ using System.IO;
             return false;
         }
 
-        public void InserirOrdem(Dado d)
+        public void InserirOrdem(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
             if (ExisteDado(d)) throw new Exception("Dado já existente");
-            NoLista<Dado> n = new NoLista<Dado>(d, null);
+            No<T> n = new No<T>(d, null);
             if (EstaVazia || anterior == null && atual != null)
                 InserirAntesDoInicio(n);
             else InserirMeio(n);
         }
 
-        protected void InserirMeio(NoLista<Dado> novoNo)
+        protected void InserirMeio(No<T> novoNo)
         {
             novoNo.Prox = atual;
             anterior.Prox = novoNo;
@@ -155,14 +160,14 @@ using System.IO;
             qtosNos++;
         }
 
-        public void Excluir(Dado d)
+        public void Excluir(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
             if (!ExisteDado(d)) throw new Exception("Dado não existente");
             RemoverNo(anterior, atual);
         }
 
-        protected void RemoverNo(NoLista<Dado> ant, NoLista<Dado> atu)
+        protected void RemoverNo(No<T> ant, No<T> atu)
         {
             if (ant == null && atu != null)
             {
@@ -183,8 +188,8 @@ using System.IO;
         {
             if (!EstaVazia)
             {
-                ListaSimples<Dado> ord = new ListaSimples<Dado>();
-                NoLista<Dado> atuM = null, antM = null, novoNo;
+                Lista<T> ord = new Lista<T>();
+                No<T> atuM = null, antM = null, novoNo;
                 while (!EstaVazia)
                 {
                     ProcurarMenor(ref antM, ref atuM);
@@ -199,7 +204,7 @@ using System.IO;
             }
         }
 
-        protected void ProcurarMenor(ref NoLista<Dado> antM, ref NoLista<Dado> atuM)
+        protected void ProcurarMenor(ref No<T> antM, ref No<T> atuM)
         {
             antM = anterior = null;
             atuM = atual = primeiro;
@@ -256,3 +261,4 @@ using System.IO;
             return ret;
         }
     }
+}

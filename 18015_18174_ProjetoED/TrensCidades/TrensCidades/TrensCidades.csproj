@@ -54,6 +54,16 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BucketHash.cs" />
+    <Compile Include="Classes\Cidade.cs" />
+    <Compile Include="Classes\DistOriginal.cs" />
+    <Compile Include="Classes\Grafo.cs" />
+    <Compile Include="Classes\IStack.cs" />
+    <Compile Include="Classes\Lista.cs" />
+    <Compile Include="Classes\No.cs" />
+    <Compile Include="Classes\Pilha.cs" />
+    <Compile Include="Classes\PilhaVaziaException.cs" />
+    <Compile Include="Classes\Vertice.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

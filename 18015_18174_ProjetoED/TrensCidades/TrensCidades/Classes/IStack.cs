@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace apCaminhosMarte
+namespace TrensCidades.Classes
 {
-    //Felipe Scherer Vicentin (18178)
-    //Pedro Gomes Moreira (18174)
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
 
-    //Interface de uma pilha genérica
     interface IStack<T>
     {
         void Empilhar(T info);

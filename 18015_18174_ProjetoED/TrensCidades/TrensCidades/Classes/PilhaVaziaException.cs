@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace apCaminhosMarte
+namespace TrensCidades.Classes
 {
-    //Felipe Scherer Vicentin (18178)
-    //Pedro Gomes Moreira (18174)
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
 
-    //Classe para exceção de pilha vazia, herda de Exception
     class PilhaVaziaException : Exception
     {
         public PilhaVaziaException(string msg) : base(msg)
