@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:layout_alignParentRight="@id/tvDe" />
+        android:layout_alignParentRight="@+id/tvDe" />
     <TextView
         android:id="@+id/tvDe"
         android:layout_width="wrap_content"

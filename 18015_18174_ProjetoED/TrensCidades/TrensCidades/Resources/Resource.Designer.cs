@@ -41,6 +41,49 @@ namespace TrensCidades
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f040009
+			public const int btnAdicionarCaminho = 2130968585;
+			
+			// aapt resource value: 0x7f040008
+			public const int btnAdicionarCidade = 2130968584;
+			
+			// aapt resource value: 0x7f040004
+			public const int btnBuscar = 2130968580;
+			
+			// aapt resource value: 0x7f040005
+			public const int canvas = 2130968581;
+			
+			// aapt resource value: 0x7f040000
+			public const int spDeOnde = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int spParaOnde = 2130968578;
+			
+			// aapt resource value: 0x7f040007
+			public const int tbCaminhos = 2130968583;
+			
+			// aapt resource value: 0x7f040001
+			public const int tvDe = 2130968577;
+			
+			// aapt resource value: 0x7f040003
+			public const int tvPara = 2130968579;
+			
+			// aapt resource value: 0x7f040006
+			public const int tvResultados = 2130968582;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class Layout
 		{
 			

@@ -10,19 +10,20 @@ namespace TrensCidades.Classes
     //Gustavo Henrique de Meira - 18015
     //Pedro Gomes Moreira - 18174
 
-    class BucketHash
+    class BucketHash<T> where T : IComparable<T>
     {
         private const int SIZE = 101;
-        private Lista<string>[] data;
+        private Lista<T>[] data;
+        
 
         public BucketHash()
         {
-            data = new Lista<string>[SIZE];
+            data = new Lista<T>[SIZE];
             for (int i = 0; i <= SIZE - 1; i++)
-                data[i] = new Lista<string>();
+                data[i] = new Lista<T>();
         }
 
-        public int Hash(
+        /*public int Hash(
             string s)
         {
             long tot = 0;
@@ -32,10 +33,14 @@ namespace TrensCidades.Classes
             if (tot < 0)
                 tot += data.GetUpperBound(0);
             return (int)tot;
+        }*/
+        private int Hash(T item)
+        {
+            return item.GetHashCode() % SIZE;
         }
 
         public void Insert(
-            string item)
+            T item)
         {
             int hash_value;
             hash_value = Hash(item);
@@ -44,7 +49,7 @@ namespace TrensCidades.Classes
         }
 
         public bool Remove(
-            string item)
+            T item)
         {
             int hash_value;
             hash_value = Hash(item);
