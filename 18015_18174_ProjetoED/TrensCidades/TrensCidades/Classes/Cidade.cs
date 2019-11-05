@@ -117,5 +117,15 @@ namespace TrensCidades.Classes
         {
             return $"{codigo} - {nome}";
         }
+        public override int GetHashCode()
+        {
+            int ret = 1;
+            ret = ret * 2 + codigo.GetHashCode();
+            ret = ret * 2 + nome.GetHashCode();
+            ret = ret * 2 + x.GetHashCode();
+            ret = ret * 2 + y.GetHashCode();
+
+            return ret;
+        }
     }
 }

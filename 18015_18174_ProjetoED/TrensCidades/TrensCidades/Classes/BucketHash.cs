@@ -36,7 +36,7 @@ namespace TrensCidades.Classes
         }*/
         private int Hash(T item)
         {
-            return item.GetHashCode() % SIZE;
+            return Math.Abs(item.GetHashCode() % SIZE);
         }
 
         public void Insert(

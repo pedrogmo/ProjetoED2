@@ -88,7 +88,7 @@
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\cidades.txt" />
+    <AndroidAsset Include="Assets\cidades.txt" />
     <Content Include="Assets\grafo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
