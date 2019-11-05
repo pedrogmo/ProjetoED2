@@ -15,6 +15,6 @@ namespace TrensCidades.Classes
         T Desempilhar();
         T Topo();
         int Tamanho { get; }
-        bool EstaVazia();
+        bool EstaVazia { get; }
     }
 }

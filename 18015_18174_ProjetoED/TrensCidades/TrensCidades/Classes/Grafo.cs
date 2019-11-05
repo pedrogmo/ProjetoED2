@@ -6,10 +6,10 @@ namespace TrensCidades.Classes
     //Gustavo Henrique de Meira - 18015
     //Pedro Gomes Moreira - 18174
 
-    class Grafo
+    class Grafo<T>
     {
         private const int NUM_VERTICES = 20;
-        private Vertice[] vertices;
+        private Vertice<T>[] vertices;
         private int[,] adjMatrix;
         int numVerts;
 
@@ -33,7 +33,7 @@ namespace TrensCidades.Classes
 
         public Grafo()
         {
-            vertices = new Vertice[NUM_VERTICES];
+            vertices = new Vertice<T>[NUM_VERTICES];
             adjMatrix = new int[NUM_VERTICES, NUM_VERTICES];
             numVerts = 0;
 
@@ -45,9 +45,9 @@ namespace TrensCidades.Classes
         }
 
         public void NovoVertice(
-            string label)
+            T informacao)
         {
-            vertices[numVerts] = new Vertice(label);
+            vertices[numVerts] = new Vertice<T>(informacao);
             numVerts++;
         }
 
@@ -118,19 +118,19 @@ namespace TrensCidades.Classes
 
         public string OrdenacaoTopologica()
         {
-            Stack<string> gPilha = new Stack<string>(); // para guardar a sequência de vértices
+            Pilha<T> gPilha = new Pilha<T>(); // para guardar a sequência de vértices
             int origVerts = numVerts;
             while (numVerts > 0)
             {
                 int currVertex = SemSucessores();
                 if (currVertex == -1)
                     return "Erro: grafo possui ciclos.";
-                gPilha.Push(vertices[currVertex].rotulo);   // empilha vértice
+                gPilha.Empilhar(vertices[currVertex].info);   // empilha vértice
                 RemoverVertice(currVertex);
             }
             string resultado = "Sequência da Ordenação Topológica: ";
-            while (gPilha.Count > 0)
-                resultado += gPilha.Pop() + " ";    // desempilha para exibir
+            while (!gPilha.EstaVazia)
+                resultado += gPilha.Desempilhar() + " ";    // desempilha para exibir
             return resultado;
         }
 
@@ -145,19 +145,19 @@ namespace TrensCidades.Classes
 
         public void PercursoEmProfundidade()
         {
-            Stack<int> gPilha = new Stack<int>(); // para guardar a sequência de vértices
+            Pilha<int> gPilha = new Pilha<int>(); // para guardar a sequência de vértices
             vertices[0].foiVisitado = true;
-            gPilha.Push(0);
+            gPilha.Empilhar(0);
             int v;
-            while (gPilha.Count > 0)
+            while (!gPilha.EstaVazia)
             {
-                v = ObterVerticeAdjacenteNaoVisitado(gPilha.Peek());
+                v = ObterVerticeAdjacenteNaoVisitado(gPilha.Topo());
                 if (v == -1)
-                    gPilha.Pop();
+                    gPilha.Desempilhar();
                 else
                 {
                     vertices[v].foiVisitado = true;
-                    gPilha.Push(v);
+                    gPilha.Empilhar(v);
                 }
             }
             for (int j = 0; j <= numVerts - 1; j++)
@@ -198,20 +198,20 @@ namespace TrensCidades.Classes
         public void ArvoreGeradoraMinima(
             int primeiro)
         {
-            Stack<int> gPilha = new Stack<int>(); // para guardar a sequência de vértices
+            Pilha<int> gPilha = new Pilha<int>(); // para guardar a sequência de vértices
             vertices[primeiro].foiVisitado = true;
-            gPilha.Push(primeiro);
+            gPilha.Empilhar(primeiro);
             int currVertex, ver;
-            while (gPilha.Count > 0)
+            while (!gPilha.EstaVazia)
             {
-                currVertex = gPilha.Peek();
+                currVertex = gPilha.Topo();
                 ver = ObterVerticeAdjacenteNaoVisitado(currVertex);
                 if (ver == -1)
-                    gPilha.Pop();
+                    gPilha.Desempilhar();
                 else
                 {
                     vertices[ver].foiVisitado = true;
-                    gPilha.Push(ver);
+                    gPilha.Empilhar(ver);
                 }
             }
             for (int j = 0; j <= numVerts - 1; j++)
@@ -300,37 +300,37 @@ namespace TrensCidades.Classes
             string linha = "", resultado = "";
             for (int j = 0; j < numVerts; j++)
             {
-                linha += vertices[j].rotulo + "=";
+                linha += vertices[j].info.ToString() + "=";
                 if (percurso[j].distancia == INFINITY)
                     linha += "inf";
                 else
                     linha += percurso[j].distancia;
-                string pai = vertices[percurso[j].verticePai].rotulo;
+                string pai = vertices[percurso[j].verticePai].info.ToString();
                 linha += "(" + pai + ") ";
             }
 
             int onde = finalDoPercurso;
-            Stack<string> pilha = new Stack<string>();
+            Pilha<T> pilha = new Pilha<T>();
 
             int cont = 0;
             while (onde != inicioDoPercurso)
             {
                 onde = percurso[onde].verticePai;
-                pilha.Push(vertices[onde].rotulo);
+                pilha.Empilhar(vertices[onde].info);
                 cont++;
             }
 
-            while (pilha.Count != 0)
+            while (!pilha.EstaVazia)
             {
-                resultado += pilha.Pop();
-                if (pilha.Count != 0)
+                resultado += pilha.Desempilhar();
+                if (!pilha.EstaVazia)
                     resultado += " --> ";
             }
 
             if ((cont == 1) && (percurso[finalDoPercurso].distancia == INFINITY))
                 resultado = "Não há caminho";
             else
-                resultado += " --> " + vertices[finalDoPercurso].rotulo;
+                resultado += " --> " + vertices[finalDoPercurso].info.ToString();
             return resultado;
         }
     }

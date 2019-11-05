@@ -5,14 +5,18 @@ namespace TrensCidades.Classes
     //Gustavo Henrique de Meira - 18015
     //Pedro Gomes Moreira - 18174
 
-    class Vertice
+    class Vertice<T>
     {
         public bool foiVisitado;
-        public string rotulo;
+        public T info;
 
-        public Vertice(string label)
+        public Vertice(
+            T informacao)
         {
-            rotulo = label;
+            if (informacao == null)
+                throw new Exception("Info do vértice nula");
+
+            info = informacao;
             foiVisitado = false;
         }
     }

@@ -22,9 +22,9 @@ namespace TrensCidades.Classes
 
         public int Tamanho { get => qtd; }
 
-        public bool EstaVazia()
+        public bool EstaVazia
         {
-            return topo == null;
+            get => topo == null;
         }
 
         public void Empilhar(T info)
@@ -36,14 +36,14 @@ namespace TrensCidades.Classes
 
         public T Topo()
         {
-            if (EstaVazia())
+            if (EstaVazia)
                 throw new PilhaVaziaException("Pilha vazia");
             return topo.Info;
         }
 
         public T Desempilhar()
         {
-            if (EstaVazia())
+            if (EstaVazia)
                 throw new PilhaVaziaException("Pilha vazia");
             T ret = topo.Info;
             topo = topo.Prox; //move o topo para o próximo elemento
@@ -53,7 +53,7 @@ namespace TrensCidades.Classes
 
         public override string ToString()
         {
-            string ret = EstaVazia() ? "Pilha vazia" : "";
+            string ret = EstaVazia ? "Pilha vazia" : "";
             for (No<T> p = topo; p != null; p = p.Prox)
             {
                 ret += "(" + p.Info.ToString() + ")";
