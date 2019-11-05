@@ -65,8 +65,8 @@ namespace TrensCidades.Classes
         {
             for (int i = 0; i < data.GetUpperBound(0); i++)
                 if (!data[i].EstaVazia)
-                    foreach (string chave in data[i])
-                        Console.WriteLine(i + " " + chave);
+                    foreach (T chave in data[i])
+                        Console.WriteLine(i + " " + chave.ToString());
             Console.ReadKey();
         }
 
@@ -76,7 +76,7 @@ namespace TrensCidades.Classes
             for (int i = 0; i < data.GetUpperBound(0); i++)
                 if (!data[i].EstaVazia)
                     foreach (T chave in data[i])
-                        ret += i + ": {" + chave.ToString() + "}";
+                        ret += i + ": {" + chave.ToString() + "}" + "\n";
             return ret;
         }
     }

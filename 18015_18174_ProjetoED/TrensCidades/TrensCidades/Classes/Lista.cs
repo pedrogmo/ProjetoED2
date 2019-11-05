@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace TrensCidades.Classes
@@ -7,7 +8,7 @@ namespace TrensCidades.Classes
     //Gustavo Henrique de Meira - 18015
     //Pedro Gomes Moreira - 18174
 
-    class Lista<T> where T : IComparable<T>
+    class Lista<T> : IEnumerable<T> where T : IComparable<T>
     {
         protected No<T> atual, primeiro, anterior, ultimo;
         protected int qtosNos;
@@ -264,25 +265,15 @@ namespace TrensCidades.Classes
         }
 
         //Métodos necessários para fazer foreach
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            return (IEnumerator)this;
+            for (atual = primeiro; atual != null; atual = atual.Prox)
+                yield return atual.Info;
         }
 
-        public bool MoveNext()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            atual = atual.Prox;
-            return atual != null;
-        }
-
-        public void Reset()
-        {
-            atual = primeiro;
-        }
-
-        public object Current
-        {
-            get => atual.Info;
+            return GetEnumerator();
         }
     }
 }

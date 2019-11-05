@@ -41,8 +41,6 @@ namespace TrensCidades
                     Cidade cd = new Cidade(linha);
                     bhCidade.Insert(cd);
                 }
-
-            Log.Info("MSG", bhCidade.Conteudo());
         }
     }
 }
