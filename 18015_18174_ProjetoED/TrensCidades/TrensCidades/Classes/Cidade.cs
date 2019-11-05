@@ -11,16 +11,16 @@ namespace TrensCidades.Classes
 
     class Cidade : IComparable<Cidade>
     {
-        protected int codigo;
-        protected int x, y;      
-        protected string nome;
+        private int codigo;
+        private float x, y;
+        private string nome;
 
         public const int COMECO_CODIGO = 0;
-        public const int TAMANHO_CODIGO = 3;
+        public const int TAMANHO_CODIGO = 2;
         public const int COMECO_NOME = COMECO_CODIGO + TAMANHO_CODIGO;
-        public const int TAMANHO_NOME = 15;
+        public const int TAMANHO_NOME = 16;
         public const int COMECO_X = COMECO_NOME + TAMANHO_NOME;
-        public const int TAMANHO_X = 5;
+        public const int TAMANHO_X = 6;
         public const int COMECO_Y = COMECO_X + TAMANHO_X;
         public const int TAMANHO_Y = 5;
 

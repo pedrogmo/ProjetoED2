@@ -11,8 +11,8 @@ namespace TrensCidades.Classes
 
     class Pilha<T> : IStack<T>
     {
-        protected No<T> topo;
-        protected int qtd;
+        private No<T> topo;
+        private int qtd;
 
         public Pilha()
         {

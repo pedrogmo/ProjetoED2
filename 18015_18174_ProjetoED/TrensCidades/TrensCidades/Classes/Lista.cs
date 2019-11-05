@@ -10,7 +10,6 @@ namespace TrensCidades.Classes
     {
         protected No<T> atual, primeiro, anterior, ultimo;
         protected int qtosNos;
-        protected bool primeiroAcessoDoPercurso;
 
         public Lista()
         {
@@ -218,40 +217,6 @@ namespace TrensCidades.Classes
                 }
             }
         }
-
-        public void IniciarPercursoSequencial()
-        {
-            atual = primeiro;
-            anterior = null;
-            primeiroAcessoDoPercurso = true;
-        }
-
-        public bool PodePercorrer()
-        {
-            if (primeiroAcessoDoPercurso)
-                primeiroAcessoDoPercurso = false;
-            else
-            {
-                anterior = atual;
-                atual = atual.Prox;
-            }
-            return atual != null;
-        }
-
-        public void PercorrerLista()
-        {
-            IniciarPercursoSequencial();
-            while (PodePercorrer())
-                Console.WriteLine(atual.Info);
-        }
-
-        /*public void Listar(ListBox onde)
-        {
-            onde.Items.Clear();
-            IniciarPercursoSequencial();
-            while (PodePercorrer())
-                onde.Items.Add(atual.Info);
-        }*/
 
         public override string ToString()
         {
