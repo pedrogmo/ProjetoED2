@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Classes\BucketHash.cs" />
     <Compile Include="Classes\Cidade.cs" />
-    <Compile Include="Classes\DistOriginal.cs" />
     <Compile Include="Classes\Grafo.cs" />
     <Compile Include="Classes\IStack.cs" />
     <Compile Include="Classes\Lista.cs" />

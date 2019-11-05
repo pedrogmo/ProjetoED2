@@ -14,6 +14,18 @@ namespace TrensCidades.Classes
         int numVerts;
 
         /// DJIKSTRA
+
+        private class DistOriginal
+        {
+            public int distancia;
+            public int verticePai;
+            public DistOriginal(int vp, int d)
+            {
+                distancia = d;
+                verticePai = vp;
+            }
+        }
+
         DistOriginal[] percurso;
         int INFINITY = 1000000;
         int verticeAtual;   // global usada para indicar o vértice atualmente sendo visitado 
