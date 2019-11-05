@@ -13,13 +13,13 @@ namespace TrensCidades.Classes
     class BucketHash
     {
         private const int SIZE = 101;
-        private ArrayList[] data;
+        private Lista<string>[] data;
 
         public BucketHash()
         {
-            data = new ArrayList[SIZE];
+            data = new Lista<string>[SIZE];
             for (int i = 0; i <= SIZE - 1; i++)
-                data[i] = new ArrayList();
+                data[i] = new Lista<string>();
         }
 
         public int Hash(
@@ -39,8 +39,8 @@ namespace TrensCidades.Classes
         {
             int hash_value;
             hash_value = Hash(item);
-            if (!data[hash_value].Contains(item))
-                data[hash_value].Add(item);
+            if (!data[hash_value].ExisteDado(item))
+                data[hash_value].InserirAposFim(item);
         }
 
         public bool Remove(
@@ -48,9 +48,9 @@ namespace TrensCidades.Classes
         {
             int hash_value;
             hash_value = Hash(item);
-            if (data[hash_value].Contains(item))
+            if (data[hash_value].ExisteDado(item))
             {
-                data[hash_value].Remove(item);
+                data[hash_value].Excluir(item);
                 return true;
             }
             return false;
@@ -59,7 +59,7 @@ namespace TrensCidades.Classes
         public void Exibir()
         {
             for (int i = 0; i < data.GetUpperBound(0); i++)
-                if (data[i].Count > 0)
+                if (!data[i].EstaVazia)
                     foreach (string chave in data[i])
                         Console.WriteLine(i + " " + chave);
             Console.ReadKey();
