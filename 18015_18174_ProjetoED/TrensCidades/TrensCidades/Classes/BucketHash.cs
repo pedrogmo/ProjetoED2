@@ -12,7 +12,7 @@ namespace TrensCidades.Classes
 
     class BucketHash<T> where T : IComparable<T>
     {
-        private const int SIZE = 101;
+        private const int SIZE = 500;
         private Lista<T>[] data;
 
         public BucketHash()
@@ -36,17 +36,19 @@ namespace TrensCidades.Classes
                 data[hashValue].InserirFim(item);
         }
 
-        public bool Excluir(
+        public void Excluir(
             T item)
         {
             int hashValue;
             hashValue = Hash(item);
-            if (data[hashValue].ExisteDado(item))
-            {
-                data[hashValue].Excluir(item);
-                return true;
-            }
-            return false;
+            data[hashValue].Excluir(item);
+        }
+
+        public T Buscar(
+            T chave)
+        {
+            int hashValue = Hash(chave);
+            return data[hashValue].Buscar(chave);
         }
 
         public void Exibir()

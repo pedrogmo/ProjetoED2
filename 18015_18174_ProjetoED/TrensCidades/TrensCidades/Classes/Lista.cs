@@ -139,8 +139,17 @@ namespace TrensCidades.Classes
         public void Excluir(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
-            if (!ExisteDado(d)) throw new Exception("Dado não existente");
-            RemoverNo(anterior, atual);
+            if (ExisteDado(d))
+                RemoverNo(anterior, atual);
+        }
+
+        public T Buscar(
+            T dado)
+        {
+            for(atual = primeiro; atual != null; atual = atual.Prox)
+                if (atual.Info.Equals(dado))
+                    return atual.Info;
+            return default(T);
         }
 
         protected void RemoverNo(No<T> ant, No<T> atu)

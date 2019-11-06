@@ -129,27 +129,12 @@ namespace TrensCidades.Classes
 
             Cidade c = (Cidade)obj;
 
-            if (codigo != c.codigo)
-                return false;
-            if (nome != c.nome)
-                return false;
-            if (x != c.x)
-                return false;
-            if (y != c.y)
-                return false;
-
-            return true;
+            return codigo == c.codigo;
         }
 
         public override int GetHashCode()
         {
-            int ret = 1;
-            ret = ret * 2 + codigo.GetHashCode();
-            ret = ret * 2 + nome.GetHashCode();
-            ret = ret * 2 + x.GetHashCode();
-            ret = ret * 2 + y.GetHashCode();
-
-            return ret;
+            return codigo.GetHashCode();
         }
     }
 }
