@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using Android.Content.Res;
 using Android.Util;
+using System.Collections.Generic;
 
 namespace TrensCidades
 {
@@ -33,14 +34,22 @@ namespace TrensCidades
             AssetManager assets = this.Assets;
             
             bhCidade = new BucketHash<Cidade>();
+            List<string> cidadesList = new List<string>();
+            ArrayAdapter<string> cidadesSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, cidadesList);
             
             using (StreamReader arq = new StreamReader(assets.Open("cidades.txt"), Encoding.UTF7))
                 while (!arq.EndOfStream)
                 {
                     string linha = arq.ReadLine();
                     Cidade cd = new Cidade(linha);
+                    cidadesSpinner.Add(cd.ToString());
                     bhCidade.Inserir(cd);
                 }
+
+            spDeOnde.Adapter = cidadesSpinner;
+            spParaOnde.Adapter = cidadesSpinner;
+
+
         }
     }
 }
