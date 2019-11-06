@@ -8,12 +8,9 @@ namespace TrensCidades.Classes
 
     class Grafo<T>
     {
-        private const int NUM_VERTICES = 20;
         private Vertice<T>[] vertices;
         private int[,] adjMatrix;
-        int numVerts;
-
-        /// DJIKSTRA
+        private int numVerts;
 
         private class DistOriginal
         {
@@ -28,20 +25,22 @@ namespace TrensCidades.Classes
 
         DistOriginal[] percurso;
         int INFINITY = 1000000;
-        int verticeAtual;   // global usada para indicar o vértice atualmente sendo visitado 
-        int doInicioAteAtual;   // global usada para ajustar menor caminho com Djikstra
+        int verticeAtual;           // global usada para indicar o vértice atualmente sendo visitado 
+        int doInicioAteAtual;       // global usada para ajustar menor caminho com Djikstra
 
-        public Grafo()
+        public Grafo(
+            int totalVertices)
         {
-            vertices = new Vertice<T>[NUM_VERTICES];
-            adjMatrix = new int[NUM_VERTICES, NUM_VERTICES];
             numVerts = 0;
+            vertices = new Vertice<T>[totalVertices];
+            adjMatrix = new int[totalVertices, totalVertices];
 
-            for (int j = 0; j < NUM_VERTICES; j++)      // zera toda a matriz
-                for (int k = 0; k < NUM_VERTICES; k++)
-                    adjMatrix[j, k] = INFINITY; // distância tão grande que não existe
+            //Põe um valor muito grande nas posições da matriz
+            for (int j = 0; j < totalVertices; j++)
+                for (int k = 0; k < totalVertices; k++)
+                    adjMatrix[j, k] = INFINITY;
 
-            percurso = new DistOriginal[NUM_VERTICES];
+            percurso = new DistOriginal[totalVertices];
         }
 
         public void NovoVertice(
@@ -107,6 +106,7 @@ namespace TrensCidades.Classes
                 for (int col = 0; col < tamanho; col++)
                     adjMatrix[linha, col] = adjMatrix[linha + 1, col];  // desloca para excluir
         }
+
         private void MoverColunas(
             int coluna,
             int tamanho)
@@ -125,7 +125,7 @@ namespace TrensCidades.Classes
                 int currVertex = SemSucessores();
                 if (currVertex == -1)
                     return "Erro: grafo possui ciclos.";
-                gPilha.Empilhar(vertices[currVertex].info);   // empilha vértice
+                gPilha.Empilhar(vertices[currVertex].Info);   // empilha vértice
                 RemoverVertice(currVertex);
             }
             string resultado = "Sequência da Ordenação Topológica: ";
@@ -138,7 +138,7 @@ namespace TrensCidades.Classes
             int vertice)
         {
             for (int j = 0; j <= numVerts - 1; j++)
-                if ((adjMatrix[vertice, j] != INFINITY) && (!vertices[j].foiVisitado))
+                if ((adjMatrix[vertice, j] != INFINITY) && (!vertices[j].FoiVisitado))
                     return j;
             return -1;
         }
@@ -146,7 +146,7 @@ namespace TrensCidades.Classes
         public void PercursoEmProfundidade()
         {
             Pilha<int> gPilha = new Pilha<int>(); // para guardar a sequência de vértices
-            vertices[0].foiVisitado = true;
+            vertices[0].FoiVisitado = true;
             gPilha.Empilhar(0);
             int v;
             while (!gPilha.EstaVazia)
@@ -156,28 +156,28 @@ namespace TrensCidades.Classes
                     gPilha.Desempilhar();
                 else
                 {
-                    vertices[v].foiVisitado = true;
+                    vertices[v].FoiVisitado = true;
                     gPilha.Empilhar(v);
                 }
             }
             for (int j = 0; j <= numVerts - 1; j++)
-                vertices[j].foiVisitado = false;
+                vertices[j].FoiVisitado = false;
         }
 
         public void PercursoEmProfundidadeRec(
             int part)
         {
             int i;
-            vertices[part].foiVisitado = true;
+            vertices[part].FoiVisitado = true;
             for (i = 0; i < numVerts; ++i)
-                if (adjMatrix[part, i] != INFINITY && !vertices[i].foiVisitado)
+                if (adjMatrix[part, i] != INFINITY && !vertices[i].FoiVisitado)
                     PercursoEmProfundidadeRec(i);
         }
 
         public void PercursoPorLargura()
         {
             Queue<int> gQueue = new Queue<int>();
-            vertices[0].foiVisitado = true;
+            vertices[0].FoiVisitado = true;
             gQueue.Enqueue(0);
             int vert1, vert2;
             while (gQueue.Count > 0)
@@ -186,20 +186,20 @@ namespace TrensCidades.Classes
                 vert2 = ObterVerticeAdjacenteNaoVisitado(vert1);
                 while (vert2 != -1)
                 {
-                    vertices[vert2].foiVisitado = true;
+                    vertices[vert2].FoiVisitado = true;
                     gQueue.Enqueue(vert2);
                     vert2 = ObterVerticeAdjacenteNaoVisitado(vert1);
                 }
             }
             for (int i = 0; i < numVerts; i++)
-                vertices[i].foiVisitado = false;
+                vertices[i].FoiVisitado = false;
         }
 
         public void ArvoreGeradoraMinima(
             int primeiro)
         {
             Pilha<int> gPilha = new Pilha<int>(); // para guardar a sequência de vértices
-            vertices[primeiro].foiVisitado = true;
+            vertices[primeiro].FoiVisitado = true;
             gPilha.Empilhar(primeiro);
             int currVertex, ver;
             while (!gPilha.EstaVazia)
@@ -210,12 +210,12 @@ namespace TrensCidades.Classes
                     gPilha.Desempilhar();
                 else
                 {
-                    vertices[ver].foiVisitado = true;
+                    vertices[ver].FoiVisitado = true;
                     gPilha.Empilhar(ver);
                 }
             }
             for (int j = 0; j <= numVerts - 1; j++)
-                vertices[j].foiVisitado = false;
+                vertices[j].FoiVisitado = false;
         }
 
         public string Caminho(
@@ -223,9 +223,9 @@ namespace TrensCidades.Classes
             int finalDoPercurso)
         {
             for (int j = 0; j < numVerts; j++)
-                vertices[j].foiVisitado = false;
+                vertices[j].FoiVisitado = false;
 
-            vertices[inicioDoPercurso].foiVisitado = true;
+            vertices[inicioDoPercurso].FoiVisitado = true;
             for (int j = 0; j < numVerts; j++)
             {
                 // anotamos no vetor percurso a distância entre o inicioDoPercurso e cada vértice
@@ -249,7 +249,7 @@ namespace TrensCidades.Classes
                 doInicioAteAtual = percurso[indiceDoMenor].distancia;
 
                 // visitamos o vértice com a menor distância desde o inicioDoPercurso
-                vertices[verticeAtual].foiVisitado = true;
+                vertices[verticeAtual].FoiVisitado = true;
                 AjustarMenorCaminho();
             }
 
@@ -261,7 +261,7 @@ namespace TrensCidades.Classes
             int distanciaMinima = INFINITY;
             int indiceDaMinima = 0;
             for (int j = 0; j < numVerts; j++)
-                if (!(vertices[j].foiVisitado) && (percurso[j].distancia < distanciaMinima))
+                if (!(vertices[j].FoiVisitado) && (percurso[j].distancia < distanciaMinima))
                 {
                     distanciaMinima = percurso[j].distancia;
                     indiceDaMinima = j;
@@ -272,7 +272,7 @@ namespace TrensCidades.Classes
         public void AjustarMenorCaminho()
         {
             for (int coluna = 0; coluna < numVerts; coluna++)
-                if (!vertices[coluna].foiVisitado)       // para cada vértice ainda não visitado
+                if (!vertices[coluna].FoiVisitado)       // para cada vértice ainda não visitado
                 {
                     // acessamos a distância desde o vértice atual (pode ser infinity)
                     int atualAteMargem = adjMatrix[verticeAtual, coluna];
@@ -300,12 +300,12 @@ namespace TrensCidades.Classes
             string linha = "", resultado = "";
             for (int j = 0; j < numVerts; j++)
             {
-                linha += vertices[j].info.ToString() + "=";
+                linha += vertices[j].Info.ToString() + "=";
                 if (percurso[j].distancia == INFINITY)
                     linha += "inf";
                 else
                     linha += percurso[j].distancia;
-                string pai = vertices[percurso[j].verticePai].info.ToString();
+                string pai = vertices[percurso[j].verticePai].Info.ToString();
                 linha += "(" + pai + ") ";
             }
 
@@ -316,7 +316,7 @@ namespace TrensCidades.Classes
             while (onde != inicioDoPercurso)
             {
                 onde = percurso[onde].verticePai;
-                pilha.Empilhar(vertices[onde].info);
+                pilha.Empilhar(vertices[onde].Info);
                 cont++;
             }
 
@@ -330,7 +330,7 @@ namespace TrensCidades.Classes
             if ((cont == 1) && (percurso[finalDoPercurso].distancia == INFINITY))
                 resultado = "Não há caminho";
             else
-                resultado += " --> " + vertices[finalDoPercurso].info.ToString();
+                resultado += " --> " + vertices[finalDoPercurso].Info.ToString();
             return resultado;
         }
     }

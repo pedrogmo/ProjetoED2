@@ -7,17 +7,27 @@ namespace TrensCidades.Classes
 
     class Vertice<T>
     {
-        public bool foiVisitado;
-        public T info;
+        private bool foiVisitado;
+        private T info;
 
         public Vertice(
             T informacao)
         {
-            if (informacao == null)
-                throw new Exception("Info do vértice nula");
+            Info = informacao;
+            FoiVisitado = false;
+        }
 
-            info = informacao;
-            foiVisitado = false;
+        public bool FoiVisitado { get => foiVisitado; set => foiVisitado = value; }
+
+        public T Info
+        {
+            get => info;
+            set
+            {
+                if (value == null)
+                    throw new Exception("Info do vértice nulo");
+                info = value;
+            }
         }
     }
 }
