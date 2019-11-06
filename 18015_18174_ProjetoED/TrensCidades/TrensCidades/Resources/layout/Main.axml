@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@android:color/background_light">
     <Spinner
         android:id="@+id/spDeOnde"
         android:layout_width="200dp"
@@ -42,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buscar"
-        android:textSize="20dp"
+        android:textSize="10dp"
         android:layout_below="@+id/tvPara"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="250dp" />
@@ -69,7 +73,7 @@
         android:id="@+id/btnAdicionarCidade"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="10dp"
         android:text="Adicionar Cidade"
         android:layout_marginLeft="30dp"
         android:layout_below="@+id/tbCaminhos" />
@@ -77,8 +81,9 @@
         android:id="@+id/btnAdicionarCaminho"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="10dp"
         android:text="Adicionar Caminho"
         android:layout_below="@+id/tbCaminhos"
         android:layout_toRightOf="@+id/btnAdicionarCidade" />
-</RelativeLayout>
+  </RelativeLayout>
+</ScrollView>
