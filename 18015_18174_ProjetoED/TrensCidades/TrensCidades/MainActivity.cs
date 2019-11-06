@@ -34,8 +34,7 @@ namespace TrensCidades
             AssetManager assets = this.Assets;
             
             bhCidade = new BucketHash<Cidade>();
-            List<string> cidadesList = new List<string>();
-            ArrayAdapter<string> cidadesSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, cidadesList);
+            ArrayAdapter<string> cidadesSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1);
             
             using (StreamReader arq = new StreamReader(assets.Open("cidades.txt"), Encoding.UTF7))
                 while (!arq.EndOfStream)
