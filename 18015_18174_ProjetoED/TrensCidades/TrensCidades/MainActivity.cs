@@ -8,6 +8,7 @@ using Android.Content.Res;
 using Android.Util;
 using System.Collections.Generic;
 using Android.Views;
+using Android.Graphics;
 
 namespace TrensCidades
 {
@@ -19,7 +20,8 @@ namespace TrensCidades
 
         Button btnBuscar;
         Spinner spDeOnde, spParaOnde;
-        View viewCanvas;
+        LinearLayout layoutCanvas;
+        CanvasView cv;
 
         BucketHash<Cidade> bhCidade;
 
@@ -32,10 +34,14 @@ namespace TrensCidades
             btnBuscar = FindViewById<Button>(Resource.Id.btnBuscar);
             spDeOnde = FindViewById<Spinner>(Resource.Id.spDeOnde);
             spParaOnde = FindViewById<Spinner>(Resource.Id.spParaOnde);
-            viewCanvas = FindViewById<View>(Resource.Id.canvas);
+            layoutCanvas = FindViewById<LinearLayout>(Resource.Id.layoutCanvas);
 
-            viewCanvas.
 
+            cv = new CanvasView(this);
+            layoutCanvas.AddView(cv);
+            
+            
+            
             AssetManager assets = this.Assets;
             
             bhCidade = new BucketHash<Cidade>();

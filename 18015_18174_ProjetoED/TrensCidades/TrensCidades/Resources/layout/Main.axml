@@ -50,10 +50,11 @@
             android:layout_below="@+id/tvPara"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="250dp" />
-        <View
-            android:id="@+id/canvas"
+        <LinearLayout
+            android:id="@+id/layoutCanvas"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_below="@+id/btnBuscar" />
         <TextView
             android:id="@+id/tvResultados"

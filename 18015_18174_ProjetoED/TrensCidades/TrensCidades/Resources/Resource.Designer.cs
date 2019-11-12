@@ -54,7 +54,7 @@ namespace TrensCidades
 			public const int btnBuscar = 2130968580;
 			
 			// aapt resource value: 0x7f040005
-			public const int canvas = 2130968581;
+			public const int layoutCanvas = 2130968581;
 			
 			// aapt resource value: 0x7f040000
 			public const int spDeOnde = 2130968576;
