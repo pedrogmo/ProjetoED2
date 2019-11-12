@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TrensCidades.Classes
 {
@@ -12,51 +7,55 @@ namespace TrensCidades.Classes
 
     class BucketHash<T>
     {
-        private const int SIZE = 500;
-        private Lista<T>[] data;
+        private const int TAMANHO = 500;
+        private Lista<T>[] conteudo;
 
         public BucketHash()
         {
-            data = new Lista<T>[SIZE];
-            for (int i = 0; i <= SIZE - 1; i++)
-                data[i] = new Lista<T>();
+            conteudo = new Lista<T>[TAMANHO];
         }
 
         private int Hash(
             T item)
         {
-            return Math.Abs(item.GetHashCode() % SIZE);
+            return Math.Abs(item.GetHashCode() % TAMANHO);
         }
 
         public void Inserir(
             T item)
         {
-            int hashValue;
-            hashValue = Hash(item);
-            if (!data[hashValue].ExisteDado(item))
-                data[hashValue].InserirFim(item);
+            int valorHash = Hash(item);
+
+            if (conteudo[valorHash] == null)
+                conteudo[valorHash] = new Lista<T>();
+
+            if (!conteudo[valorHash].ExisteDado(item))
+                conteudo[valorHash].InserirFim(item);
         }
 
         public void Excluir(
             T item)
         {
-            int hashValue;
-            hashValue = Hash(item);
-            data[hashValue].Excluir(item);
+            int valorHash = Hash(item);
+
+            if (conteudo[valorHash] != null)
+                conteudo[valorHash].Excluir(item);
         }
 
         public T Buscar(
             T chave)
         {
-            int hashValue = Hash(chave);
-            return data[hashValue].Buscar(chave);
+            int valorHash = Hash(chave);
+            if (conteudo[valorHash] == null)
+                return default(T);
+            return conteudo[valorHash].Buscar(chave);
         }
 
         public void Exibir()
         {
-            for (int i = 0; i < data.GetUpperBound(0); i++)
-                if (!data[i].EstaVazia)
-                    foreach (T chave in data[i])
+            for (int i = 0; i < conteudo.GetUpperBound(0); i++)
+                if (conteudo[i] != null)
+                    foreach (T chave in conteudo[i])
                         Console.WriteLine(i + " " + chave.ToString());
             Console.ReadKey();
         }
@@ -64,9 +63,9 @@ namespace TrensCidades.Classes
         public string Conteudo()
         {
             string ret = "";
-            for (int i = 0; i < data.GetUpperBound(0); i++)
-                if (!data[i].EstaVazia)
-                    foreach (T chave in data[i])
+            for (int i = 0; i < conteudo.GetUpperBound(0); i++)
+                if (conteudo[i] != null)
+                    foreach (T chave in conteudo[i])
                         ret += i + ": {" + chave.ToString() + "}" + "\n";
             return ret;
         }
