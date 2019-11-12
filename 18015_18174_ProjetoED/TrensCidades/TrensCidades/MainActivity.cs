@@ -16,7 +16,6 @@ namespace TrensCidades
         //Gustavo Henrique de Meira - 18015
         //Pedro Gomes Moreira - 18174
 
-
         Button btnBuscar;
         Spinner spDeOnde, spParaOnde;
         BucketHash<Cidade> bhCidade;
