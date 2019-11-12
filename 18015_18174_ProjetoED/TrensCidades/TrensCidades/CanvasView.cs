@@ -12,7 +12,8 @@ using Android.Widget;
 
 namespace TrensCidades
 {
-    class CanvasView
+    class CanvasView : View
     {
+        
     }
 }

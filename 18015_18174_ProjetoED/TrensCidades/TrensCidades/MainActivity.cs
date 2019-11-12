@@ -7,6 +7,7 @@ using System.Text;
 using Android.Content.Res;
 using Android.Util;
 using System.Collections.Generic;
+using Android.Views;
 
 namespace TrensCidades
 {
@@ -18,6 +19,8 @@ namespace TrensCidades
 
         Button btnBuscar;
         Spinner spDeOnde, spParaOnde;
+        View viewCanvas;
+
         BucketHash<Cidade> bhCidade;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -29,6 +32,9 @@ namespace TrensCidades
             btnBuscar = FindViewById<Button>(Resource.Id.btnBuscar);
             spDeOnde = FindViewById<Spinner>(Resource.Id.spDeOnde);
             spParaOnde = FindViewById<Spinner>(Resource.Id.spParaOnde);
+            viewCanvas = FindViewById<View>(Resource.Id.canvas);
+
+            viewCanvas.
 
             AssetManager assets = this.Assets;
             

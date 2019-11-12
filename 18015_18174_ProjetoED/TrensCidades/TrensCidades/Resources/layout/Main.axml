@@ -3,87 +3,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
-  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@android:color/background_light">
-    <Spinner
-        android:id="@+id/spDeOnde"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@android:color/background_light"
-        android:layout_alignParentRight="@+id/tvDe" />
-    <TextView
-        android:id="@+id/tvDe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/spDeOnde"
-        android:text="De"
-        android:textSize="15dp"
-        android:textColor="@android:color/black"
-        android:layout_alignBottom="@id/spDeOnde" />
-    <Spinner
-        android:id="@+id/spParaOnde"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/background_light"
-        android:layout_below="@id/spDeOnde" />
-    <TextView
-        android:id="@+id/tvPara"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_toLeftOf="@id/spDeOnde"
-        android:text="Para"
-        android:textSize="15dp"
-        android:textColor="@android:color/black"
-        android:layout_alignTop="@id/spParaOnde" />
-    <Button
-        android:id="@+id/btnBuscar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buscar"
-        android:textSize="10dp"
-        android:layout_below="@+id/tvPara"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="250dp" />
-    <View
-        android:id="@+id/canvas"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/btnBuscar" />
-    <TextView
-        android:id="@+id/tvResultados"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="Resultados"
-        android:textSize="30dp"
-        android:layout_below="@id/btnBuscar"
-        android:layout_marginLeft="40dp" />
-    <TableLayout
-        android:id="@+id/tbCaminhos"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tvResultados" />
-    <Button
-        android:id="@+id/btnAdicionarCidade"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:text="Adicionar Cidade"
-        android:layout_marginLeft="30dp"
-        android:layout_below="@+id/tbCaminhos" />
-    <Button
-        android:id="@+id/btnAdicionarCaminho"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:text="Adicionar Caminho"
-        android:layout_below="@+id/tbCaminhos"
-        android:layout_toRightOf="@+id/btnAdicionarCidade" />
-  </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light">
+        <Spinner
+            android:id="@+id/spDeOnde"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/background_light"
+            android:layout_alignParentRight="@+id/tvDe" />
+        <TextView
+            android:id="@+id/tvDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/spDeOnde"
+            android:text="De"
+            android:textSize="15dp"
+            android:textColor="@android:color/black"
+            android:layout_alignBottom="@id/spDeOnde" />
+        <Spinner
+            android:id="@+id/spParaOnde"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/background_light"
+            android:layout_below="@id/spDeOnde" />
+        <TextView
+            android:id="@+id/tvPara"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/spDeOnde"
+            android:text="Para"
+            android:textSize="15dp"
+            android:textColor="@android:color/black"
+            android:layout_alignTop="@id/spParaOnde" />
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar"
+            android:textSize="10dp"
+            android:layout_below="@+id/tvPara"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="250dp" />
+        <View
+            android:id="@+id/canvas"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/btnBuscar" />
+        <TextView
+            android:id="@+id/tvResultados"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Resultados"
+            android:textSize="30dp"
+            android:layout_below="@id/btnBuscar"
+            android:layout_marginLeft="40dp" />
+        <TableLayout
+            android:id="@+id/tbCaminhos"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvResultados" />
+        <Button
+            android:id="@+id/btnAdicionarCidade"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="Adicionar Cidade"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/tbCaminhos" />
+        <Button
+            android:id="@+id/btnAdicionarCaminho"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="Adicionar Caminho"
+            android:layout_below="@+id/tbCaminhos"
+            android:layout_toRightOf="@+id/btnAdicionarCidade" />
+    </RelativeLayout>
 </ScrollView>

@@ -54,6 +54,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CanvasView.cs" />
     <Compile Include="Classes\BucketHash.cs" />
     <Compile Include="Classes\Cidade.cs" />
     <Compile Include="Classes\Grafo.cs" />
