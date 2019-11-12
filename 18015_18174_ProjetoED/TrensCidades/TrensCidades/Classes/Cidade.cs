@@ -129,12 +129,15 @@ namespace TrensCidades.Classes
 
             Cidade c = (Cidade)obj;
 
-            return codigo == c.codigo;
+            return nome.Equals(c.nome);
         }
 
         public override int GetHashCode()
         {
-            return codigo.GetHashCode();
+            int hash = 1;
+            foreach (char c in nome)
+                hash = 37 * hash + c;
+            return hash;
         }
     }
 }
