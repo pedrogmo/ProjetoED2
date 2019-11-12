@@ -53,8 +53,9 @@
             android:layout_below="@+id/tvPara" />
         <LinearLayout
             android:id="@+id/layoutCanvas"
-            android:layout_height="578dp"
-            android:layout_width="717dp"
+            android:layout_height="289dp"
+            android:layout_width="358.5dp"
+            android:layout_centerHorizontal="true"
             android:orientation="vertical"
             android:layout_below="@+id/btnBuscar" />
         <TextView

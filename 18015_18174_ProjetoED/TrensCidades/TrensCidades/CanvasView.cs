@@ -16,8 +16,8 @@ namespace TrensCidades
 {
     public class CanvasView : View
     {
-        private const int mapaTotalX = 717;
-        private const int mapaTotalY = 578;
+        private const float mapaTotalX = 358.5f;
+        private const float mapaTotalY = 289f;
 
         public CanvasView(Context context) : base(context)
         {
