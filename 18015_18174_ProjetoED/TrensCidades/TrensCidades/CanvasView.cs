@@ -16,6 +16,9 @@ namespace TrensCidades
 {
     public class CanvasView : View
     {
+        private const int mapaTotalX = 717;
+        private const int mapaTotalY = 578;
+
         public CanvasView(Context context) : base(context)
         {
         }
@@ -35,10 +38,14 @@ namespace TrensCidades
         protected CanvasView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
+
         protected override void OnDraw(Canvas canvas)
         {
-            base.OnDraw(canvas);
+            Bitmap mapa = BitmapFactory.DecodeResource(Resources, Resource.Drawable.Mapa);
 
+            canvas.DrawBitmap(mapa, 0, 0, null);
+
+            base.OnDraw(canvas);
         }
     }
 }
