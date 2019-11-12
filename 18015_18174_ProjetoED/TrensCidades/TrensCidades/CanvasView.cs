@@ -43,7 +43,7 @@ namespace TrensCidades
         {
             Bitmap mapa = BitmapFactory.DecodeResource(Resources, Resource.Drawable.Mapa);
 
-            canvas.DrawBitmap(mapa, 0, 0, null);
+            canvas.DrawBitmap(mapa,0, 0, null);
 
             base.OnDraw(canvas);
         }

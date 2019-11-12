@@ -36,12 +36,13 @@ namespace TrensCidades
             spParaOnde = FindViewById<Spinner>(Resource.Id.spParaOnde);
             layoutCanvas = FindViewById<LinearLayout>(Resource.Id.layoutCanvas);
 
-
+            
             cv = new CanvasView(this);
             layoutCanvas.AddView(cv);
             
-            
-            
+
+
+
             AssetManager assets = this.Assets;
             
             bhCidade = new BucketHash<Cidade>();
