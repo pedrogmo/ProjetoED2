@@ -13,8 +13,9 @@ using Android.Views;
 using Android.Widget;
 using TrensCidades.Classes;
 
-namespace TrensCidades
+namespace TrensCidades.Activities
 {
+    [Activity(Label = "AdicionarCidade", MainLauncher = true)]
     class AdicionarCidade : Activity
     {
         //Gustavo Henrique de Meira - 18015

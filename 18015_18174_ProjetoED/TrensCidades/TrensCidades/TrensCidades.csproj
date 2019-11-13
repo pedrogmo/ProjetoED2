@@ -54,7 +54,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanvasView.cs" />
+    <Compile Include="Activities\CanvasView.cs" />
     <Compile Include="Classes\BucketHash.cs" />
     <Compile Include="Classes\Cidade.cs" />
     <Compile Include="Classes\Grafo.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="Classes\PilhaVaziaException.cs" />
     <Compile Include="Classes\Vertice.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="AdicionarCidade.cs" />
+    <Compile Include="Activities\AdicionarCidade.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

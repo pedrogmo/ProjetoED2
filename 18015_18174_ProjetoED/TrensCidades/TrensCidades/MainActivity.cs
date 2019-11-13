@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using TrensCidades.Classes;
 using System.IO;
 using System.Text;
 using Android.Content.Res;
@@ -10,6 +9,9 @@ using System.Collections.Generic;
 using Android.Views;
 using Android.Graphics;
 using Android.Content;
+
+using TrensCidades.Classes;
+using TrensCidades.Activities;
 
 namespace TrensCidades
 {
@@ -62,6 +64,7 @@ namespace TrensCidades
 
             btnAdicionarCidade.Click += delegate
             {
+                new AdicionarCidade();
                 Intent i = new Intent(this, typeof(AdicionarCidade));
                 StartActivity(i);
             };
