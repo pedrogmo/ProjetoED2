@@ -68,7 +68,7 @@ namespace TrensCidades.Classes
         public int Codigo
         {
             get => codigo;
-            private set
+            set
             {
                 if (value < 0)
                     throw new Exception("Código inválido");
@@ -118,6 +118,15 @@ namespace TrensCidades.Classes
         public override string ToString()
         {
             return $"{codigo} - {nome}";
+        }
+
+        public string ParaArquivo()
+        {
+            string ret = (codigo + "").PadRight(TAMANHO_CODIGO);
+            ret += nome.PadRight(TAMANHO_NOME);
+            ret += (x + "").PadRight(TAMANHO_X);
+            ret += (Y + "").PadRight(TAMANHO_Y);
+            return ret;
         }
 
         public override bool Equals(
