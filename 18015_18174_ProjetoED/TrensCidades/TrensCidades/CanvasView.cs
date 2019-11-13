@@ -12,7 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace TrensCidades.Activities
+namespace TrensCidades
 {
     public class CanvasView : View
     {
