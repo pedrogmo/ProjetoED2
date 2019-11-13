@@ -60,35 +60,56 @@ namespace TrensCidades
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050009
-			public const int btnAdicionarCaminho = 2131034121;
+			// aapt resource value: 0x7f050006
+			public const int btnAdicionar = 2131034118;
 			
-			// aapt resource value: 0x7f050008
-			public const int btnAdicionarCidade = 2131034120;
+			// aapt resource value: 0x7f050010
+			public const int btnAdicionarCaminho = 2131034128;
 			
-			// aapt resource value: 0x7f050004
-			public const int btnBuscar = 2131034116;
+			// aapt resource value: 0x7f05000f
+			public const int btnAdicionarCidade = 2131034127;
 			
-			// aapt resource value: 0x7f050005
-			public const int layoutCanvas = 2131034117;
-			
-			// aapt resource value: 0x7f050000
-			public const int spDeOnde = 2131034112;
-			
-			// aapt resource value: 0x7f050002
-			public const int spParaOnde = 2131034114;
-			
-			// aapt resource value: 0x7f050007
-			public const int tbCaminhos = 2131034119;
-			
-			// aapt resource value: 0x7f050001
-			public const int tvDe = 2131034113;
+			// aapt resource value: 0x7f05000b
+			public const int btnBuscar = 2131034123;
 			
 			// aapt resource value: 0x7f050003
-			public const int tvPara = 2131034115;
+			public const int etCoordenadaX = 2131034115;
 			
-			// aapt resource value: 0x7f050006
-			public const int tvResultados = 2131034118;
+			// aapt resource value: 0x7f050005
+			public const int etCoordenadaY = 2131034117;
+			
+			// aapt resource value: 0x7f050001
+			public const int etNome = 2131034113;
+			
+			// aapt resource value: 0x7f05000c
+			public const int layoutCanvas = 2131034124;
+			
+			// aapt resource value: 0x7f050007
+			public const int spDeOnde = 2131034119;
+			
+			// aapt resource value: 0x7f050009
+			public const int spParaOnde = 2131034121;
+			
+			// aapt resource value: 0x7f05000e
+			public const int tbCaminhos = 2131034126;
+			
+			// aapt resource value: 0x7f050002
+			public const int tvCoordenadaX = 2131034114;
+			
+			// aapt resource value: 0x7f050004
+			public const int tvCoordenadaY = 2131034116;
+			
+			// aapt resource value: 0x7f050008
+			public const int tvDe = 2131034120;
+			
+			// aapt resource value: 0x7f050000
+			public const int tvNome = 2131034112;
+			
+			// aapt resource value: 0x7f05000a
+			public const int tvPara = 2131034122;
+			
+			// aapt resource value: 0x7f05000d
+			public const int tvResultados = 2131034125;
 			
 			static Id()
 			{
@@ -107,7 +128,10 @@ namespace TrensCidades
 			public const int item_spinner = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Main = 2130903041;
+			public const int layoutAdicionarCidade = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Main = 2130903042;
 			
 			static Layout()
 			{
