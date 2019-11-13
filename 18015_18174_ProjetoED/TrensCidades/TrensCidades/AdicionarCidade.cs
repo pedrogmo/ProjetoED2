@@ -15,8 +15,7 @@ using TrensCidades.Classes;
 
 namespace TrensCidades
 {
-    [Activity(Label = "TrensCidades", MainLauncher = true)]
-    public class AdicionarCidade : Activity
+    class AdicionarCidade : Activity
     {
         //Gustavo Henrique de Meira - 18015
         //Pedro Gomes Moreira - 18174
@@ -32,7 +31,7 @@ namespace TrensCidades
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.layoutAdicionarCidade);
-            btnAdicionar = FindViewById<Button>(Resource.Id.btnAdicionar);
+            btnAdicionar = FindViewById<Button>(Resource.Id.btnAdicionarCidade);
             etNome = FindViewById<EditText>(Resource.Id.etNome);
             etCoordenadaX = FindViewById<EditText>(Resource.Id.etCoordenadaX);
             etCoordenadaY = FindViewById<EditText>(Resource.Id.etCoordenadaY);

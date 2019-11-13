@@ -9,6 +9,7 @@ using Android.Util;
 using System.Collections.Generic;
 using Android.Views;
 using Android.Graphics;
+using Android.Content;
 
 namespace TrensCidades
 {
@@ -18,7 +19,7 @@ namespace TrensCidades
         //Gustavo Henrique de Meira - 18015
         //Pedro Gomes Moreira - 18174
 
-        Button btnBuscar;
+        Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
         Spinner spDeOnde, spParaOnde;
         LinearLayout layoutCanvas;
         CanvasView cv;
@@ -31,11 +32,14 @@ namespace TrensCidades
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-            btnBuscar = FindViewById<Button>(Resource.Id.btnBuscar);
+            
             spDeOnde = FindViewById<Spinner>(Resource.Id.spDeOnde);
             spParaOnde = FindViewById<Spinner>(Resource.Id.spParaOnde);
             layoutCanvas = FindViewById<LinearLayout>(Resource.Id.layoutCanvas);
-            
+            btnBuscar = FindViewById<Button>(Resource.Id.btnBuscar);
+            btnAdicionarCidade = FindViewById<Button>(Resource.Id.btnAdicionarCidadeMain);
+            btnAdicionarCaminho = FindViewById<Button>(Resource.Id.btnAdicionarCaminhoMain);
+
             cv = new CanvasView(this);
             layoutCanvas.AddView(cv);
 
@@ -56,6 +60,11 @@ namespace TrensCidades
             spDeOnde.Adapter = cidadesSpinner;
             spParaOnde.Adapter = cidadesSpinner;
 
+            btnAdicionarCidade.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(AdicionarCidade));
+                StartActivity(i);
+            };
             
         }
     }

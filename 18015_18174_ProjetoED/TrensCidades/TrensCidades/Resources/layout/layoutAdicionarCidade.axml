@@ -63,7 +63,7 @@
         android:layout_below="@+id/tvCoordenadaY"
         android:textColor="#bdc3c7" />
     <Button
-        android:id="@+id/btnAdicionar"
+        android:id="@+id/btnAdicionarCidade"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"

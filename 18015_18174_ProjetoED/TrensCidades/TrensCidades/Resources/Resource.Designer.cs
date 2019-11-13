@@ -60,14 +60,14 @@ namespace TrensCidades
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050006
-			public const int btnAdicionar = 2131034118;
-			
 			// aapt resource value: 0x7f050010
-			public const int btnAdicionarCaminho = 2131034128;
+			public const int btnAdicionarCaminhoMain = 2131034128;
+			
+			// aapt resource value: 0x7f050006
+			public const int btnAdicionarCidade = 2131034118;
 			
 			// aapt resource value: 0x7f05000f
-			public const int btnAdicionarCidade = 2131034127;
+			public const int btnAdicionarCidadeMain = 2131034127;
 			
 			// aapt resource value: 0x7f05000b
 			public const int btnBuscar = 2131034123;
