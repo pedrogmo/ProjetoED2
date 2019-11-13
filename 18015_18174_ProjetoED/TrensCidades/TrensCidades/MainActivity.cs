@@ -39,12 +39,13 @@ namespace TrensCidades
             
             cv = new CanvasView(this);
             layoutCanvas.AddView(cv);
-            
 
+            
+            
 
 
             AssetManager assets = this.Assets;
-            
+
             bhCidade = new BucketHash<Cidade>();
             ArrayAdapter<string> cidadesSpinner = new ArrayAdapter<string>(this, Resource.Layout.item_spinner);
             

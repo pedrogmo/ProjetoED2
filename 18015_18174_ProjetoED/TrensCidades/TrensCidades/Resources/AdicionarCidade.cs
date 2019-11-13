@@ -53,7 +53,18 @@ namespace TrensCidades
             {
                 if (etNome.Text.Trim() != "" && etCoordenadaX.Text.Trim() != "" && etCoordenadaY.Text.Trim() != "")
                 {
-                    //if (bhCidade.Buscar())
+                    Cidade cd = new Cidade(etNome.Text.Trim());
+                    if (bhCidade.Buscar(cd) == null)
+                    {
+                        StreamWriter sw = new StreamWriter(assets.Open("cidades.txt"));
+                        cd.X = Double.Parse(etCoordenadaX.Text.Trim());
+                        cd.Y = Double.Parse(etCoordenadaY.Text.Trim());
+                        cd.Codigo = bhCidade.Quantidade;
+                        sw.Write(cd.ParaArquivo());
+                        sw.Close();
+                    }
+                    else
+                        Toast.MakeText(Application.Context, "Essa cidade já existe", ToastLength.Short);
                 }
                 else
                     Toast.MakeText(Application.Context, "Há campos vazios", ToastLength.Short);
