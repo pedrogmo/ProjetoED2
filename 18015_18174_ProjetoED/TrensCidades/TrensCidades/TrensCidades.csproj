@@ -59,6 +59,7 @@
     <Compile Include="Classes\Cidade.cs" />
     <Compile Include="Classes\Grafo.cs" />
     <Compile Include="Classes\IStack.cs" />
+    <Compile Include="Classes\Linha.cs" />
     <Compile Include="Classes\Lista.cs" />
     <Compile Include="Classes\No.cs" />
     <Compile Include="Classes\Pilha.cs" />

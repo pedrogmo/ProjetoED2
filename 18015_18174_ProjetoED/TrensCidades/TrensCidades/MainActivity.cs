@@ -52,7 +52,7 @@ namespace TrensCidades
                 while (!arq.EndOfStream)
                 {
                     string linha = arq.ReadLine();
-                    Cidade cd = new Cidade(linha);
+                    Cidade cd = new Cidade(new Linha(linha));
                     cidadesSpinner.Add(cd.ToString());
                     bhCidade.Inserir(cd);
                 }

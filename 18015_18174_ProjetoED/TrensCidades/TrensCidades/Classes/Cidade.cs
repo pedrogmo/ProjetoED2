@@ -40,14 +40,15 @@ namespace TrensCidades.Classes
         }
 
         public Cidade(
-            string linha)
+            Linha linha)
         {
             try
             {
-                Codigo = int.Parse(linha.Substring(COMECO_CODIGO, TAMANHO_CODIGO).Trim());
-                Nome = linha.Substring(COMECO_NOME, TAMANHO_NOME).Trim();
-                X = double.Parse(linha.Substring(COMECO_X, TAMANHO_X).Trim());
-                Y = double.Parse(linha.Substring(COMECO_Y, TAMANHO_Y).Trim());
+                string str = linha.Conteudo;
+                Codigo = int.Parse(str.Substring(COMECO_CODIGO, TAMANHO_CODIGO).Trim());
+                Nome = str.Substring(COMECO_NOME, TAMANHO_NOME).Trim();
+                X = double.Parse(str.Substring(COMECO_X, TAMANHO_X).Trim());
+                Y = double.Parse(str.Substring(COMECO_Y, TAMANHO_Y).Trim());
             }
             catch
             {
@@ -56,12 +57,12 @@ namespace TrensCidades.Classes
         }
 
         public Cidade(
-            int codigo)
+            string nome)
         {
-            Codigo = codigo;
+            codigo = 0;
+            Nome = nome;
             x = 0.0;
             y = 0.0;
-            nome = "";
         }
 
         public int Codigo
