@@ -66,7 +66,7 @@
     <Compile Include="Classes\PilhaVaziaException.cs" />
     <Compile Include="Classes\Vertice.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Resources\AdicionarCidade.cs" />
+    <Compile Include="AdicionarCidade.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
