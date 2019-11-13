@@ -136,11 +136,15 @@ namespace TrensCidades.Classes
             qtosNos++;
         }
 
-        public void Excluir(T d)
+        public bool Excluir(T d)
         {
             if (d == null) throw new Exception("Dado nulo");
             if (ExisteDado(d))
+            {
                 RemoverNo(anterior, atual);
+                return true;
+            }
+            return false;
         }
 
         public T Buscar(

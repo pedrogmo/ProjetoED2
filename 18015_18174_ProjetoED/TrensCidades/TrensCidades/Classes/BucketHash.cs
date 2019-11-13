@@ -9,6 +9,7 @@ namespace TrensCidades.Classes
     {
         private const int TAMANHO = 500;
         private Lista<T>[] conteudo;
+        private int qtd;
 
         public BucketHash()
         {
@@ -30,7 +31,10 @@ namespace TrensCidades.Classes
                 conteudo[valorHash] = new Lista<T>();
 
             if (!conteudo[valorHash].ExisteDado(item))
+            {
                 conteudo[valorHash].InserirFim(item);
+                ++qtd;
+            }
         }
 
         public void Excluir(
@@ -39,7 +43,8 @@ namespace TrensCidades.Classes
             int valorHash = Hash(item);
 
             if (conteudo[valorHash] != null)
-                conteudo[valorHash].Excluir(item);
+                if (conteudo[valorHash].Excluir(item))
+                    --qtd;
         }
 
         public T Buscar(
@@ -69,5 +74,7 @@ namespace TrensCidades.Classes
                         ret += i + ": {" + chave.ToString() + "}" + "\n";
             return ret;
         }
+
+        public int Quantidade { get => qtd; }
     }
 }
