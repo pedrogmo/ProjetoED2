@@ -13,12 +13,12 @@ using Android.Content;
 
 namespace TrensCidades
 {
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
+
     [Activity(Label = "TrensCidades", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        //Gustavo Henrique de Meira - 18015
-        //Pedro Gomes Moreira - 18174
-
         Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
         Spinner spDeOnde, spParaOnde;
         LinearLayout layoutCanvas;
@@ -29,8 +29,6 @@ namespace TrensCidades
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             
             spDeOnde = FindViewById<Spinner>(Resource.Id.spDeOnde);

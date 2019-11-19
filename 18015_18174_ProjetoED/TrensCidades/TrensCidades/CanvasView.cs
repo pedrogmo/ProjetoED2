@@ -14,6 +14,9 @@ using Android.Widget;
 
 namespace TrensCidades
 {
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
+
     public class CanvasView : View
     {
         private const float mapaTotalX = 358.5f;

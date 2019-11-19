@@ -15,14 +15,14 @@ using TrensCidades.Classes;
 
 namespace TrensCidades
 {
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
+
+    [Activity(Label = "TrensCidades", MainLauncher = false)]
     class AdicionarCidade : Activity
     {
-        //Gustavo Henrique de Meira - 18015
-        //Pedro Gomes Moreira - 18174
-
         Button btnAdicionar;
         EditText etNome, etCoordenadaX, etCoordenadaY;
-
         BucketHash<Cidade> bhCidade;
 
         protected override void OnCreate(Bundle savedInstanceState)

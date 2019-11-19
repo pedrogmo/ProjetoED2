@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace TrensCidades.Classes
 {
+    //Gustavo Henrique de Meira - 18015
+    //Pedro Gomes Moreira - 18174
+
     class Linha
     {
         private string conteudo;
