@@ -1,10 +1,15 @@
-package com.example.trenscidadesandroid.classes;
+package com.example.trenscidadesandroid.classes.fila;
 
-public class Pilha<T>
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
+import com.example.trenscidadesandroid.classes.lista.Lista;
+
+public class Fila<T>
 {
     private Lista<T> lista;
 
-    public Pilha()
+    public Fila()
     {
         lista = new Lista<T>();
     }
@@ -14,20 +19,20 @@ public class Pilha<T>
         return lista.isVazia();
     }
 
-    public void empilhar(
+    public void enfileirar(
         T informacao) throws Exception
     {
-        lista.inserirInicio(informacao);
+        lista.inserirFim(informacao);
     }
 
-    public T desempilhar()
+    public T desenfileirar()
     {
         T dado = lista.getDadoInicio();
         lista.excluirInicio();
         return dado;
     }
 
-    public T topo()
+    public T inicio()
     {
         return lista.getDadoInicio();
     }

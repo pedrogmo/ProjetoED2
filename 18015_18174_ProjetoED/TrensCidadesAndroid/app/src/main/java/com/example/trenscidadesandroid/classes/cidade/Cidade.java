@@ -1,7 +1,9 @@
-package com.example.trenscidadesandroid.classes;
+package com.example.trenscidadesandroid.classes.cidade;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
+
+import com.example.trenscidadesandroid.classes.linha.Linha;
 
 public class Cidade
     implements Comparable<Cidade>

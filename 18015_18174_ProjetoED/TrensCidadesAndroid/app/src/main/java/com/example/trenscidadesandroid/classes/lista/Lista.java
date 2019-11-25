@@ -1,7 +1,9 @@
-package com.example.trenscidadesandroid.classes;
+package com.example.trenscidadesandroid.classes.lista;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
+
+import com.example.trenscidadesandroid.classes.no.No;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -9,32 +11,6 @@ import java.util.Iterator;
 public class Lista<T>
     implements Serializable, Iterable<T>
 {
-    private class No<T>
-    {
-        private T info;
-        public No<T> prox;
-
-        public No(
-            T info,
-            No<T> prox) throws Exception
-        {
-            setInfo(info);
-            this.prox = prox;
-        }
-
-        public T getInfo()
-        {
-            return info;
-        }
-
-        public void setInfo(
-            T info) throws Exception
-        {
-            if (info == null)
-                throw new Exception("No<T> - setInfo: info nula");
-            this.info = info;
-        }
-    }
 
     protected No<T> atual, primeiro, anterior, ultimo;
     protected int qtosNos;
@@ -144,10 +120,9 @@ public class Lista<T>
     }
 
     public boolean existeDado(T d)
-            throws Exception
     {
         if (d == null)
-            throw new Exception("Dado nulo");
+            return false;
 
         if (isVazia())
             return false;
@@ -174,11 +149,11 @@ public class Lista<T>
     }
 
     public boolean excluir(T d)
-        throws Exception
     {
         if (d == null)
-            throw new Exception("Dado nulo");
-        if (existeDado(d)) {
+            return false;
+        if (existeDado(d))
+        {
             removerNo(anterior, atual);
             return true;
         }

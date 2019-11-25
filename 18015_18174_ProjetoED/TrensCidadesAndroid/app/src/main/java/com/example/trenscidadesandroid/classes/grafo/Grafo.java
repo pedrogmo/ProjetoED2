@@ -1,14 +1,14 @@
-package com.example.trenscidadesandroid.classes;
+package com.example.trenscidadesandroid.classes.grafo;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
+import com.example.trenscidadesandroid.classes.pilha.Pilha;
+import com.example.trenscidadesandroid.classes.vertice.Vertice;
+import com.example.trenscidadesandroid.classes.fila.Fila;
+
 public class Grafo<T>
 {
-    private Object[] vertices;
-    private int[][] adjMatrix;
-    private int numVerts;
-
     private class DistOriginal
     {
         public int distancia;
@@ -21,11 +21,14 @@ public class Grafo<T>
         }
     }
 
-    Object[] percurso;
+    private Object[] vertices;
+    private Object[] percurso;
+    private int[][] adjMatrix;
+    private int numVerts;
 
-    int INFINITY = 1000000;
-    int verticeAtual;           // global usada para indicar o vértice atualmente sendo visitado
-    int doInicioAteAtual;       // global usada para ajustar menor caminho com Djikstra
+    private final int INFINITY = 1000000;
+    private int verticeAtual;           // global usada para indicar o vértice atualmente sendo visitado
+    private int doInicioAteAtual;       // global usada para ajustar menor caminho com Djikstra
 
     public Grafo(
         int totalVertices)
@@ -184,26 +187,36 @@ public class Grafo<T>
         PercursoEmProfundidadeRec(i);
     }
 
-    /*public void PercursoPorLargura()
+    public void PercursoPorLargura()
     {
-        Queue<Integer> gQueue = new Queue<Integer>();
-        vertices[0].foiVisitado = true;
-        gQueue.Enqueue(0);
-        int vert1, vert2;
-        while (gQueue.Count > 0)
+        Fila<Integer> gQueue = new Fila<Integer>();
+        ((Vertice<T>)vertices[0]).foiVisitado = true;
+        try
         {
-            vert1 = gQueue.Dequeue();
+            gQueue.enfileirar(0);
+        }
+        catch(Exception exc){}
+        int vert1, vert2;
+        while (!gQueue.isVazia())
+        {
+            vert1 = gQueue.desenfileirar();
             vert2 = ObterVerticeAdjacenteNaoVisitado(vert1);
             while (vert2 != -1)
             {
-                vertices[vert2].foiVisitado = true;
-                gQueue.Enqueue(vert2);
+                ((Vertice<T>)vertices[vert2]).foiVisitado = true;
+
+                try
+                {
+                    gQueue.enfileirar(vert2);
+                }
+                catch(Exception exc){}
+
                 vert2 = ObterVerticeAdjacenteNaoVisitado(vert1);
             }
         }
         for (int i = 0; i < numVerts; i++)
-            vertices[i].foiVisitado = false;
-    }*/
+            ((Vertice<T>)vertices[i]).foiVisitado = false;
+    }
 
     public void ArvoreGeradoraMinima(
             int primeiro)
