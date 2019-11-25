@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdicionarCidade"
+    android:background="@android:color/white">
+    <TextView
+        android:id="@+id/tvNome"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:textSize="26dp"
+        android:text="Nome"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"/>
+    <EditText
+        android:id="@+id/etNome"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:textSize="24dp"
+        android:hint="Nome"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvNome"
+        />
+    <TextView
+        android:id="@+id/tvCoordenadaX"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:textSize="26dp"
+        android:text="Coordenada X"
+        android:layout_below="@+id/etNome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        />
+    <EditText
+        android:id="@+id/etCoordenadaX"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:textSize="24dp"
+        android:hint="Coordenada X"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvCoordenadaX"
+        />
+    <TextView
+        android:id="@+id/tvCoordenadaY"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:textSize="26dp"
+        android:text="Coordenada Y"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etCoordenadaX"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"/>
+    <EditText
+        android:id="@+id/etCoordenadaY"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:textSize="24dp"
+        android:hint="Coordenada Y"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvCoordenadaY"
+        />
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Adicionar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etCoordenadaY"/>
+
+</RelativeLayout>

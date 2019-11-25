@@ -1,18 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Spinner
+        android:id="@+id/spDeOnde"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentRight="@id/tvDe"/>
     <TextView
+        android:id="@+id/tvDe"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/spDeOnde"
+        android:text="De"
+        android:textSize="30dp"
+        android:layout_alignTop="@id/spDeOnde"/>
+    <Spinner
+        android:id="@+id/spParaOnde"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/spDeOnde"/>
+    <TextView
+        android:id="@+id/tvPara"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/spDeOnde"
+        android:text="Para"
+        android:textSize="30dp"
+        android:layout_alignTop="@id/spParaOnde"/>
+    <Button
+        android:id="@+id/btnBuscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Buscar"
+        android:textSize="20dp"
+        android:layout_below="@+id/tvPara"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="250dp"/>
+    <View
+        android:id="@+id/canvas"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/btnBuscar"/>
+    <TextView
+        android:id="@+id/tvResultados"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Resultados"
+        android:textSize="30dp"
+        android:layout_below="@id/btnBuscar"
+        android:layout_marginLeft="40dp"/>
+    <TableLayout
+        android:id="@+id/tbCaminhos"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvResultados"/>
+    <Button
+        android:id="@+id/btnAdicionarCidade"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Adicionar Cidade"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/tbCaminhos"/>
+    <Button
+        android:id="@+id/btnAdicionarCaminho"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Adicionar Caminho"
+        android:layout_below="@+id/tbCaminhos"
+        android:layout_toRightOf="@+id/btnAdicionarCidade"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
+</ScrollView>
