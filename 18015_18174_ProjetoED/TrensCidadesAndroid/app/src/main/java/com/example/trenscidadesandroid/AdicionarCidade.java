@@ -13,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
 
 public class AdicionarCidade extends AppCompatActivity
 {

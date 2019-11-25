@@ -23,11 +23,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
 public class MainActivity extends AppCompatActivity
 {
 
     private Spinner spDeOnde, spParaOnde;
-    private View canvasView;
+    private CanvasView canvasView;
     private LinearLayout layoutCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
     private TableLayout tbCaminhos;
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
 
-        canvasView = new View(this);
+        canvasView = new CanvasView(this);
         layoutCanvas.addView(canvasView);
 
         bhCidade = new BucketHash<Cidade>();
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         catch (Exception exc)
         {
             Toast.makeText(
-                this,
+                getApplicationContext(),
                 "Erro na leitura do arquivo",
                 Toast.LENGTH_SHORT
             ).show();
