@@ -1,0 +1,28 @@
+package com.example.trenscidadesandroid.classes;
+
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
+public class Linha
+{
+    private String conteudo;
+
+    public Linha(
+        String conteudo) throws Exception
+    {
+        setConteudo(conteudo);
+    }
+
+    public String getConteudo()
+    {
+        return conteudo;
+    }
+
+    public void setConteudo(
+        String conteudo) throws Exception
+    {
+        if (conteudo == null || conteudo.equals(""))
+            throw new Exception("Linha - setConteudo: string inválida");
+        this.conteudo = conteudo;
+    }
+}
