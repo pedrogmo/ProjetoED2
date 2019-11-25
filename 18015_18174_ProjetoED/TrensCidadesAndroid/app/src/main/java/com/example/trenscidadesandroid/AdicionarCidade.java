@@ -2,21 +2,28 @@ package com.example.trenscidadesandroid;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Xml;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
+import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
-public class AdicionarCidade extends AppCompatActivity {
-    EditText etNome, etCoordenadaX, etCoordenadaY;
-    Button btnAdicionar;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+public class AdicionarCidade extends AppCompatActivity
+{
+    private EditText etNome, etCoordenadaX, etCoordenadaY;
+    private Button btnAdicionar;
+    private BucketHash<Cidade> bhCidade;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,27 +33,7 @@ public class AdicionarCidade extends AppCompatActivity {
         etCoordenadaX = findViewById(R.id.etCoordenadaX);
         etCoordenadaY = findViewById(R.id.etCoordenadaY);
 
-        AssetManager assetManager = getApplicationContext().getAssets();
-        InputStream inputStream;
-
-        bhCidade = new BucketHash<Cidade>();
-
-        try {
-            inputStream = assetManager.open("cidades.txt");
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String recebe_string;
-            while((recebe_string = bufferedReader.readLine())!=null){
-
-                Cidade cd = new Cidade(new Linha(recebe_string));
-                bhCidade.inserir(cd);
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+        bhCidade = (BucketHash<Cidade>) getIntent().getExtras().getSerializable("hash");
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,21 +41,65 @@ public class AdicionarCidade extends AppCompatActivity {
                 if (!etNome.getText().toString().trim().equals("")  && !etCoordenadaX.getText().toString().trim().equals("")
                         && etCoordenadaY.getText().toString().trim().equals(""))
                 {
-                    Cidade cd = new Cidade(etNome.getText().toString().trim());
-                    if (bhCidade.Buscar(cd) == null)
+                    Cidade cd = null;
+                    try
                     {
-                        StreamWriter sw = new StreamWriter(assets.Open("cidades.txt"));
-                        cd.X = Double.Parse(etCoordenadaX.Text.Trim());
-                        cd.Y = Double.Parse(etCoordenadaY.Text.Trim());
-                        cd.Codigo = bhCidade.Quantidade;
-                        sw.Write(cd.ParaArquivo());
-                        sw.Close();
+                        cd = new Cidade(etNome.getText().toString().trim());
+                    }
+                    catch(Exception exc)
+                    {
+                        Toast.makeText(
+                            getApplicationContext(),
+                            exc.getMessage(),
+                            Toast.LENGTH_SHORT
+                        ).show();
+                        return;
+                    }
+                    if (bhCidade.buscar(cd) == null)
+                    {
+                        try
+                        {
+                            AssetManager assetManager = getResources().getAssets();
+
+                            //trocar essa linha:
+                            OutputStream outputStream = null;
+
+                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+                            PrintWriter bufferedReader = new PrintWriter(outputStreamWriter);
+
+                            bufferedReader.println(cd.paraArquivo());
+
+                            outputStream.close();
+                        }
+
+                        catch (Exception exc)
+                        {
+                            Toast.makeText(
+                                getApplicationContext(),
+                                "Erro na leitura do arquivo",
+                                Toast.LENGTH_SHORT
+                            ).show();
+
+                            Log.d("ERRO", exc.toString());
+                        }
                     }
                     else
-                        Toast.MakeText(Application.Context, "Essa cidade já existe", ToastLength.Short);
+                    {
+                        Toast.makeText(
+                            getApplicationContext(),
+                            "Cidade já existente",
+                            Toast.LENGTH_SHORT
+                        ).show();
+                    }
                 }
                 else
-                    Toast.MakeText(Application.Context, "Há campos vazios", ToastLength.Short);
+                {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "Há campos vazios",
+                        Toast.LENGTH_SHORT
+                    ).show();
+                }
             }
         });
     }

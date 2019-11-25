@@ -3,34 +3,40 @@ package com.example.trenscidadesandroid;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Xml;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
+import com.example.trenscidadesandroid.classes.cidade.Cidade;
+import com.example.trenscidadesandroid.classes.linha.Linha;
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.LinkedList;
+import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
-    Spinner spDeOnde, spParaOnde;
-    View canvasView;
-    LinearLayout layoutCanvas;
-    Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
-    TableLayout tbCaminhos;
+    private Spinner spDeOnde, spParaOnde;
+    private View canvasView;
+    private LinearLayout layoutCanvas;
+    private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
+    private TableLayout tbCaminhos;
 
+    private BucketHash<Cidade> bhCidade;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -46,23 +52,33 @@ public class MainActivity extends AppCompatActivity {
         bhCidade = new BucketHash<Cidade>();
         ArrayAdapter<String> cidadesSpinner = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
 
-        AssetManager assetManager = getResources().getAssets();
-        InputStream inputStream;
+        try
+        {
+            AssetManager assetManager = getResources().getAssets();
 
-        try {
-            inputStream = assetManager.open("cidades.txt");
+            InputStream inputStream = assetManager.open("cidades.txt");
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String recebe_string;
-            while((recebe_string = bufferedReader.readLine())!=null){
-
-                Cidade cd = new Cidade(new Linha(recebe_string));
+            String recebeString;
+            while((recebeString = bufferedReader.readLine())!=null)
+            {
+                Cidade cd = null;
+                cd = new Cidade(new Linha(recebeString));
                 cidadesSpinner.add(cd.toString());
                 bhCidade.inserir(cd);
             }
             inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+
+        catch (Exception exc)
+        {
+            Toast.makeText(
+                this,
+                "Erro na leitura do arquivo",
+                Toast.LENGTH_SHORT
+            ).show();
+
+            Log.d("ERRO", exc.toString());
         }
 
         spDeOnde.setAdapter(cidadesSpinner);
@@ -70,8 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
         btnAdicionarCidade.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent i = new Intent(getApplicationContext(), AdicionarCidade.class);
+                i.putExtra("hash", (Serializable) bhCidade);
                 startActivity(i);
             }
         });
