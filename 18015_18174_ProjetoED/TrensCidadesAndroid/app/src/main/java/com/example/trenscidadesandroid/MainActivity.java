@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
         layoutCanvas = findViewById(R.id.llCanvas);
+        tbCaminhos = findViewById(R.id.tbCaminhos);
 
         canvasView = new CanvasView(this);
         layoutCanvas.addView(canvasView);
@@ -84,9 +85,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                getApplicationContext(),
-                android.R.layout.simple_spinner_item,
-                listaNomesCidades);
+            getApplicationContext(),
+            android.R.layout.simple_spinner_item,
+            listaNomesCidades);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
