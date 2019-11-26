@@ -11,7 +11,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentRight="@id/tvDe"/>
     <TextView
         android:id="@+id/tvDe"
@@ -19,14 +19,14 @@
         android:layout_height="40dp"
         android:layout_toLeftOf="@id/spDeOnde"
         android:text="De"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_alignTop="@id/spDeOnde"/>
     <Spinner
         android:id="@+id/spParaOnde"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/spDeOnde"/>
     <TextView
         android:id="@+id/tvPara"
@@ -34,7 +34,7 @@
         android:layout_height="40dp"
         android:layout_toLeftOf="@id/spDeOnde"
         android:text="Para"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_alignTop="@id/spParaOnde"/>
     <Button
         android:id="@+id/btnBuscar"
@@ -43,8 +43,8 @@
         android:text="Buscar"
         android:textSize="20dp"
         android:layout_below="@+id/tvPara"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="250dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"/>
     <LinearLayout
         android:id="@+id/llCanvas"
         android:layout_width="wrap_content"
@@ -56,8 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:text="Resultados"
-        android:textSize="30dp"
-        android:layout_below="@id/btnBuscar"
+        android:textSize="20dp"
+        android:layout_below="@id/llCanvas"
         android:layout_marginLeft="40dp"/>
     <TableLayout
         android:id="@+id/tbCaminhos"

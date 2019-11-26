@@ -1,7 +1,6 @@
 package com.example.trenscidadesandroid;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +18,13 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.linha.Linha;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
@@ -48,29 +51,29 @@ public class MainActivity extends AppCompatActivity
         btnBuscar = findViewById(R.id.btnBuscar);
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
+        layoutCanvas = findViewById(R.id.llCanvas);
 
         canvasView = new CanvasView(this);
         layoutCanvas.addView(canvasView);
 
         bhCidade = new BucketHash<Cidade>();
-        ArrayAdapter<String> cidadesSpinner = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
+        ArrayList<String> listaNomesCidades = new ArrayList<String>();
 
         try
         {
-            AssetManager assetManager = getResources().getAssets();
+            FileInputStream fileIn = openFileInput("cidades.txt");
+            InputStreamReader inputRead = new InputStreamReader(fileIn);
+            BufferedReader leitor = new BufferedReader(inputRead);
 
-            InputStream inputStream = assetManager.open("cidades.txt");
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String recebeString;
-            while((recebeString = bufferedReader.readLine())!=null)
+            int c = 0;
+            while((recebeString = leitor.readLine()) != null)
             {
-                Cidade cd = null;
-                cd = new Cidade(new Linha(recebeString));
-                cidadesSpinner.add(cd.toString());
+                Cidade cd = new Cidade(new Linha(recebeString));
+                listaNomesCidades.add(cd.toString());
                 bhCidade.inserir(cd);
             }
-            inputStream.close();
+            leitor.close();
         }
 
         catch (Exception exc)
@@ -81,11 +84,18 @@ public class MainActivity extends AppCompatActivity
                 Toast.LENGTH_SHORT
             ).show();
 
-            Log.d("ERRO", exc.toString());
+            Log.d("MSG_ERR", exc.toString());
         }
 
-        spDeOnde.setAdapter(cidadesSpinner);
-        spParaOnde.setAdapter(cidadesSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_item,
+                listaNomesCidades);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spDeOnde.setAdapter(adapter);
+        spParaOnde.setAdapter(adapter);
 
         btnAdicionarCidade.setOnClickListener(new View.OnClickListener() {
             @Override

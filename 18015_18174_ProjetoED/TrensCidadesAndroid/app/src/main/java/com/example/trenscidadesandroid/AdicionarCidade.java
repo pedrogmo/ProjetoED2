@@ -1,6 +1,5 @@
 package com.example.trenscidadesandroid;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
-import java.io.OutputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
@@ -61,17 +60,12 @@ public class AdicionarCidade extends AppCompatActivity
                     {
                         try
                         {
-                            AssetManager assetManager = getResources().getAssets();
+                            FileOutputStream fileout = openFileOutput("cidades.txt", MODE_APPEND);
+                            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
 
-                            //trocar essa linha:
-                            OutputStream outputStream = null;
+                            outputWriter.write("\n" + cd.paraArquivo());
 
-                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
-                            PrintWriter bufferedReader = new PrintWriter(outputStreamWriter);
-
-                            bufferedReader.println(cd.paraArquivo());
-
-                            outputStream.close();
+                            outputWriter.close();
                         }
 
                         catch (Exception exc)
@@ -82,7 +76,7 @@ public class AdicionarCidade extends AppCompatActivity
                                 Toast.LENGTH_SHORT
                             ).show();
 
-                            Log.d("ERRO", exc.toString());
+                            Log.d("MSG_ERR", exc.toString());
                         }
                     }
                     else

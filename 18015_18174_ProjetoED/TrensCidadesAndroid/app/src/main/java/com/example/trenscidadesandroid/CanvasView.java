@@ -13,8 +13,8 @@ import android.view.View;
 
 public class CanvasView extends View
 {
-    private final float mapaTotalX = 358.5f;
-    private final float mapaTotalY = 289f;
+    private final float TOTAL_X = 358.5f;
+    private final float TOTAL_Y = 289f;
 
     private Paint paint; //propriedades do formato (cor)
 
@@ -33,9 +33,9 @@ public class CanvasView extends View
         this.paint.setColor(Color.RED);
 
         //pega imagem põe no bitmap
-        Bitmap imagem = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_name);
+        Bitmap imagem = BitmapFactory.decodeResource(getResources(), R.drawable.mapa);
 
-        canvas.drawBitmap(imagem, 0, 0, null);
+        canvas.drawBitmap(imagem, 0, 0,null);
 
         final float espessura = 5.0f;
 
