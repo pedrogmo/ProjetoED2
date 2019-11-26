@@ -19,10 +19,7 @@ import com.example.trenscidadesandroid.classes.linha.Linha;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity
             BufferedReader leitor = new BufferedReader(inputRead);
 
             String recebeString;
-            int c = 0;
             while((recebeString = leitor.readLine()) != null)
             {
                 Cidade cd = new Cidade(new Linha(recebeString));

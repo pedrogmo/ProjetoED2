@@ -13,8 +13,10 @@ import android.view.View;
 
 public class CanvasView extends View
 {
-    private final float TOTAL_X = 358.5f;
-    private final float TOTAL_Y = 289f;
+    private static final float TOTAL_X = 358.5f;
+    private static final float TOTAL_Y = 289f;
+    private static final float ESPESSURA = 5.0f;
+    private static final int COR_LINHA = Color.RED;
 
     private Paint paint; //propriedades do formato (cor)
 
@@ -26,19 +28,16 @@ public class CanvasView extends View
 
     @Override
     protected void onDraw(
-            Canvas canvas) //canvas para formas geométricas
+        Canvas canvas)
     {
-        super.onDraw(canvas);
         this.paint = new Paint();
-        this.paint.setColor(Color.RED);
+        this.paint.setColor(COR_LINHA);
+        this.paint.setStrokeWidth(ESPESSURA);
 
         //pega imagem põe no bitmap
         Bitmap imagem = BitmapFactory.decodeResource(getResources(), R.drawable.mapa);
-
         canvas.drawBitmap(imagem, 0, 0,null);
 
-        final float espessura = 5.0f;
-
-        paint.setStrokeWidth(espessura);
+        super.onDraw(canvas);
     }
 }

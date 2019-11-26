@@ -14,7 +14,6 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
