@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 
 //Gustavo Henrique de Meira - 18015
@@ -30,6 +31,10 @@ public class CanvasView extends View
     protected void onDraw(
         Canvas canvas)
     {
+        super.onDraw(canvas);
+
+        Log.d("MSG", "chegou");
+
         this.paint = new Paint();
         this.paint.setColor(COR_LINHA);
         this.paint.setStrokeWidth(ESPESSURA);
@@ -38,6 +43,6 @@ public class CanvasView extends View
         Bitmap imagem = BitmapFactory.decodeResource(getResources(), R.drawable.mapa);
         canvas.drawBitmap(imagem, 0, 0,null);
 
-        super.onDraw(canvas);
+
     }
 }
