@@ -66,6 +66,70 @@ public class MainActivity extends AppCompatActivity
 
         try
         {
+            /*
+            Escrevendo arquivo:
+
+            FileOutputStream fileout = openFileOutput("cidades.txt", MODE_PRIVATE);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
+            outputWriter.write("" +
+                " 0Covilhã         0.252 0.479\n" +
+                " 1A Coruna        0.195 0.151\n" +
+                " 2Albacete        0.609 0.609\n" +
+                " 3Alicante        0.697 0.675\n" +
+                " 4Barcelona       0.864 0.363\n" +
+                " 5Bilbao          0.542 0.164\n" +
+                " 6Braga           0.194 0.344\n" +
+                " 7Burgos          0.494 0.261\n" +
+                " 8Caceres         0.324 0.561\n" +
+                " 9Cadiz           0.327 0.854\n" +
+                "10Cartagena       0.666 0.751\n" +
+                "11Castelo Branco  0.252 0.524\n" +
+                "12Coimbra         0.193 0.485\n" +
+                "13Cordoba         0.425 0.721\n" +
+                "14El Ejido        0.550 0.832\n" +
+                "15Gijon           0.369 0.131\n" +
+                "16Girona          0.907 0.299\n" +
+                "17Granada         0.498 0.791\n" +
+                "18Guadalajara     0.527 0.443\n" +
+                "19Guarda          0.266 0.452\n" +
+                "20Huelva          0.287 0.784\n" +
+                "21Jaen            0.488 0.734\n" +
+                "22Leon            0.375 0.235\n" +
+                "23Lisboa          0.148 0.638\n" +
+                "24Lleida          0.768 0.339\n" +
+                "25Logrono         0.572 0.249\n" +
+                "26Lorca           0.619 0.742\n" +
+                "27Loule           0.218 0.796\n" +
+                "28Lugo            0.248 0.192\n" +
+                "29Madrid          0.492 0.462\n" +
+                "30Malaga          0.446 0.837\n" +
+                "31Mataro          0.882 0.350\n" +
+                "32Montpellier     0.976 0.126\n" +
+                "33Murcia          0.655 0.710\n" +
+                "34Ourense         0.229 0.261\n" +
+                "35Oviedo          0.356 0.152\n" +
+                "36Pau             0.703 0.159\n" +
+                "37Perpignan       0.911 0.223\n" +
+                "38Pombal          0.179 0.517\n" +
+                "39Ponferrada      0.310 0.240\n" +
+                "40Porto           0.180 0.388\n" +
+                "41Salamanca       0.368 0.407\n" +
+                "42San Sebastian   0.601 0.156\n" +
+                "43Santander       0.487 0.141\n" +
+                "44Santiago de C.  0.185 0.206\n" +
+                "45Sevilha         0.347 0.770\n" +
+                "46Tarragona       0.806 0.391\n" +
+                "47Toledo          0.471 0.521\n" +
+                "48Toulouse        0.817 0.126\n" +
+                "49Valencia        0.702 0.561\n" +
+                "50Valladolid      0.425 0.334\n" +
+                "51Vigo            0.174 0.272\n" +
+                "52Viseu           0.225 0.439\n" +
+                "53Zaragoza        0.672 0.334"
+            );
+            outputWriter.close();
+            */
+
             FileInputStream fileIn = openFileInput("cidades.txt");
             InputStreamReader inputRead = new InputStreamReader(fileIn);
             BufferedReader leitor = new BufferedReader(inputRead);
