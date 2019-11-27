@@ -75,6 +75,7 @@ public class AdicionarCidade extends AppCompatActivity
                             outputWriter.write("\n" + cd.paraArquivo());
 
                             outputWriter.close();
+                            Toast.makeText(getApplicationContext(), "Inserido com sucesso", Toast.LENGTH_SHORT).show();
                         }
 
                         catch (Exception exc)

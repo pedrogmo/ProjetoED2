@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity
                 "52Viseu           0.225 0.439\n" +
                 "53Zaragoza        0.672 0.334"
             );
-            outputWriter.close();
-            */
+            outputWriter.close();*/
+
 
             FileInputStream fileIn = openFileInput("cidades.txt");
             InputStreamReader inputRead = new InputStreamReader(fileIn);
@@ -176,4 +176,5 @@ public class MainActivity extends AppCompatActivity
         });
 
     }
+
 }
