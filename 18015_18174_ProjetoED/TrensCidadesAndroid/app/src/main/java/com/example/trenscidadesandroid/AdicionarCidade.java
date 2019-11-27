@@ -32,6 +32,7 @@ public class AdicionarCidade extends AppCompatActivity
         etNome = findViewById(R.id.etNome);
         etCoordenadaX = findViewById(R.id.etCoordenadaX);
         etCoordenadaY = findViewById(R.id.etCoordenadaY);
+        btnAdicionar = findViewById(R.id.btnConcluirCidade);
 
         bhCidade = (BucketHash<Cidade>) getIntent().getExtras().getSerializable("hash");
 
@@ -39,12 +40,21 @@ public class AdicionarCidade extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 if (!etNome.getText().toString().trim().equals("")  && !etCoordenadaX.getText().toString().trim().equals("")
-                        && etCoordenadaY.getText().toString().trim().equals(""))
+                        && !etCoordenadaY.getText().toString().trim().equals(""))
                 {
                     Cidade cd = null;
+
+                    //precisa pegar esse código de alguma forma
+                    int codigo = 0;
+
                     try
                     {
-                        cd = new Cidade(etNome.getText().toString().trim());
+                        cd = new Cidade(
+                            codigo,
+                            etNome.getText().toString().trim(),
+                            Double.parseDouble(etCoordenadaX.getText().toString().trim()),
+                            Double.parseDouble(etCoordenadaY.getText().toString().trim())
+                        );
                     }
                     catch(Exception exc)
                     {

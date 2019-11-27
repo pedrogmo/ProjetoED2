@@ -3,7 +3,10 @@ package com.example.trenscidadesandroid.classes.linha;
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
+import java.io.Serializable;
+
 public class Linha
+        implements Serializable
 {
     private String conteudo;
 

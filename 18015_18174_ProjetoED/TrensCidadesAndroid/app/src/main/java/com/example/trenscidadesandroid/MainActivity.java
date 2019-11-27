@@ -25,7 +25,9 @@ import com.example.trenscidadesandroid.classes.linha.Linha;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity
     private ImageView ivCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
     private TableLayout tbCaminhos;
-    private Paint paint;
 
     private BucketHash<Cidade> bhCidade;
 

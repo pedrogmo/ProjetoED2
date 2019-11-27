@@ -1,8 +1,10 @@
 package com.example.trenscidadesandroid.classes.no;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 
 public class No<T>
+    implements Serializable
 {
     private T info;
     public No<T> prox;

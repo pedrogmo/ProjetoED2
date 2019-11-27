@@ -3,7 +3,10 @@ package com.example.trenscidadesandroid.classes.vertice;
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
+import java.io.Serializable;
+
 public class Vertice<T>
+    implements Serializable
 {
     public boolean foiVisitado;
     private T info;

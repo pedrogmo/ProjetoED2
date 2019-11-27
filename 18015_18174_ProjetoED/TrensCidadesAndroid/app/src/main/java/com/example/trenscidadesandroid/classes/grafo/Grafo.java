@@ -7,7 +7,10 @@ import com.example.trenscidadesandroid.classes.pilha.Pilha;
 import com.example.trenscidadesandroid.classes.vertice.Vertice;
 import com.example.trenscidadesandroid.classes.fila.Fila;
 
+import java.io.Serializable;
+
 public class Grafo<T>
+    implements Serializable
 {
     private class DistOriginal
     {

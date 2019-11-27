@@ -65,9 +65,9 @@
         android:hint="Coordenada Y"
         android:textAlignment="center"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tvCoordenadaY"
-        />
+        android:layout_below="@+id/tvCoordenadaY" />
     <Button
+        android:id="@+id/btnConcluirCidade"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"

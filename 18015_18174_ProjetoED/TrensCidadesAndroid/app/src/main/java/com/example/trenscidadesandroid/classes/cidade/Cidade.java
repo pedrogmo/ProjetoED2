@@ -5,8 +5,10 @@ package com.example.trenscidadesandroid.classes.cidade;
 
 import com.example.trenscidadesandroid.classes.linha.Linha;
 
+import java.io.Serializable;
+
 public class Cidade
-    implements Comparable<Cidade>
+    implements Comparable<Cidade>, Serializable
 {
     private int codigo;
     //Posição em porcentagem da imagem
@@ -31,8 +33,8 @@ public class Cidade
     public Cidade(
         int codigo,
         String nome,
-        int posicaoX,
-        int posicaoY) throws Exception
+        double posicaoX,
+        double posicaoY) throws Exception
     {
         setCodigo(codigo);
         setNome(nome);

@@ -5,7 +5,10 @@ package com.example.trenscidadesandroid.classes.buckethash;
 
 import com.example.trenscidadesandroid.classes.lista.Lista;
 
+import java.io.Serializable;
+
 public class BucketHash<T>
+    implements Serializable
 {
     private final int TAMANHO = 500;
     private Object[] conteudo;
