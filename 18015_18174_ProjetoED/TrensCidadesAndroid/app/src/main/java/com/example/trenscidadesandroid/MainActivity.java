@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spDeOnde = findViewById(R.id.spDeOnde);
-        spParaOnde = findViewById(R.id.spParaOnde);
+        spDeOnde = findViewById(R.id.spDeOndeMain);
+        spParaOnde = findViewById(R.id.spParaOndeMain);
         btnBuscar = findViewById(R.id.btnBuscar);
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         desenhadora = new Desenhadora(this.ivCanvas, getResources());
 
         bhCidade = new BucketHash<Cidade>();
-        ArrayList<String> listaNomesCidades = new ArrayList<String>();
+        final ArrayList<String> listaNomesCidades = new ArrayList<String>();
 
         try
         {
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity
             Log.d("MSG_ERR", exc.toString());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
             getApplicationContext(),
             android.R.layout.simple_spinner_item,
             listaNomesCidades);
@@ -171,6 +171,15 @@ public class MainActivity extends AppCompatActivity
             {
                 Intent i = new Intent(getApplicationContext(), AdicionarCidade.class);
                 i.putExtra("hash", (Serializable) bhCidade);
+                startActivity(i);
+            }
+        });
+
+        btnAdicionarCaminho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), AdicionarCaminho.class);
+                i.putExtra("listaNomesCidades", (Serializable) listaNomesCidades);
                 startActivity(i);
             }
         });
