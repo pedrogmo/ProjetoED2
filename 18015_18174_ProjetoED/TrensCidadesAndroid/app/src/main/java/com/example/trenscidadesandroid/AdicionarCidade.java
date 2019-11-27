@@ -1,5 +1,6 @@
 package com.example.trenscidadesandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
@@ -39,21 +41,39 @@ public class AdicionarCidade extends AppCompatActivity
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!etNome.getText().toString().trim().equals("")  && !etCoordenadaX.getText().toString().trim().equals("")
-                        && !etCoordenadaY.getText().toString().trim().equals(""))
+                if (!etNome.getText().toString().trim().equals("") &&
+                    !etCoordenadaX.getText().toString().trim().equals("") &&
+                    !etCoordenadaY.getText().toString().trim().equals(""))
                 {
                     Cidade cd = null;
 
-                    //precisa pegar esse código de alguma forma
-                    int codigo = 0;
+                    final String nome;
+                    final double x;
+                    final double y;
+
+                    try
+                    {
+                        nome = etNome.getText().toString().trim();
+                        x = Double.parseDouble(etCoordenadaX.getText().toString().trim());
+                        y = Double.parseDouble(etCoordenadaY.getText().toString().trim());
+                    }
+                    catch(Exception exc)
+                    {
+                        Toast.makeText(
+                            getApplicationContext(),
+                            "Dados inválidos",
+                            Toast.LENGTH_SHORT
+                        ).show();
+                        return;
+                    }
 
                     try
                     {
                         cd = new Cidade(
                             bhCidade.getQuantidade(),
-                            etNome.getText().toString().trim(),
-                            Double.parseDouble(etCoordenadaX.getText().toString().trim()),
-                            Double.parseDouble(etCoordenadaY.getText().toString().trim())
+                            nome,
+                            x,
+                            y
                         );
                     }
                     catch(Exception exc)
@@ -71,11 +91,12 @@ public class AdicionarCidade extends AppCompatActivity
                         {
                             FileOutputStream fileout = openFileOutput("cidades.txt", MODE_APPEND);
                             OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-
                             outputWriter.write("\n" + cd.paraArquivo());
-
                             outputWriter.close();
+
                             Toast.makeText(getApplicationContext(), "Inserido com sucesso", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
 
                         catch (Exception exc)

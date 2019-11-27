@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
     private TableLayout tbCaminhos;
 
-    private BucketHash<Cidade> bhCidade;
+    private static BucketHash<Cidade> bhCidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
