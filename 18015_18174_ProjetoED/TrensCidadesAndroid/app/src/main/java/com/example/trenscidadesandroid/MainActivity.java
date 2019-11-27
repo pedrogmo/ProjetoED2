@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -37,15 +36,11 @@ public class MainActivity extends AppCompatActivity
 {
 
     private Spinner spDeOnde, spParaOnde;
-    private CanvasView canvasView;
+    private Desenhadora desenhadora;
     private ImageView ivCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
     private TableLayout tbCaminhos;
-    Paint paint;
-    private static final float TOTAL_X = 358.5f;
-    private static final float TOTAL_Y = 289f;
-    private static final float ESPESSURA = 5.0f;
-    private static final int COR_LINHA = Color.RED;
+    private Paint paint;
 
     private BucketHash<Cidade> bhCidade;
 
@@ -63,18 +58,7 @@ public class MainActivity extends AppCompatActivity
         ivCanvas = findViewById(R.id.ivCanvas);
         tbCaminhos = findViewById(R.id.tbCaminhos);
 
-        this.paint = new Paint();
-        this.paint.setColor(COR_LINHA);
-        this.paint.setStrokeWidth(ESPESSURA);
-
-        canvasView = new CanvasView(this);
-
-        Bitmap imagem = BitmapFactory.decodeResource(getResources(), R.drawable.mapa);
-        Canvas canvas = new Canvas();
-        canvas.drawBitmap(imagem, 0, 0, null);
-
-        ivCanvas.setImageDrawable(new BitmapDrawable(getResources(), imagem));
-
+        desenhadora = new Desenhadora(this.ivCanvas, getResources());
 
         bhCidade = new BucketHash<Cidade>();
         ArrayList<String> listaNomesCidades = new ArrayList<String>();
