@@ -45,10 +45,9 @@
         android:layout_below="@+id/tvPara"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"/>
-    <LinearLayout
-        android:id="@+id/llCanvas"
+    <ImageView
+        android:id="@+id/ivCanvas"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnBuscar"/>
     <TextView
@@ -57,7 +56,7 @@
         android:layout_height="40dp"
         android:text="Resultados"
         android:textSize="20dp"
-        android:layout_below="@id/llCanvas"
+        android:layout_below="@+id/ivCanvas"
         android:layout_marginLeft="40dp"/>
     <TableLayout
         android:id="@+id/tbCaminhos"
