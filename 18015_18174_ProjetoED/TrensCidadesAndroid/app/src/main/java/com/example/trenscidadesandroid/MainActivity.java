@@ -1,11 +1,18 @@
 package com.example.trenscidadesandroid;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -31,9 +38,14 @@ public class MainActivity extends AppCompatActivity
 
     private Spinner spDeOnde, spParaOnde;
     private CanvasView canvasView;
-    private LinearLayout layoutCanvas;
+    private ImageView ivCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
     private TableLayout tbCaminhos;
+    Paint paint;
+    private static final float TOTAL_X = 358.5f;
+    private static final float TOTAL_Y = 289f;
+    private static final float ESPESSURA = 5.0f;
+    private static final int COR_LINHA = Color.RED;
 
     private BucketHash<Cidade> bhCidade;
 
@@ -48,11 +60,21 @@ public class MainActivity extends AppCompatActivity
         btnBuscar = findViewById(R.id.btnBuscar);
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
-        layoutCanvas = findViewById(R.id.llCanvas);
+        ivCanvas = findViewById(R.id.ivCanvas);
         tbCaminhos = findViewById(R.id.tbCaminhos);
 
+        this.paint = new Paint();
+        this.paint.setColor(COR_LINHA);
+        this.paint.setStrokeWidth(ESPESSURA);
+
         canvasView = new CanvasView(this);
-        layoutCanvas.addView(canvasView);
+
+        Bitmap imagem = BitmapFactory.decodeResource(getResources(), R.drawable.mapa);
+        Canvas canvas = new Canvas();
+        canvas.drawBitmap(imagem, 0, 0, null);
+
+        ivCanvas.setImageDrawable(new BitmapDrawable(getResources(), imagem));
+
 
         bhCidade = new BucketHash<Cidade>();
         ArrayList<String> listaNomesCidades = new ArrayList<String>();
