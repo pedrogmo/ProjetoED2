@@ -50,7 +50,7 @@ public class AdicionarCidade extends AppCompatActivity
                     try
                     {
                         cd = new Cidade(
-                            codigo,
+                            bhCidade.getQuantidade(),
                             etNome.getText().toString().trim(),
                             Double.parseDouble(etCoordenadaX.getText().toString().trim()),
                             Double.parseDouble(etCoordenadaY.getText().toString().trim())
