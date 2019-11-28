@@ -1,57 +1,87 @@
 package com.example.trenscidadesandroid.classes.aresta;
 
-public class Aresta<T>
+import com.example.trenscidadesandroid.classes.cidade.Cidade;
+import com.example.trenscidadesandroid.classes.pesocidades.PesoCidades;
+
+public class Aresta
 {
-    private int origem;
-    private int destino;
-    private T peso;
+    public static final int COMECO_NOME_ORIGEM = 0;
+    public static final int TAMANHO_NOME_ORIGEM = 15;
+    public static final int FIM_NOME_ORIGEM = COMECO_NOME_ORIGEM + TAMANHO_NOME_ORIGEM;
+
+    public static final int COMECO_NOME_DESTINO = FIM_NOME_ORIGEM;
+    public static final int TAMANHO_NOME_DESTINO = 15;
+    public static final int FIM_NOME_DESTINO = COMECO_NOME_DESTINO + TAMANHO_NOME_DESTINO;
+
+    public static final int COMECO_TEMPO = FIM_NOME_DESTINO;
+    public static final int TAMANHO_TEMPO = 6;
+    public static final int FIM_TEMPO = COMECO_TEMPO + TAMANHO_TEMPO;
+
+    public static final int COMECO_DISTANCIA = FIM_TEMPO;
+
+
+    private Cidade origem;
+    private Cidade destino;
+    private PesoCidades peso;
 
     public Aresta(
-        int origem,
-        int destino,
-        T peso) throws Exception
+        Cidade origem,
+        Cidade destino,
+        PesoCidades peso) throws Exception
     {
         this.setOrigem(origem);
         this.setDestino(destino);
         this.setPeso(peso);
     }
 
-    public int getOrigem()
+    public Cidade getOrigem()
     {
         return origem;
     }
 
     private void setOrigem(
-        int origem) throws Exception
+        Cidade origem)
     {
-        if (origem < 0)
-            throw new Exception("Aresta - setOrigem: valor negativo");
         this.origem = origem;
     }
 
-    public int getDestino()
+    public Cidade getDestino()
     {
         return destino;
     }
 
     private void setDestino(
-            int destino) throws Exception
+            Cidade destino)
     {
-        if (destino < 0)
-            throw new Exception("Aresta - setDestino: valor negativo");
         this.destino = destino;
     }
 
-    public T getPeso()
+    public PesoCidades getPeso()
     {
         return peso;
     }
 
     private void setPeso(
-        T peso) throws Exception
+        PesoCidades peso) throws Exception
     {
         if (peso == null)
             throw new Exception("Aresta - setPeso: valor nulo");
         this.peso = peso;
+    }
+
+    public String paraArquivo()
+    {
+        String ret = padRight(origem.getNome(), TAMANHO_NOME_ORIGEM);
+        ret += padRight(destino.getNome(), TAMANHO_NOME_DESTINO);
+        ret += padRight(peso.getTempo() + "", TAMANHO_TEMPO);
+        ret += peso.getDistancia() + "";
+        return ret;
+    }
+
+    private static String padRight(
+            String s,
+            int n)
+    {
+        return String.format("%-" + n + "s", s);
     }
 }

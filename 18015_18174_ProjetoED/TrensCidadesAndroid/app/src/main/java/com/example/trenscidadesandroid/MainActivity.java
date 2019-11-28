@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), AdicionarCaminho.class);
                 i.putExtra("listaNomesCidades", (Serializable) listaNomesCidades);
+                i.putExtra("hash", (Serializable) bhCidade);
                 startActivity(i);
             }
         });
