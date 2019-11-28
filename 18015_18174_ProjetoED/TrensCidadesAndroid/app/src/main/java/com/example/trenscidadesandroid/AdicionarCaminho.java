@@ -56,7 +56,7 @@ public class AdicionarCaminho extends AppCompatActivity {
             public void onClick(View view) {
 
                 try {
-                    FileOutputStream fileout = openFileOutput("cidades.txt", MODE_PRIVATE);
+                    /*FileOutputStream fileout = openFileOutput("cidades.txt", MODE_PRIVATE);
                     OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                     outputWriter.write("Madrid         Salamanca       220  150\n" +
                             "Salamanca      Guarda          160   90\n" +
@@ -122,8 +122,9 @@ public class AdicionarCaminho extends AppCompatActivity {
                             "Mataro         Girona           80   44\n" +
                             "Girona         Perpignan        93   38"
                     );
-                    outputWriter.close();
-                    String cidadeOrigem = spDeOnde.getSelectedItem().toString(), cidadeDestino = spParaOnde.getSelectedItem().toString();
+                    outputWriter.close();*/
+                    String cidadeOrigem = spDeOnde.getSelectedItem().toString(),
+                           cidadeDestino = spParaOnde.getSelectedItem().toString();
 
 
                     Cidade origem = bhCidade.buscar(new Cidade(cidadeOrigem));
@@ -134,8 +135,8 @@ public class AdicionarCaminho extends AppCompatActivity {
 
                     Aresta aresta = new Aresta(origem, destino, p);
 
-                    fileout = openFileOutput("cidades.txt", MODE_APPEND);
-                    outputWriter = new OutputStreamWriter(fileout);
+                    FileOutputStream fileout = openFileOutput("cidades.txt", MODE_PRIVATE);
+                    OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                     outputWriter.write("\n" + aresta.paraArquivo());
                     outputWriter.close();
 
