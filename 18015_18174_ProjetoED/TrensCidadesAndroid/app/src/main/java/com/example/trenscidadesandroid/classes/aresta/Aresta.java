@@ -2,6 +2,7 @@ package com.example.trenscidadesandroid.classes.aresta;
 
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.pesocidades.PesoCidades;
+import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
 
 public class Aresta
 {
@@ -71,17 +72,10 @@ public class Aresta
 
     public String paraArquivo()
     {
-        String ret = padRight(origem.getNome(), TAMANHO_NOME_ORIGEM);
-        ret += padRight(destino.getNome(), TAMANHO_NOME_DESTINO);
-        ret += padRight(peso.getTempo() + "", TAMANHO_TEMPO);
+        String ret = Utilidades.padRight(origem.getNome(), TAMANHO_NOME_ORIGEM);
+        ret += Utilidades.padRight(destino.getNome(), TAMANHO_NOME_DESTINO);
+        ret += Utilidades.padRight(peso.getTempo() + "", TAMANHO_TEMPO);
         ret += peso.getDistancia() + "";
         return ret;
-    }
-
-    private static String padRight(
-            String s,
-            int n)
-    {
-        return String.format("%-" + n + "s", s);
     }
 }

@@ -1,7 +1,8 @@
 package com.example.trenscidadesandroid.classes.no;
 
+import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
+
 import java.io.Serializable;
-import java.lang.reflect.Method;
 
 public class No<T>
     implements Serializable
@@ -28,22 +29,7 @@ public class No<T>
         if (info == null)
             throw new Exception("No<T> - setInfo: info nula");
         if (info instanceof Cloneable)
-            this.info = cloneDeT(info);
+            this.info = (T) Utilidades.cloneDe(info);
         this.info = info;
-    }
-
-    private T cloneDeT(T t)
-    {
-        T ret = null;
-        try
-        {
-            Class<?> classe = t.getClass();
-            Class<?>[] tiposFormais = null;
-            Method metodo = classe.getMethod("clone", tiposFormais);
-            Object[] pametrosReais = null;
-            ret = (T) metodo.invoke(t, pametrosReais);
-        }
-        catch(Exception erro){}
-        return ret;
     }
 }

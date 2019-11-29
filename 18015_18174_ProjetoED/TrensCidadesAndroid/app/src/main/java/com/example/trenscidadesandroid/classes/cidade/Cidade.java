@@ -4,14 +4,14 @@ package com.example.trenscidadesandroid.classes.cidade;
 //Pedro Gomes Moreira - 18174
 
 import com.example.trenscidadesandroid.classes.linha.Linha;
+import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
 
 import java.io.Serializable;
 
 public class Cidade
-    implements Comparable<Cidade>, Serializable
+    implements Comparable<Cidade>, Serializable, Cloneable
 {
     private int codigo;
-    //Posição em porcentagem da imagem
     private double x, y;
     private String nome;
 
@@ -66,6 +66,17 @@ public class Cidade
         setNome(nome);
         x = 0.0;
         y = 0.0;
+    }
+
+    public Cidade(
+        Cidade modelo) throws Exception
+    {
+        if (modelo == null)
+            throw new Exception("Cidade - construtor de cópia: modelo ausente");
+        codigo = modelo.codigo;
+        nome = modelo.nome;
+        x = modelo.x;
+        y = modelo.y;
     }
 
     public int getCodigo()
@@ -133,10 +144,10 @@ public class Cidade
 
     public String paraArquivo()
     {
-        String ret = padRight(codigo + "", TAMANHO_CODIGO);
-        ret += padRight(nome, TAMANHO_NOME);
-        ret += padRight(x + "", TAMANHO_X);
-        ret += padRight(y + "", TAMANHO_Y);
+        String ret = Utilidades.padRight(codigo + "", TAMANHO_CODIGO);
+        ret += Utilidades.padRight(nome, TAMANHO_NOME);
+        ret += Utilidades.padRight(x + "", TAMANHO_X);
+        ret += Utilidades.padRight(y + "", TAMANHO_Y);
         return ret;
     }
 
@@ -162,10 +173,11 @@ public class Cidade
         return hash;
     }
 
-    private static String padRight(
-        String s,
-        int n)
+    public Object clone()
     {
-        return String.format("%-" + n + "s", s);
+        Cidade c = null;
+        try{ c = new Cidade(this); }
+        catch(Exception e){}
+        return c;
     }
 }

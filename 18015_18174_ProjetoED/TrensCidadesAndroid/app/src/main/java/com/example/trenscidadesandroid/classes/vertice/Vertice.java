@@ -3,31 +3,33 @@ package com.example.trenscidadesandroid.classes.vertice;
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
+import com.example.trenscidadesandroid.classes.cidade.Cidade;
+
 import java.io.Serializable;
 
-public class Vertice<T>
+public class Vertice
     implements Serializable
 {
     public boolean foiVisitado;
-    private T info;
+    private Cidade info;
 
     public Vertice(
-        T informacao) throws Exception
+            Cidade informacao) throws Exception
     {
         setInfo(informacao);
         foiVisitado = false;
     }
 
-    public T getInfo()
+    public Cidade getInfo()
     {
         return info;
     }
 
     public void setInfo(
-        T info) throws Exception
+            Cidade info) throws Exception
     {
         if (info == null)
             throw new Exception("Vertice<T> - setInfo: dado invalido");
-        this.info = info;
+        this.info = (Cidade) info.clone();
     }
 }
