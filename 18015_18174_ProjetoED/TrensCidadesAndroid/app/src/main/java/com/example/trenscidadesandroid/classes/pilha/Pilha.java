@@ -5,7 +5,10 @@ package com.example.trenscidadesandroid.classes.pilha;
 
 import com.example.trenscidadesandroid.classes.lista.Lista;
 
+import java.io.Serializable;
+
 public class Pilha<T>
+    implements Serializable
 {
     private Lista<T> lista;
 
