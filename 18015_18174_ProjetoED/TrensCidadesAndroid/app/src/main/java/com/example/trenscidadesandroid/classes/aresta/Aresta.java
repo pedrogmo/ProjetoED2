@@ -111,4 +111,9 @@ public class Aresta
         ret += distancia + "";
         return ret;
     }
+    public String toString()
+    {
+        String ret = origem.getNome() + " | " + destino.getNome() + " | " + tempo + " | " + distancia;
+        return ret;
+    }
 }
