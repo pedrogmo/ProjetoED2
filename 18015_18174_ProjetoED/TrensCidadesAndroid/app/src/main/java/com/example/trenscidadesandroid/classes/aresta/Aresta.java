@@ -4,7 +4,10 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.linha.Linha;
 import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
 
+import java.io.Serializable;
+
 public class Aresta
+    implements Serializable
 {
     public static final int COMECO_NOME_ORIGEM = 0;
     public static final int TAMANHO_NOME_ORIGEM = 15;

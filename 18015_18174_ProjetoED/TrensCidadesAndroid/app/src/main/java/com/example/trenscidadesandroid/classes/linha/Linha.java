@@ -6,7 +6,7 @@ package com.example.trenscidadesandroid.classes.linha;
 import java.io.Serializable;
 
 public class Linha
-        implements Serializable
+    implements Serializable
 {
     private String conteudo;
 
