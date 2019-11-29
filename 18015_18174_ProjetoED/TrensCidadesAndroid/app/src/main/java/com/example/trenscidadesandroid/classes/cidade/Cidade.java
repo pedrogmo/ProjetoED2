@@ -55,7 +55,7 @@ public class Cidade
         }
         catch (Exception exc)
         {
-            throw new Exception(exc.getMessage());
+            throw new Exception("Cidade - contrutor de linha: linha inválida");
         }
     }
 

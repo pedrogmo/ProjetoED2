@@ -1,7 +1,7 @@
 package com.example.trenscidadesandroid.classes.aresta;
 
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
-import com.example.trenscidadesandroid.classes.pesocidades.PesoCidades;
+import com.example.trenscidadesandroid.classes.linha.Linha;
 import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
 
 public class Aresta
@@ -23,16 +23,36 @@ public class Aresta
 
     private Cidade origem;
     private Cidade destino;
-    private PesoCidades peso;
+    private int tempo;
+    private int distancia;
 
     public Aresta(
         Cidade origem,
         Cidade destino,
-        PesoCidades peso) throws Exception
+        int tempo,
+        int distancia) throws Exception
     {
         this.setOrigem(origem);
         this.setDestino(destino);
-        this.setPeso(peso);
+        this.setTempo(tempo);
+        this.setDistancia(distancia);
+    }
+
+    public Aresta(
+        Linha linha) throws Exception
+    {
+        try
+        {
+            String str = linha.getConteudo();
+            setOrigem(new Cidade(str.substring(COMECO_NOME_ORIGEM, FIM_NOME_ORIGEM).trim()));
+            setDestino(new Cidade(str.substring(COMECO_NOME_DESTINO, FIM_NOME_DESTINO).trim()));
+            setTempo(Integer.parseInt(str.substring(COMECO_TEMPO, FIM_TEMPO).trim()));
+            setDistancia(Integer.parseInt(str.substring(COMECO_DISTANCIA).trim()));
+        }
+        catch (Exception exc)
+        {
+            throw new Exception("Aresta - contrutor de linha: linha inválida");
+        }
     }
 
     public Cidade getOrigem()
@@ -57,25 +77,38 @@ public class Aresta
         this.destino = destino;
     }
 
-    public PesoCidades getPeso()
+    public int getTempo()
     {
-        return peso;
+        return tempo;
     }
 
-    private void setPeso(
-        PesoCidades peso) throws Exception
+    private void setTempo(
+            int tempo) throws Exception
     {
-        if (peso == null)
-            throw new Exception("Aresta - setPeso: valor nulo");
-        this.peso = peso;
+        if (tempo < 0)
+            throw new Exception("Aresta - setTempo: valor negativo");
+        this.tempo = tempo;
+    }
+
+    public int getDistancia()
+    {
+        return distancia;
+    }
+
+    private void setDistancia(
+            int distancia) throws Exception
+    {
+        if (distancia < 0)
+            throw new Exception("Aresta - setDistancia: valor negativo");
+        this.distancia = distancia;
     }
 
     public String paraArquivo()
     {
         String ret = Utilidades.padRight(origem.getNome(), TAMANHO_NOME_ORIGEM);
         ret += Utilidades.padRight(destino.getNome(), TAMANHO_NOME_DESTINO);
-        ret += Utilidades.padRight(peso.getTempo() + "", TAMANHO_TEMPO);
-        ret += peso.getDistancia() + "";
+        ret += Utilidades.padRight(tempo + "", TAMANHO_TEMPO);
+        ret += distancia + "";
         return ret;
     }
 }
