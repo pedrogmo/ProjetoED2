@@ -19,9 +19,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
+import com.example.trenscidadesandroid.classes.grafo.Grafo;
 import com.example.trenscidadesandroid.classes.linha.Linha;
+import com.example.trenscidadesandroid.classes.lista.Lista;
+import com.example.trenscidadesandroid.classes.no.No;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity
     private ImageView ivCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
     private TableLayout tbCaminhos;
+    private Grafo grafo;
+    private Lista<Cidade> cidadesLidas;
 
     private static BucketHash<Cidade> bhCidade;
 
@@ -60,9 +66,11 @@ public class MainActivity extends AppCompatActivity
         tbCaminhos = findViewById(R.id.tbCaminhos);
 
         desenhadora = new Desenhadora(this.ivCanvas, getResources());
+        cidadesLidas = new Lista<Cidade>();
 
         bhCidade = new BucketHash<Cidade>();
         final ArrayList<String> listaNomesCidades = new ArrayList<String>();
+
 
         try
         {
@@ -133,15 +141,32 @@ public class MainActivity extends AppCompatActivity
             FileInputStream fileIn = openFileInput("cidades.txt");
             InputStreamReader inputRead = new InputStreamReader(fileIn);
             BufferedReader leitor = new BufferedReader(inputRead);
-
+            int qtsVertices = 0;
             String recebeString;
             while((recebeString = leitor.readLine()) != null)
             {
                 Cidade cd = new Cidade(new Linha(recebeString));
-                listaNomesCidades.add(cd.toString());
-                bhCidade.inserir(cd);
+                cidadesLidas.inserirFim(cd);
+                qtsVertices++;
             }
             leitor.close();
+            grafo = new Grafo(qtsVertices);
+            for(Cidade cd: cidadesLidas)
+            {
+                listaNomesCidades.add(cd.toString());
+                bhCidade.inserir(cd);
+                grafo.NovoVertice(cd);
+            }
+
+            fileIn = openFileInput("grafo.txt");
+            inputRead = new InputStreamReader(fileIn);
+            leitor = new BufferedReader(inputRead);
+
+            while((recebeString = leitor.readLine()) != null)
+            {
+                Aresta a = new Aresta(new Linha(recebeString));
+                grafo.NovaAresta(a);
+            }
         }
 
         catch (Exception exc)

@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.trenscidadesandroid.classes.cidade.Cidade;
+
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 

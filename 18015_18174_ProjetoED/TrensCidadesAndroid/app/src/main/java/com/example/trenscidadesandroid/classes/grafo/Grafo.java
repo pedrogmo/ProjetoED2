@@ -3,6 +3,7 @@ package com.example.trenscidadesandroid.classes.grafo;
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
+import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.pilha.Pilha;
 import com.example.trenscidadesandroid.classes.vertice.Vertice;
@@ -57,19 +58,18 @@ public class Grafo
     }
 
     public void NovaAresta(
-        int origem,
-        int destino)
+        Aresta a)
     {
-        adjMatrix[origem][destino] = 1;
+        adjMatrix[a.getOrigem().getCodigo()][a.getDestino().getCodigo()] = 1;
     }
 
-    public void NovaAresta(
+    /*public void NovaAresta(
         int origem,
         int destino,
         int peso)
     {
         adjMatrix[origem][destino] = peso;
-    }
+    }*/
 
     public int SemSucessores()  // encontra e retorna a linha de um vértice sem sucessores
     {

@@ -61,8 +61,8 @@ public class AdicionarCaminho extends AppCompatActivity {
         spDeOnde.setAdapter(adapter);
 
         try {
-            /*
-            FileOutputStream fileout = openFileOutput("grafo.txt", MODE_PRIVATE);
+
+            /*FileOutputStream fileout = openFileOutput("grafo.txt", MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
             outputWriter.write("Madrid         Salamanca       220  150\n" +
                     "Salamanca      Guarda          160   90\n" +
