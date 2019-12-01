@@ -63,40 +63,23 @@ public class Grafo
     }
 
     public void NovaAresta(
-        Aresta a)
+        Aresta aresta)
     {
-        adjMatrix[a.getOrigem().getCodigo()][a.getDestino().getCodigo()] = a;
+        adjMatrix[aresta.getOrigem().getCodigo()][aresta.getDestino().getCodigo()] = aresta;
     }
 
-    public int SemSucessores()  // encontra e retorna a linha de um vértice sem sucessores
+    public void RemoverVertice(
+        int indiceVertice)
     {
-        boolean temAresta;
-        for (int linha = 0; linha < numVerts; linha++)
+        if (indiceVertice != numVerts - 1)
         {
-            temAresta = false;
-            for (int col = 0; col < numVerts; col++)
-                if (adjMatrix[linha][col] != null)
-            {
-                temAresta = true;
-                break;
-            }
-            if (!temAresta)
-                return linha;
-        }
-        return -1;
-    }
-
-    public void RemoverVertice(int vert)
-    {
-        if (vert != numVerts - 1)
-        {
-            for (int j = vert; j < numVerts - 1; j++)   // remove vértice do vetor
+            for (int j = indiceVertice; j < numVerts - 1; j++)   // remove vértice do vetor
                 vertices[j] = vertices[j + 1];
 
             // remove vértice da matriz
-            for (int row = vert; row < numVerts; row++)
+            for (int row = indiceVertice; row < numVerts; row++)
                 MoverLinhas(row, numVerts - 1);
-            for (int col = vert; col < numVerts; col++)
+            for (int col = indiceVertice; col < numVerts; col++)
                 MoverColunas(col, numVerts - 1);
         }
         numVerts--;
@@ -119,23 +102,24 @@ public class Grafo
                 adjMatrix[linha][coluna] = adjMatrix[linha][coluna + 1]; // desloca para excluir
     }
 
-    private int getPeso(Aresta a)
+    private int getPeso(
+        Aresta aresta)
     {
         int peso = INFINITY;
-        if (a != null)
+        if (aresta != null)
         {
             if (modoBusca == ModoBusca.PorMenorDistancia)
-                peso = a.getDistancia();
+                peso = aresta.getDistancia();
             else if (modoBusca == ModoBusca.PorMenorTempo)
-                peso = a.getTempo();
+                peso = aresta.getTempo();
         }
         return peso;
     }
 
     public String Caminho(
-            Cidade origem,
-            Cidade destino,
-            ModoBusca mb)
+        Cidade origem,
+        Cidade destino,
+        ModoBusca mb)
     {
         this.modoBusca = mb;
 
@@ -149,7 +133,6 @@ public class Grafo
         {
             // anotamos no vetor percurso a distância entre o inicioDoPercurso e cada vértice
             // se não há ligação direta, o valor da distância será infinity
-
             int tempDist = getPeso(adjMatrix[inicioDoPercurso][j]);
             percurso[j] = new DistOriginal(inicioDoPercurso, tempDist);
         }
@@ -164,7 +147,6 @@ public class Grafo
 
             // o vértice com o menor peso passa a ser o vértice atual
             // para compararmos com o peso calculada em AjustarMenorCaminho()
-
             verticeAtual = indiceDoMenor;
             doInicioAteAtual = percurso[indiceDoMenor].peso;
 
@@ -199,15 +181,16 @@ public class Grafo
                 // acessamos o peso desde o vértice atual (pode ser infinity)
                 int atualAteMargem = getPeso(adjMatrix[verticeAtual][coluna]);
 
-                // calculamos a distância desde inicioDoPercurso passando por vertice atual até
+                // calculamos o peso desde inicioDoPercurso passando por vertice atual até
                 // esta saída
                 int doInicioAteMargem = doInicioAteAtual + atualAteMargem;
 
-                // quando encontra uma distância menor, marca o vértice a partir do
-                // qual chegamos no vértice de índice coluna, e a soma da distância
-                // percorrida para nele chegar
-                int distanciaDoCaminho = ((DistOriginal)percurso[coluna]).peso;
-                if (doInicioAteMargem < distanciaDoCaminho)
+                // quando encontra um peso menor, marca o vértice a partir do
+                // qual chegamos no vértice de índice coluna, e a soma do peso
+                // para nele chegar
+                int pesoDoCaminho = percurso[coluna].peso;
+
+                if (doInicioAteMargem < pesoDoCaminho)
                 {
                     percurso[coluna].verticePai = verticeAtual;
                     percurso[coluna].peso = doInicioAteMargem;
