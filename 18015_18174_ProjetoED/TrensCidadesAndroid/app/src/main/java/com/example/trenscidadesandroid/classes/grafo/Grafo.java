@@ -4,6 +4,7 @@ package com.example.trenscidadesandroid.classes.grafo;
 //Pedro Gomes Moreira - 18174
 
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
+import com.example.trenscidadesandroid.classes.caminho.Caminho;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.pilha.Pilha;
 import com.example.trenscidadesandroid.classes.vertice.Vertice;
@@ -55,20 +56,20 @@ public class Grafo
         percurso = new DistOriginal[totalVertices];
     }
 
-    public void NovoVertice(
+    public void novoVertice(
         Cidade informacao) throws Exception
     {
         vertices[numVerts] = new Vertice(informacao);
         numVerts++;
     }
 
-    public void NovaAresta(
+    public void novaAresta(
         Aresta aresta)
     {
         adjMatrix[aresta.getOrigem().getCodigo()][aresta.getDestino().getCodigo()] = aresta;
     }
 
-    public void RemoverVertice(
+    public void removerVertice(
         int indiceVertice)
     {
         if (indiceVertice != numVerts - 1)
@@ -78,13 +79,14 @@ public class Grafo
 
             // remove vértice da matriz
             for (int row = indiceVertice; row < numVerts; row++)
-                MoverLinhas(row, numVerts - 1);
+                moverLinhas(row, numVerts - 1);
             for (int col = indiceVertice; col < numVerts; col++)
-                MoverColunas(col, numVerts - 1);
+                moverColunas(col, numVerts - 1);
         }
         numVerts--;
     }
-    private void MoverLinhas(
+
+    private void moverLinhas(
         int linha,
         int tamanho)
     {
@@ -93,7 +95,7 @@ public class Grafo
                 adjMatrix[linha][col] = adjMatrix[linha + 1][col];  // desloca para excluir
     }
 
-    private void MoverColunas(
+    private void moverColunas(
         int coluna,
         int tamanho)
     {
@@ -116,10 +118,10 @@ public class Grafo
         return peso;
     }
 
-    public String Caminho(
+    public Caminho getCaminho(
         Cidade origem,
         Cidade destino,
-        ModoBusca mb)
+        ModoBusca mb) throws Exception
     {
         this.modoBusca = mb;
 
@@ -140,7 +142,7 @@ public class Grafo
         for (int nTree = 0; nTree < numVerts; nTree++)
         {
             // Procuramos a saída não visitada do vértice inicioDoPercurso com o menor peso
-            int indiceDoMenor = ObterMenor();
+            int indiceDoMenor = obterMenor();
 
             // e anotamos esse menor peso
             int pesoMinimo = percurso[indiceDoMenor].peso;
@@ -152,13 +154,13 @@ public class Grafo
 
             // visitamos o vértice com a menor distância desde o inicioDoPercurso
             vertices[verticeAtual].foiVisitado = true;
-            AjustarMenorCaminho();
+            ajustarMenorCaminho();
         }
 
-        return ExibirPercursos(origem, destino);
+        return getCaminho(inicioDoPercurso, finalDoPercurso);
     }
 
-    public int ObterMenor()
+    private int obterMenor()
     {
         int pesoMinimo = INFINITY;
         int indiceDaMinima = 0;
@@ -171,7 +173,7 @@ public class Grafo
         return indiceDaMinima;
     }
 
-    public void AjustarMenorCaminho()
+    private void ajustarMenorCaminho()
     {
         for (int coluna = 0; coluna < numVerts; coluna++)
 
@@ -198,27 +200,14 @@ public class Grafo
             }
     }
 
-    public String ExibirPercursos(
-            Cidade origem,
-            Cidade destino)
+    private Caminho getCaminho(
+        int inicioDoPercurso,
+        int finalDoPercurso) throws Exception
     {
-        int inicioDoPercurso = origem.getCodigo();
-        int finalDoPercurso = destino.getCodigo();
-        String linha = "",  resultado = "";
-        for (int j = 0; j < numVerts; j++)
-        {
-            linha += vertices[j].getInfo().toString() + "=";
-            if (percurso[j].peso == INFINITY)
-                linha += "inf";
-            else
-                linha += percurso[j].peso;
-            String pai = (vertices[percurso[j].verticePai]).getInfo().toString();
-            linha += "(" + pai + ") ";
-        }
-
-        int onde = finalDoPercurso;
+        Caminho ret = new Caminho();
         Pilha<Cidade> pilha = new Pilha<Cidade>();
 
+        int onde = finalDoPercurso;
         int cont = 0;
         while (onde != inicioDoPercurso)
         {
@@ -233,17 +222,18 @@ public class Grafo
             cont++;
         }
 
+        Cidade anterior = null, atual = null;
         while (!pilha.isVazia())
         {
-            resultado += pilha.desempilhar();
-            if (!pilha.isVazia())
-                resultado += " --> ";
+            atual = pilha.desempilhar();
+            if (anterior != null)
+            {
+                Aresta a = adjMatrix[anterior.getCodigo()][atual.getCodigo()];
+                ret.adicionar(a);
+            }
+            anterior = atual;
         }
 
-        if ((cont == 1) && (percurso[finalDoPercurso].peso == INFINITY))
-            resultado = "Não há caminho";
-        else
-            resultado += " --> " + vertices[finalDoPercurso].getInfo().toString();
-        return resultado;
+        return ret;
     }
 }

@@ -1,12 +1,6 @@
 package com.example.trenscidadesandroid;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,13 +19,10 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.grafo.Grafo;
 import com.example.trenscidadesandroid.classes.linha.Linha;
 import com.example.trenscidadesandroid.classes.lista.Lista;
-import com.example.trenscidadesandroid.classes.no.No;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -155,7 +146,7 @@ public class MainActivity extends AppCompatActivity
             {
                 listaNomesCidades.add(cd.toString());
                 bhCidade.inserir(cd);
-                grafo.NovoVertice(cd);
+                grafo.novoVertice(cd);
             }
 
             fileIn = openFileInput("grafo.txt");
@@ -165,7 +156,7 @@ public class MainActivity extends AppCompatActivity
             while((recebeString = leitor.readLine()) != null)
             {
                 Aresta a = new Aresta(new Linha(recebeString));
-                grafo.NovaAresta(a);
+                grafo.novaAresta(a);
             }
         }
 
