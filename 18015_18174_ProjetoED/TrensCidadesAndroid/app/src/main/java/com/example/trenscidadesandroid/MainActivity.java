@@ -141,16 +141,16 @@ public class MainActivity extends AppCompatActivity
             FileInputStream fileIn = openFileInput("cidades.txt");
             InputStreamReader inputRead = new InputStreamReader(fileIn);
             BufferedReader leitor = new BufferedReader(inputRead);
-            int qtsVertices = 0;
+
             String recebeString;
             while((recebeString = leitor.readLine()) != null)
             {
                 Cidade cd = new Cidade(new Linha(recebeString));
                 cidadesLidas.inserirFim(cd);
-                qtsVertices++;
             }
             leitor.close();
-            grafo = new Grafo(qtsVertices);
+            grafo = new Grafo(cidadesLidas.getQuantidade());
+
             for(Cidade cd: cidadesLidas)
             {
                 listaNomesCidades.add(cd.toString());

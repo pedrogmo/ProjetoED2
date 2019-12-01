@@ -7,7 +7,6 @@ import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.pilha.Pilha;
 import com.example.trenscidadesandroid.classes.vertice.Vertice;
-import com.example.trenscidadesandroid.classes.fila.Fila;
 
 import java.io.Serializable;
 
@@ -16,36 +15,42 @@ public class Grafo
 {
     private class DistOriginal
     {
-        public int distancia;
         public int verticePai;
+        public int peso;
 
-        public DistOriginal(int vp, int d)
+        public DistOriginal(int vp, int p)
         {
-            distancia = d;
+            peso = p;
             verticePai = vp;
         }
     }
 
+    public enum ModoBusca
+    {
+        PorMenorDistancia, PorMenorTempo
+    }
+
     private Vertice[] vertices;
     private DistOriginal[] percurso;
-    private int[][] adjMatrix;
+    private Aresta[][] adjMatrix;
     private int numVerts;
 
     private final int INFINITY = 1000000;
     private int verticeAtual;           // global usada para indicar o vértice atualmente sendo visitado
     private int doInicioAteAtual;       // global usada para ajustar menor caminho com Djikstra
+    private ModoBusca modoBusca;
 
     public Grafo(
         int totalVertices)
     {
         numVerts = 0;
         vertices = new Vertice[totalVertices];
-        adjMatrix = new int[totalVertices][totalVertices];
+        adjMatrix = new Aresta[totalVertices][totalVertices];
 
-        //Põe um valor muito grande nas posições da matriz
+        //Põe null em cada posição da matriz
         for (int j = 0; j < totalVertices; j++)
             for (int k = 0; k < totalVertices; k++)
-                adjMatrix[j][k] = INFINITY;
+                adjMatrix[j][k] = null;
 
         percurso = new DistOriginal[totalVertices];
     }
@@ -60,16 +65,8 @@ public class Grafo
     public void NovaAresta(
         Aresta a)
     {
-        adjMatrix[a.getOrigem().getCodigo()][a.getDestino().getCodigo()] = 1;
+        adjMatrix[a.getOrigem().getCodigo()][a.getDestino().getCodigo()] = a;
     }
-
-    /*public void NovaAresta(
-        int origem,
-        int destino,
-        int peso)
-    {
-        adjMatrix[origem][destino] = peso;
-    }*/
 
     public int SemSucessores()  // encontra e retorna a linha de um vértice sem sucessores
     {
@@ -78,7 +75,7 @@ public class Grafo
         {
             temAresta = false;
             for (int col = 0; col < numVerts; col++)
-                if (adjMatrix[linha][col] != INFINITY)
+                if (adjMatrix[linha][col] != null)
             {
                 temAresta = true;
                 break;
@@ -122,141 +119,26 @@ public class Grafo
                 adjMatrix[linha][coluna] = adjMatrix[linha][coluna + 1]; // desloca para excluir
     }
 
-    public String OrdenacaoTopologica()
+    private int getPeso(Aresta a)
     {
-        Pilha<Cidade> gPilha = new Pilha<Cidade>(); // para guardar a sequência de vértices
-        while (numVerts > 0)
+        int peso = INFINITY;
+        if (a != null)
         {
-            int currVertex = SemSucessores();
-            if (currVertex == -1)
-                return "Erro: grafo possui ciclos.";
-            try
-            {
-                gPilha.empilhar(vertices[currVertex].getInfo());   // empilha vértice
-            }
-            catch(Exception exc){}
-            RemoverVertice(currVertex);
+            if (modoBusca == ModoBusca.PorMenorDistancia)
+                peso = a.getDistancia();
+            else if (modoBusca == ModoBusca.PorMenorTempo)
+                peso = a.getTempo();
         }
-        String resultado = "Sequência da Ordenação Topológica: ";
-        while (!gPilha.isVazia())
-            resultado += gPilha.desempilhar() + " ";    // desempilha para exibir
-        return resultado;
-    }
-
-    private int ObterVerticeAdjacenteNaoVisitado(
-            int vertice)
-    {
-        for (int j = 0; j <= numVerts - 1; j++)
-            if ((adjMatrix[vertice][j] != INFINITY) && (!vertices[j].foiVisitado))
-                    return j;
-        return -1;
-    }
-
-    public void PercursoEmProfundidade()
-    {
-        Pilha<Integer> gPilha = new Pilha<Integer>(); // para guardar a sequência de vértices
-        vertices[0].foiVisitado = true;
-        try
-        {
-            gPilha.empilhar(0);
-        }
-        catch(Exception exc){}
-        int v;
-        while (!gPilha.isVazia())
-        {
-            v = ObterVerticeAdjacenteNaoVisitado(gPilha.topo());
-            if (v == -1)
-                gPilha.desempilhar();
-            else
-            {
-                (vertices[v]).foiVisitado = true;
-                try
-                {
-                    gPilha.empilhar(v);
-                }
-                catch(Exception exc){}
-            }
-        }
-        for (int j = 0; j <= numVerts - 1; j++)
-            (vertices[j]).foiVisitado = false;
-    }
-
-    public void PercursoEmProfundidadeRec(
-        int part)
-    {
-        int i;
-        vertices[part].foiVisitado = true;
-        for (i = 0; i < numVerts; ++i)
-            if (adjMatrix[part][i] != INFINITY && !vertices[i].foiVisitado)
-        PercursoEmProfundidadeRec(i);
-    }
-
-    public void PercursoPorLargura()
-    {
-        Fila<Integer> gQueue = new Fila<Integer>();
-        vertices[0].foiVisitado = true;
-        try
-        {
-            gQueue.enfileirar(0);
-        }
-        catch(Exception exc){}
-        int vert1, vert2;
-        while (!gQueue.isVazia())
-        {
-            vert1 = gQueue.desenfileirar();
-            vert2 = ObterVerticeAdjacenteNaoVisitado(vert1);
-            while (vert2 != -1)
-            {
-                vertices[vert2].foiVisitado = true;
-
-                try
-                {
-                    gQueue.enfileirar(vert2);
-                }
-                catch(Exception exc){}
-
-                vert2 = ObterVerticeAdjacenteNaoVisitado(vert1);
-            }
-        }
-        for (int i = 0; i < numVerts; i++)
-            vertices[i].foiVisitado = false;
-    }
-
-    public void ArvoreGeradoraMinima(
-            int primeiro)
-    {
-        Pilha<Integer> gPilha = new Pilha<Integer>(); // para guardar a sequência de vértices
-        vertices[primeiro].foiVisitado = true;
-        try
-        {
-            gPilha.empilhar(primeiro);
-        }
-        catch(Exception exc){}
-        int currVertex, ver;
-        while (!gPilha.isVazia())
-        {
-            currVertex = gPilha.topo();
-            ver = ObterVerticeAdjacenteNaoVisitado(currVertex);
-            if (ver == -1)
-                gPilha.desempilhar();
-            else
-            {
-                vertices[ver].foiVisitado = true;
-                try
-                {
-                    gPilha.empilhar(ver);
-                }
-                catch(Exception exc){}
-            }
-        }
-        for (int j = 0; j <= numVerts - 1; j++)
-            vertices[j].foiVisitado = false;
+        return peso;
     }
 
     public String Caminho(
             Cidade origem,
-            Cidade destino)
+            Cidade destino,
+            ModoBusca mb)
     {
+        this.modoBusca = mb;
+
         int inicioDoPercurso = origem.getCodigo();
         int finalDoPercurso = destino.getCodigo();
         for (int j = 0; j < numVerts; j++)
@@ -267,23 +149,24 @@ public class Grafo
         {
             // anotamos no vetor percurso a distância entre o inicioDoPercurso e cada vértice
             // se não há ligação direta, o valor da distância será infinity
-            int tempDist = adjMatrix[inicioDoPercurso][j];
+
+            int tempDist = getPeso(adjMatrix[inicioDoPercurso][j]);
             percurso[j] = new DistOriginal(inicioDoPercurso, tempDist);
         }
 
         for (int nTree = 0; nTree < numVerts; nTree++)
         {
-            // Procuramos a saída não visitada do vértice inicioDoPercurso com a menor distância
+            // Procuramos a saída não visitada do vértice inicioDoPercurso com o menor peso
             int indiceDoMenor = ObterMenor();
 
-            // e anotamos essa menor distância
-            int distanciaMinima = ((DistOriginal)percurso[indiceDoMenor]).distancia;
+            // e anotamos esse menor peso
+            int pesoMinimo = percurso[indiceDoMenor].peso;
 
+            // o vértice com o menor peso passa a ser o vértice atual
+            // para compararmos com o peso calculada em AjustarMenorCaminho()
 
-            // o vértice com a menor distância passa a ser o vértice atual
-            // para compararmos com a distância calculada em AjustarMenorCaminho()
             verticeAtual = indiceDoMenor;
-            doInicioAteAtual = percurso[indiceDoMenor].distancia;
+            doInicioAteAtual = percurso[indiceDoMenor].peso;
 
             // visitamos o vértice com a menor distância desde o inicioDoPercurso
             vertices[verticeAtual].foiVisitado = true;
@@ -295,12 +178,12 @@ public class Grafo
 
     public int ObterMenor()
     {
-        int distanciaMinima = INFINITY;
+        int pesoMinimo = INFINITY;
         int indiceDaMinima = 0;
         for (int j = 0; j < numVerts; j++)
-            if (!(vertices[j].foiVisitado) && (percurso[j]).distancia < distanciaMinima)
+            if (!(vertices[j].foiVisitado) && (percurso[j]).peso < pesoMinimo)
             {
-                distanciaMinima =((DistOriginal)percurso[j]).distancia;
+                pesoMinimo = percurso[j].peso;
                 indiceDaMinima = j;
             }
         return indiceDaMinima;
@@ -309,10 +192,12 @@ public class Grafo
     public void AjustarMenorCaminho()
     {
         for (int coluna = 0; coluna < numVerts; coluna++)
-            if (!vertices[coluna].foiVisitado)       // para cada vértice ainda não visitado
+
+            // para cada vértice ainda não visitado
+            if (!vertices[coluna].foiVisitado)
             {
-                // acessamos a distância desde o vértice atual (pode ser infinity)
-                int atualAteMargem = adjMatrix[verticeAtual][coluna];
+                // acessamos o peso desde o vértice atual (pode ser infinity)
+                int atualAteMargem = getPeso(adjMatrix[verticeAtual][coluna]);
 
                 // calculamos a distância desde inicioDoPercurso passando por vertice atual até
                 // esta saída
@@ -321,11 +206,11 @@ public class Grafo
                 // quando encontra uma distância menor, marca o vértice a partir do
                 // qual chegamos no vértice de índice coluna, e a soma da distância
                 // percorrida para nele chegar
-                int distanciaDoCaminho = ((DistOriginal)percurso[coluna]).distancia;
+                int distanciaDoCaminho = ((DistOriginal)percurso[coluna]).peso;
                 if (doInicioAteMargem < distanciaDoCaminho)
                 {
                     percurso[coluna].verticePai = verticeAtual;
-                    percurso[coluna].distancia = doInicioAteMargem;
+                    percurso[coluna].peso = doInicioAteMargem;
                 }
             }
     }
@@ -340,10 +225,10 @@ public class Grafo
         for (int j = 0; j < numVerts; j++)
         {
             linha += vertices[j].getInfo().toString() + "=";
-            if (percurso[j].distancia == INFINITY)
+            if (percurso[j].peso == INFINITY)
                 linha += "inf";
             else
-                linha += percurso[j].distancia;
+                linha += percurso[j].peso;
             String pai = (vertices[percurso[j].verticePai]).getInfo().toString();
             linha += "(" + pai + ") ";
         }
@@ -372,7 +257,7 @@ public class Grafo
                 resultado += " --> ";
         }
 
-        if ((cont == 1) && (percurso[finalDoPercurso].distancia == INFINITY))
+        if ((cont == 1) && (percurso[finalDoPercurso].peso == INFINITY))
             resultado = "Não há caminho";
         else
             resultado += " --> " + vertices[finalDoPercurso].getInfo().toString();
