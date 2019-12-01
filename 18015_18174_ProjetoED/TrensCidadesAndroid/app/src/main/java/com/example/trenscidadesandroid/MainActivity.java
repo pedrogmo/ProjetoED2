@@ -210,6 +210,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //grafo.ExibirPercursos()
+            }
+        });
+
     }
 
 }

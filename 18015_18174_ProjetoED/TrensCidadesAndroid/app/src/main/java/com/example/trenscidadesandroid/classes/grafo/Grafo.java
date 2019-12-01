@@ -254,9 +254,11 @@ public class Grafo
     }
 
     public String Caminho(
-            int inicioDoPercurso,
-            int finalDoPercurso)
+            Cidade origem,
+            Cidade destino)
     {
+        int inicioDoPercurso = origem.getCodigo();
+        int finalDoPercurso = destino.getCodigo();
         for (int j = 0; j < numVerts; j++)
             vertices[j].foiVisitado = false;
 
@@ -288,7 +290,7 @@ public class Grafo
             AjustarMenorCaminho();
         }
 
-        return ExibirPercursos(inicioDoPercurso, finalDoPercurso);
+        return ExibirPercursos(origem, destino);
     }
 
     public int ObterMenor()
@@ -329,9 +331,11 @@ public class Grafo
     }
 
     public String ExibirPercursos(
-            int inicioDoPercurso,
-            int finalDoPercurso)
+            Cidade origem,
+            Cidade destino)
     {
+        int inicioDoPercurso = origem.getCodigo();
+        int finalDoPercurso = destino.getCodigo();
         String linha = "",  resultado = "";
         for (int j = 0; j < numVerts; j++)
         {
