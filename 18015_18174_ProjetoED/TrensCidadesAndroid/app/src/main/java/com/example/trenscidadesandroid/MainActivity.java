@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
+import com.example.trenscidadesandroid.classes.desenhadora.Desenhadora;
 import com.example.trenscidadesandroid.classes.grafo.Grafo;
 import com.example.trenscidadesandroid.classes.linha.Linha;
 import com.example.trenscidadesandroid.classes.lista.Lista;

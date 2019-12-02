@@ -1,4 +1,4 @@
-package com.example.trenscidadesandroid;
+package com.example.trenscidadesandroid.classes.desenhadora;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,10 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
+import com.example.trenscidadesandroid.R;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
 //Gustavo Henrique de Meira - 18015

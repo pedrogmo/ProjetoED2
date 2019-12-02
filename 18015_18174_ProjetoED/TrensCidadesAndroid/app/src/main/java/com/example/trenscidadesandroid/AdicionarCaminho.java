@@ -31,8 +31,6 @@ public class AdicionarCaminho extends AppCompatActivity {
     Button btnAdicionar;
     ArrayList<String> listaNomesCidades, listaCaminhos;
     BucketHash<Cidade> bhCidade;
-    ListView lvCaminhos;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +44,6 @@ public class AdicionarCaminho extends AppCompatActivity {
         spDeOnde = findViewById(R.id.spDeOndeAdicionarCaminho);
         spParaOnde = findViewById(R.id.spParaOndeAdicionarCaminho);
 
-        lvCaminhos = findViewById(R.id.lvCaminhos);
-
         listaNomesCidades = (ArrayList<String>) getIntent().getExtras().getSerializable("listaNomesCidades");
         bhCidade = (BucketHash<Cidade>) getIntent().getExtras().getSerializable("hash");
 
@@ -59,96 +55,6 @@ public class AdicionarCaminho extends AppCompatActivity {
 
         spParaOnde.setAdapter(adapter);
         spDeOnde.setAdapter(adapter);
-
-        try {
-
-            /*FileOutputStream fileout = openFileOutput("grafo.txt", MODE_PRIVATE);
-            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-            outputWriter.write("Madrid         Salamanca       220  150\n" +
-                    "Salamanca      Guarda          160   90\n" +
-                    "Guarda         Viseu            76   80\n" +
-                    "Madrid         Albacete        257  280\n" +
-                    "Madrid         Toledo           72  205\n" +
-                    "Madrid         Valladolid      189  140\n" +
-                    "Toledo         Cordoba         344  210\n" +
-                    "Cordoba        Sevilha         140  220\n" +
-                    "Sevilha        Huelva           94  201\n" +
-                    "Sevilha        Cadiz           121   80\n" +
-                    "Sevilha        Caceres         267  120\n" +
-                    "Caceres        Toledo          260  110\n" +
-                    "Caceres        Castelo Branco  141   90\n" +
-                    "Pombal         Castelo Branco  137  150\n" +
-                    "Zaragoza       Lleida          150  210\n" +
-                    "Lleida         Tarragona       100  205\n" +
-                    "Tarragona      Barcelona        99  208\n" +
-                    "Tarragona      Valencia        258  250\n" +
-                    "Valencia       Albacete        188  270\n" +
-                    "Albacete       Murcia          144  230\n" +
-                    "Murcia         Cartagena        50  201\n" +
-                    "Valencia       Alicante        179  105\n" +
-                    "Alicante       Murcia           82   80\n" +
-                    "Murcia         Lorca            70   60\n" +
-                    "Zaragoza       Valencia        308   93\n" +
-                    "Zaragoza       Pau             235   60\n" +
-                    "Pau            Toulouse        195   90\n" +
-                    "Toulouse       Montpellier     246   76\n" +
-                    "Zaragoza       Logrono         170  100\n" +
-                    "Logrono        San Sebastian   167   75\n" +
-                    "Logrono        Bilbao          136   77\n" +
-                    "Logrono        Burgos          104   50\n" +
-                    "Bilbao         Burgos          158   70\n" +
-                    "Burgos         Valladolid      136   50\n" +
-                    "Valladolid     Santander       244   66\n" +
-                    "Valladolid     Leon            137   95\n" +
-                    "Leon           Oviedo          125   83\n" +
-                    "Leon           Ponferrada      113   75\n" +
-                    "Oviedo         Gijon            30   73\n" +
-                    "Loule          Lisboa          265   75\n" +
-                    "Lisboa         Pombal          140   70\n" +
-                    "Pombal         Coimbra          36   96\n" +
-                    "Coimbra        Viseu            92   78\n" +
-                    "Coimbra        Porto           107  107\n" +
-                    "Porto          Braga            46   42\n" +
-                    "Braga          Vigo             81   18\n" +
-                    "Vigo           Ourense          71   42\n" +
-                    "Ourense        Ponferrada      100   48\n" +
-                    "Vigo           Santiago de C.   72   48\n" +
-                    "Santiago de C. A Coruna         64   67\n" +
-                    "Santiago de C. Ourense          82  136\n" +
-                    "A Coruna       Lugo             80   47\n" +
-                    "Lugo           Ponferrada       93   71\n" +
-                    "Cordoba        Jaen            120   73\n" +
-                    "Cordoba        Malaga          168  203\n" +
-                    "Malaga         Granada          88   50\n" +
-                    "Jaen           Granada          67   53\n" +
-                    "Granada        El Ejido        113   37\n" +
-                    "Madrid         Guadalajara      68   45\n" +
-                    "Guadalajara    Zaragoza        257   72\n" +
-                    "Barcelona      Mataro           31   31\n" +
-                    "Mataro         Girona           80   44\n" +
-                    "Girona         Perpignan        93   38"
-            );
-            outputWriter.close();*/
-            FileInputStream fileIn = openFileInput("grafo.txt");
-            InputStreamReader inputRead = new InputStreamReader(fileIn);
-            BufferedReader leitor = new BufferedReader(inputRead);
-
-            listaCaminhos = new ArrayList<String>();
-            String recebeString;
-            while ((recebeString = leitor.readLine()) != null) {
-                Aresta aresta = new Aresta(new Linha(recebeString));
-                listaCaminhos.add(aresta.toString());
-            }
-            leitor.close();
-
-
-            final ArrayAdapter<String> adapterLista = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listaCaminhos);
-
-            lvCaminhos.setAdapter(adapterLista);
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("MEIRA", e.getMessage());
-        }
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override

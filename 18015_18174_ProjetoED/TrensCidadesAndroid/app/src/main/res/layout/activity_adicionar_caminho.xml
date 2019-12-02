@@ -82,14 +82,4 @@
         android:text="Adicionar"
         android:layout_below="@+id/etTempo"/>
 
-    <ListView
-        android:id="@+id/lvCaminhos"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnAdicionarCaminhoAC"
-        android:layout_marginTop="30dp"
-        />
-
-
 </RelativeLayout>
