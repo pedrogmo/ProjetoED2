@@ -48,14 +48,14 @@ public class AdicionarCidade extends AppCompatActivity
                     Cidade cd = null;
 
                     final String nome;
-                    final double x;
-                    final double y;
+                    final float x;
+                    final float y;
 
                     try
                     {
                         nome = etNome.getText().toString().trim();
-                        x = Double.parseDouble(etCoordenadaX.getText().toString().trim());
-                        y = Double.parseDouble(etCoordenadaY.getText().toString().trim());
+                        x = Float.parseFloat(etCoordenadaX.getText().toString().trim());
+                        y = Float.parseFloat(etCoordenadaY.getText().toString().trim());
                     }
                     catch(Exception exc)
                     {

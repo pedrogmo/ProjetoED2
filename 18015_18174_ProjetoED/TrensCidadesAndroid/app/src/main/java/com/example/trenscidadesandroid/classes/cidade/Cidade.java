@@ -15,7 +15,7 @@ public class Cidade
 
     private int codigo;
     //Posição da cidade no mapa em porcentagem
-    private double x, y;
+    private float x, y;
     private String nome;
 
     //Constantes para leitura do arquivo "cidades.txt"
@@ -40,8 +40,8 @@ public class Cidade
     public Cidade(
         int codigo,
         String nome,
-        double posicaoX,
-        double posicaoY) throws Exception
+        float posicaoX,
+        float posicaoY) throws Exception
     {
         setCodigo(codigo);
         setNome(nome);
@@ -61,8 +61,8 @@ public class Cidade
             String str = linha.getConteudo();
             setCodigo(Integer.parseInt(str.substring(COMECO_CODIGO, FIM_CODIGO).trim()));
             setNome(str.substring(COMECO_NOME, FIM_NOME).trim());
-            setX(Double.parseDouble(str.substring(COMECO_X, FIM_X).trim()));
-            setY(Double.parseDouble(str.substring(COMECO_Y).trim()));
+            setX(Float.parseFloat(str.substring(COMECO_X, FIM_X).trim()));
+            setY(Float.parseFloat(str.substring(COMECO_Y).trim()));
         }
         catch (Exception exc)
         {
@@ -80,8 +80,8 @@ public class Cidade
 
         codigo = 0;
         setNome(nome);
-        x = 0.0;
-        y = 0.0;
+        x = 0.0f;
+        y = 0.0f;
     }
 
     //Construtor de cópia de Cidade a partir de um modelo
@@ -115,28 +115,28 @@ public class Cidade
         this.codigo = codigo;
     }
 
-    public double getX()
+    public float getX()
     {
         return x;
     }
 
     private void setX(
-        double x) throws Exception
+        float x) throws Exception
     {
-        if (x < 0.0 || x > 1.0)
+        if (x < 0.0f || x > 1.0f)
             throw new Exception("Cidade - setX: valor inválido");
         this.x = x;
     }
 
-    public double getY()
+    public float getY()
     {
         return y;
     }
 
     private void setY(
-        double y) throws Exception
+        float y) throws Exception
     {
-        if (y < 0.0 || y > 1.0)
+        if (y < 0.0f || y > 1.0f)
             throw new Exception("Cidade - setY: valor inválido");
         this.y = y;
     }

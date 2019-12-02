@@ -1,6 +1,5 @@
 package com.example.trenscidadesandroid.classes.desenhadora;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,13 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.trenscidadesandroid.R;
+import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.caminho.Caminho;
-import com.example.trenscidadesandroid.classes.cidade.Cidade;
-import com.example.trenscidadesandroid.classes.lista.Lista;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
@@ -28,7 +25,9 @@ public class Desenhadora
     private static final float TOTAL_X = 358.5f;
     private static final float TOTAL_Y = 289f;
     private static final float ESPESSURA = 5.0f;
-    private static final int COR_LINHA = Color.RED;
+    private static final int DIST_LINHA = 200;
+    private static final int COR_LINHA_LONGA = 0xFF800080;
+    private static final int COR_LINHA_CURTA = Color.RED;
     private Paint paint; //propriedades do formato (cor)
 
     public Desenhadora(
@@ -39,7 +38,6 @@ public class Desenhadora
         this.resources = resources;
 
         this.paint = new Paint();
-        this.paint.setColor(COR_LINHA);
         this.paint.setStrokeWidth(ESPESSURA);
 
         Bitmap imagem = BitmapFactory.decodeResource(this.resources, R.drawable.mapa);
@@ -54,6 +52,20 @@ public class Desenhadora
     public void desenhaCaminho(
         Caminho caminho)
     {
-        
+        for (Aresta aresta : caminho.getListaArestas())
+        {
+            if (aresta.getDistancia() < DIST_LINHA)
+                this.paint.setColor(COR_LINHA_CURTA);
+            else
+                this.paint.setColor(COR_LINHA_LONGA);
+
+            canvas.drawLine(
+                aresta.getOrigem().getX() * TOTAL_X,
+                aresta.getOrigem().getY() * TOTAL_Y,
+                aresta.getDestino().getX() * TOTAL_X,
+                aresta.getDestino().getY() * TOTAL_Y,
+                paint
+            );
+        }
     }
 }
