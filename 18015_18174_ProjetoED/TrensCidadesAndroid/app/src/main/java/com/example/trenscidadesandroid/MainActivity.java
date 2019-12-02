@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
+import com.example.trenscidadesandroid.classes.caminho.Caminho;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.desenhadora.Desenhadora;
 import com.example.trenscidadesandroid.classes.grafo.Grafo;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     private TableLayout tbCaminhos;
     private Grafo grafo;
     private Lista<Cidade> cidadesLidas;
+    private RadioButton rbTempo, rbDistancia;
 
     private static BucketHash<Cidade> bhCidade;
 
@@ -59,6 +62,10 @@ public class MainActivity extends AppCompatActivity
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
         ivCanvas = findViewById(R.id.ivCanvas);
         tbCaminhos = findViewById(R.id.tbCaminhos);
+        rbTempo = findViewById(R.id.rbTempo);
+        rbDistancia = findViewById(R.id.rbDistancia);
+
+        rbTempo.setChecked(true);
 
         cidadesLidas = new Lista<Cidade>();
 
@@ -157,7 +164,25 @@ public class MainActivity extends AppCompatActivity
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //grafo.ExibirPercursos()
+                try{
+                    Cidade origem = bhCidade.buscar(new Cidade(spDeOnde.getSelectedItem().toString())),
+                            destino = bhCidade.buscar(new Cidade(spParaOnde.getSelectedItem().toString()));
+
+                    Grafo.ModoBusca modoBusca;
+
+                    if (rbTempo.isChecked())
+                        modoBusca = Grafo.ModoBusca.PorMenorTempo;
+                    else
+                        modoBusca = Grafo.ModoBusca.PorMenorDistancia;
+
+                    Caminho c = grafo.getCaminho(origem, destino, modoBusca);
+                    if (c.isVazio())
+                        Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
+                    else
+                        desenhadora.desenhaCaminho(c);
+                }
+                catch (Exception e){Toast.makeText(getApplicationContext(), "Busca não foi possível", Toast.LENGTH_SHORT).show();}
+
             }
         });
 

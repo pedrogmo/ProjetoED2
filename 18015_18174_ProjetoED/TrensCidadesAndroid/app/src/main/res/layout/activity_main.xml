@@ -45,6 +45,25 @@
         android:layout_below="@+id/tvPara"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"/>
+    <RadioGroup
+        android:id="@+id/rgOpcao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvPara"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/btnBuscar">
+        <RadioButton
+            android:id="@+id/rbTempo"
+            android:text="Tempo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <RadioButton
+            android:id="@+id/rbDistancia"
+            android:text="Distância"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+    </RadioGroup>
     <ImageView
         android:id="@+id/ivCanvas"
         android:layout_width="wrap_content"
