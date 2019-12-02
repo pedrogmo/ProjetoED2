@@ -5,6 +5,7 @@ package com.example.trenscidadesandroid.classes.linha;
 
 import java.io.Serializable;
 
+//Classe para diferenciar o construtor de nome do construtor em que é passado uma linha inteira
 public class Linha
     implements Serializable
 {
