@@ -8,10 +8,16 @@ import com.example.trenscidadesandroid.classes.lista.Lista;
 
 public class Caminho
 {
+    //Lista de Arestas entre cidades presentes no caminho
     private Lista<Aresta> listaArestas;
+
+    //Somatória da distância das arestas
     private int distanciaTotal;
+
+    //Somatória do tempo das arestas
     private int tempoTotal;
 
+    //Construtor vazio do Caminho
     public Caminho()
     {
         listaArestas = new Lista<Aresta>();
@@ -22,8 +28,15 @@ public class Caminho
     public void adicionar(
         Aresta novaAresta) throws Exception
     {
+        //Adiciona-se a aresta na lista
         listaArestas.inserirFim(novaAresta);
+
+        //Adicionam-se os valores de distância e tempo
+        distanciaTotal += novaAresta.getDistancia();
+        tempoTotal += novaAresta.getTempo();
     }
+
+    //Getters dos atributos
 
     public Lista<Aresta> getListaArestas()
     {
@@ -39,6 +52,8 @@ public class Caminho
     {
         return tempoTotal;
     }
+
+    //Para saber se o caminho é válido, retorna-se se a lista está vazia
 
     public boolean isVazio()
     {

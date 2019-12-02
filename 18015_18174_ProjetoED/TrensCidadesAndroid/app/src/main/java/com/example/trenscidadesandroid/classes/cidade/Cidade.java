@@ -11,9 +11,14 @@ import java.io.Serializable;
 public class Cidade
     implements Comparable<Cidade>, Serializable, Cloneable
 {
+    //Atributos da Cidade
+
     private int codigo;
+    //Posição da cidade no mapa em porcentagem
     private double x, y;
     private String nome;
+
+    //Constantes para leitura do arquivo "cidades.txt"
 
     public static final int COMECO_CODIGO = 0;
     public static final int TAMANHO_CODIGO = 2;
@@ -30,6 +35,8 @@ public class Cidade
     public static final int COMECO_Y = FIM_X;
     public static final int TAMANHO_Y = 5;
 
+    //Construtor de Cidade com cada atributo dela
+
     public Cidade(
         int codigo,
         String nome,
@@ -42,11 +49,15 @@ public class Cidade
         setY(posicaoY);
     }
 
+    //Construtor de Cidade a partir de uma linha lida do arquivo
+
     public Cidade(
         Linha linha) throws Exception
     {
         try
         {
+            //Separam-se os dados da String para cada atributo correspondente
+
             String str = linha.getConteudo();
             setCodigo(Integer.parseInt(str.substring(COMECO_CODIGO, FIM_CODIGO).trim()));
             setNome(str.substring(COMECO_NOME, FIM_NOME).trim());
@@ -55,36 +66,48 @@ public class Cidade
         }
         catch (Exception exc)
         {
+            //Se houve erro, joga-se uma exceção
             throw new Exception("Cidade - contrutor de linha: linha inválida");
         }
     }
 
+    //Construtor de Cidade com o seu nome, para ser usado como chave
+
     public Cidade(
         String nome) throws Exception
     {
+        //Nome é definido, enquanto o restante dos atributos inicializados para 0
+
         codigo = 0;
         setNome(nome);
         x = 0.0;
         y = 0.0;
     }
 
+    //Construtor de cópia de Cidade a partir de um modelo
+
     public Cidade(
         Cidade modelo) throws Exception
     {
+        //Se o modelo estiver vazio, joga-se exceção
         if (modelo == null)
             throw new Exception("Cidade - construtor de cópia: modelo ausente");
+
+        //Copia-se cada atributo
         codigo = modelo.codigo;
         nome = modelo.nome;
         x = modelo.x;
         y = modelo.y;
     }
 
+    //Getters e setters para cada atributo, sendo os setters private
+
     public int getCodigo()
     {
         return codigo;
     }
 
-    public void setCodigo(
+    private void setCodigo(
         int codigo) throws Exception
     {
         if (codigo < 0)
@@ -97,7 +120,7 @@ public class Cidade
         return x;
     }
 
-    public void setX(
+    private void setX(
         double x) throws Exception
     {
         if (x < 0.0 || x > 1.0)
@@ -110,7 +133,7 @@ public class Cidade
         return y;
     }
 
-    public void setY(
+    private void setY(
         double y) throws Exception
     {
         if (y < 0.0 || y > 1.0)
@@ -123,7 +146,7 @@ public class Cidade
         return nome;
     }
 
-    public void setNome(
+    private void setNome(
         String nome) throws Exception
     {
         if (nome == null || nome.equals(""))
@@ -131,16 +154,22 @@ public class Cidade
         this.nome = nome;
     }
 
+    //Compara duas cidades a partir do nome
+
     public int compareTo(
         Cidade c)
     {
-        return codigo - c.codigo;
+        return nome.compareTo(c.nome);
     }
+
+    //Cidade formatada para String
 
     public String toString()
     {
         return codigo + " - " + nome;
     }
+
+    //String que representa uma cidade no arquivo texto
 
     public String paraArquivo()
     {
@@ -151,27 +180,33 @@ public class Cidade
         return ret;
     }
 
+    //Verifica-se se duas cidades são iguais a partir dos nomes
+
     public boolean equals(
         Object obj)
     {
+        //Se ponteiros são iguais, true
         if (this == obj)
-        return true;
+            return true;
 
+        //Se obj é vazio, false
         if (obj == null)
-        return false;
+            return false;
 
         Cidade c = (Cidade)obj;
 
+        //Retorna-se o equals do nome
         return nome.equals(c.nome);
     }
 
+    //Retorna-se o código hash a partir da String nome
+
     public int hashCode()
     {
-        int hash = 1;
-        for(char c : nome.toCharArray())
-            hash = 37 * hash + c;
-        return hash;
+        return nome.hashCode();
     }
+
+    //Método que retorna um clone da instância atual a partir do consturtor de cópia
 
     public Object clone()
     {

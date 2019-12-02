@@ -1,5 +1,8 @@
 package com.example.trenscidadesandroid.classes.aresta;
 
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.linha.Linha;
 import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
@@ -9,6 +12,15 @@ import java.io.Serializable;
 public class Aresta
     implements Serializable
 {
+    //Aributos da classe
+
+    private Cidade origem;
+    private Cidade destino;
+    private int tempo;
+    private int distancia;
+
+    //Constantes para leitura do arquivo texto "grafo.txt"
+
     public static final int COMECO_NOME_ORIGEM = 0;
     public static final int TAMANHO_NOME_ORIGEM = 15;
     public static final int FIM_NOME_ORIGEM = COMECO_NOME_ORIGEM + TAMANHO_NOME_ORIGEM;
@@ -23,11 +35,7 @@ public class Aresta
 
     public static final int COMECO_DISTANCIA = FIM_TEMPO;
 
-
-    private Cidade origem;
-    private Cidade destino;
-    private int tempo;
-    private int distancia;
+    //Consturtor de Aresta com os atributos correspondentes
 
     public Aresta(
         Cidade origem,
@@ -41,11 +49,15 @@ public class Aresta
         this.setDistancia(distancia);
     }
 
+    //Consturtor de Aresta a partir de uma Linha lida do arquivo
+
     public Aresta(
         Linha linha) throws Exception
     {
         try
         {
+            //Pega-se o conteúdo da string e se separam os dados presentes para cada atributo
+
             String str = linha.getConteudo();
             setOrigem(new Cidade(str.substring(COMECO_NOME_ORIGEM, FIM_NOME_ORIGEM).trim()));
             setDestino(new Cidade(str.substring(COMECO_NOME_DESTINO, FIM_NOME_DESTINO).trim()));
@@ -54,9 +66,13 @@ public class Aresta
         }
         catch (Exception exc)
         {
+            //Caso alguma exceção seja lançada, joga-se outra indicando que houve erro na Linha
+
             throw new Exception("Aresta - contrutor de linha: linha inválida");
         }
     }
+
+    //Getters e setters para cada atributo, sendo os setters private
 
     public Cidade getOrigem()
     {
@@ -106,6 +122,8 @@ public class Aresta
         this.distancia = distancia;
     }
 
+    //método que retorna o formato de arquivo da Aresta
+
     public String paraArquivo()
     {
         String ret = Utilidades.padRight(origem.getNome(), TAMANHO_NOME_ORIGEM);
@@ -114,6 +132,9 @@ public class Aresta
         ret += distancia + "";
         return ret;
     }
+
+    //toString() indicando os valores da aresta
+
     public String toString()
     {
         String ret = origem.getNome() + " | " + destino.getNome() + " | " + tempo + " | " + distancia;
