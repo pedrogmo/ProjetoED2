@@ -248,18 +248,14 @@ public class Lista<T>
 
         public boolean hasNext()
         {
-            return no.prox != null;
+            return no != null;
         }
 
         public T next()
         {
+            T info = no.getInfo();
             no = no.prox;
-            return no.getInfo();
-        }
-
-        public void remove()
-        {
-            throw new UnsupportedOperationException("NAO");
+            return info;
         }
     }
 }
