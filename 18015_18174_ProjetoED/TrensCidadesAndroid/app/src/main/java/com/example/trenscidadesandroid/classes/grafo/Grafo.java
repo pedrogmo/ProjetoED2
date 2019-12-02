@@ -118,6 +118,7 @@ public class Grafo
         return peso;
     }
 
+    //Método que busca o melhor caminho da origem ao destino, priorizado  por distancia ou tempo(ModoBusca)
     public Caminho getCaminho(
         Cidade origem,
         Cidade destino,
@@ -200,6 +201,7 @@ public class Grafo
             }
     }
 
+    //percorre do final do dijkstra até o topo
     private Caminho getCaminho(
         int inicioDoPercurso,
         int finalDoPercurso) throws Exception
