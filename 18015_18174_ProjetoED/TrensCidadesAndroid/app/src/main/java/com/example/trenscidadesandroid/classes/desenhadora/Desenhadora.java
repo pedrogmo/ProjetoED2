@@ -8,10 +8,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.trenscidadesandroid.R;
+import com.example.trenscidadesandroid.classes.caminho.Caminho;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
+import com.example.trenscidadesandroid.classes.lista.Lista;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
@@ -20,6 +23,7 @@ public class Desenhadora
 {
     private ImageView imvMapa;
     private Resources resources;
+    private Canvas canvas;
 
     private static final float TOTAL_X = 358.5f;
     private static final float TOTAL_Y = 289f;
@@ -39,9 +43,17 @@ public class Desenhadora
         this.paint.setStrokeWidth(ESPESSURA);
 
         Bitmap imagem = BitmapFactory.decodeResource(this.resources, R.drawable.mapa);
-        Canvas canvas = new Canvas();
+        Bitmap tempBitmap = Bitmap.createBitmap(imagem.getWidth(), imagem.getHeight(), Bitmap.Config.RGB_565);
+
+        canvas = new Canvas(tempBitmap);
         canvas.drawBitmap(imagem, 0, 0, null);
 
-        this.imvMapa.setImageDrawable(new BitmapDrawable(this.resources, imagem));
+        this.imvMapa.setImageDrawable(new BitmapDrawable(this.resources, tempBitmap));
+    }
+
+    public void desenhaCaminho(
+        Caminho caminho)
+    {
+        
     }
 }

@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity
         ivCanvas = findViewById(R.id.ivCanvas);
         tbCaminhos = findViewById(R.id.tbCaminhos);
 
-        desenhadora = new Desenhadora(this.ivCanvas, getResources());
         cidadesLidas = new Lista<Cidade>();
+
+        desenhadora = new Desenhadora(this.ivCanvas, getResources());
 
         bhCidade = new BucketHash<Cidade>();
         final ArrayList<String> listaNomesCidades = new ArrayList<String>();
-
 
         try
         {
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity
                 Cidade cd = new Cidade(new Linha(recebeString));
                 cidadesLidas.inserirFim(cd);
             }
+
             leitor.close();
             grafo = new Grafo(cidadesLidas.getQuantidade());
 
