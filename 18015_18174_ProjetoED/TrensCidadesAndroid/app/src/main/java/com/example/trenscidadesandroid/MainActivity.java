@@ -116,6 +116,11 @@ public class MainActivity extends AppCompatActivity
             while((recebeString = leitor.readLine()) != null)
             {
                 Aresta a = new Aresta(new Linha(recebeString));
+
+                //Redefinindo as cidades da aresta buscando na tabela hash
+                a.setOrigem(bhCidade.buscar(a.getOrigem()));
+                a.setDestino(bhCidade.buscar(a.getDestino()));
+
                 grafo.novaAresta(a);
             }
         }
@@ -171,7 +176,9 @@ public class MainActivity extends AppCompatActivity
                     String[] vetor1 = stringCidadeOrigem.split("-");
                     String[] vetor2 = stringCidadeDestino.split("-");
 
-                    String cidadeOrigem = vetor1[1].substring(1), cidadeDestino = vetor2[1].substring(1);
+                    String  cidadeOrigem = vetor1[1].substring(1),
+                            cidadeDestino = vetor2[1].substring(1);
+
                      Cidade origem = bhCidade.buscar(new Cidade(cidadeOrigem)),
                             destino = bhCidade.buscar(new Cidade(cidadeDestino));
 
@@ -183,6 +190,7 @@ public class MainActivity extends AppCompatActivity
                         modoBusca = Grafo.ModoBusca.PorMenorDistancia;
 
                     Caminho c = grafo.getCaminho(origem, destino, modoBusca);
+
                     if (c.isVazio())
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
