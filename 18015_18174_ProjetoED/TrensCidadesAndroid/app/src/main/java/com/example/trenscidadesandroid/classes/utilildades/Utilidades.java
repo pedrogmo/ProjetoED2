@@ -1,9 +1,10 @@
 package com.example.trenscidadesandroid.classes.utilildades;
 
 import java.lang.reflect.Method;
-
+//Classe com métodos auxiliares ao projeto
 public class Utilidades
 {
+    //Método que movimenta o texto n casas à direita
     public static String padRight(
         String s,
         int n)
@@ -11,6 +12,7 @@ public class Utilidades
         return String.format("%-" + n + "s", s);
     }
 
+    //Método que retorna um clone do objeto passado por parâmetro
     public static Object cloneDe(Object t)
     {
         Object ret = null;
