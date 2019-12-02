@@ -165,8 +165,15 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 try{
-                    Cidade origem = bhCidade.buscar(new Cidade(spDeOnde.getSelectedItem().toString())),
-                            destino = bhCidade.buscar(new Cidade(spParaOnde.getSelectedItem().toString()));
+                    String stringCidadeOrigem = spDeOnde.getSelectedItem().toString(),
+                            stringCidadeDestino = spParaOnde.getSelectedItem().toString();
+
+                    String[] vetor1 = stringCidadeOrigem.split("-");
+                    String[] vetor2 = stringCidadeDestino.split("-");
+
+                    String cidadeOrigem = vetor1[1].substring(1), cidadeDestino = vetor2[1].substring(1);
+                     Cidade origem = bhCidade.buscar(new Cidade(cidadeOrigem)),
+                            destino = bhCidade.buscar(new Cidade(cidadeDestino));
 
                     Grafo.ModoBusca modoBusca;
 
