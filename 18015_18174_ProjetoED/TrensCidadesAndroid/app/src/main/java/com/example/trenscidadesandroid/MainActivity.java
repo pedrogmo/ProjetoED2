@@ -71,10 +71,12 @@ public class MainActivity extends AppCompatActivity
         cidadesLidas = new Lista<Cidade>();
 
 
-        //Instanciamento da desenhadora de grafo
+        //Instanciação da desenhadora de grafo
         desenhadora = new Desenhadora(this.ivCanvas, getResources());
 
         bhCidade = new BucketHash<Cidade>();
+
+        //ArrayList<String> é exigido pelo Spinner
         final ArrayList<String> listaNomesCidades = new ArrayList<String>();
 
         try
