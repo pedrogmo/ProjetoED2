@@ -32,8 +32,8 @@ public class Caminho
         listaArestas.inserirFim(novaAresta);
 
         //Adicionam-se os valores de distância e tempo
-        distanciaTotal += novaAresta.getDistancia();
-        tempoTotal += novaAresta.getTempo();
+        distanciaTotal += novaAresta.getPesoCidades().getDistancia();
+        tempoTotal += novaAresta.getPesoCidades().getTempo();
     }
 
     //Getters dos atributos

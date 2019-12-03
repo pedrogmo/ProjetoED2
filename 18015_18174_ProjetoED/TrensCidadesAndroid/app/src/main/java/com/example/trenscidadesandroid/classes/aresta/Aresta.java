@@ -5,6 +5,7 @@ package com.example.trenscidadesandroid.classes.aresta;
 
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.linha.Linha;
+import com.example.trenscidadesandroid.classes.pesocidades.PesoCidades;
 import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
 
 import java.io.Serializable;
@@ -16,9 +17,7 @@ public class Aresta
 
     private Cidade origem;
     private Cidade destino;
-    private int tempo;
-    private int distancia;
-
+    private PesoCidades pesoCidades;
     //Constantes para leitura do arquivo texto "grafo.txt"
 
     public static final int COMECO_NOME_ORIGEM = 0;
@@ -40,13 +39,11 @@ public class Aresta
     public Aresta(
         Cidade origem,
         Cidade destino,
-        int tempo,
-        int distancia) throws Exception
+        PesoCidades pesoCidades) throws Exception
     {
         this.setOrigem(origem);
         this.setDestino(destino);
-        this.setTempo(tempo);
-        this.setDistancia(distancia);
+        this.setPesoCidades(pesoCidades);
     }
 
     //Consturtor de Aresta a partir de uma Linha lida do arquivo
@@ -61,8 +58,10 @@ public class Aresta
             String str = linha.getConteudo();
             setOrigem(new Cidade(str.substring(COMECO_NOME_ORIGEM, FIM_NOME_ORIGEM).trim()));
             setDestino(new Cidade(str.substring(COMECO_NOME_DESTINO, FIM_NOME_DESTINO).trim()));
-            setDistancia(Integer.parseInt(str.substring(COMECO_DISTANCIA, FIM_DISTANCIA).trim()));
-            setTempo(Integer.parseInt(str.substring(COMECO_TEMPO).trim()));
+            pesoCidades = new PesoCidades(
+                Integer.parseInt(str.substring(COMECO_DISTANCIA, FIM_DISTANCIA).trim()),
+                Integer.parseInt(str.substring(COMECO_TEMPO).trim())
+            );
         }
         catch (Exception exc)
         {
@@ -100,30 +99,17 @@ public class Aresta
         this.destino = destino;
     }
 
-    public int getTempo()
+    public PesoCidades getPesoCidades()
     {
-        return tempo;
+        return pesoCidades;
     }
 
-    private void setTempo(
-            int tempo) throws Exception
+    private void setPesoCidades(
+        PesoCidades pesoCidades) throws Exception
     {
-        if (tempo < 0)
-            throw new Exception("Aresta - setTempo: valor negativo");
-        this.tempo = tempo;
-    }
-
-    public int getDistancia()
-    {
-        return distancia;
-    }
-
-    private void setDistancia(
-            int distancia) throws Exception
-    {
-        if (distancia < 0)
-            throw new Exception("Aresta - setDistancia: valor negativo");
-        this.distancia = distancia;
+        if (pesoCidades == null)
+            throw new Exception("Aresta - setPesoCidades : objeto nulo");
+        this.pesoCidades = pesoCidades;
     }
 
     //método que retorna o formato de arquivo da Aresta
@@ -132,8 +118,8 @@ public class Aresta
     {
         String ret = Utilidades.padRight(origem.getNome(), TAMANHO_NOME_ORIGEM);
         ret += Utilidades.padRight(destino.getNome(), TAMANHO_NOME_DESTINO);
-        ret += Utilidades.padRight(distancia + "", TAMANHO_DISTANCIA);
-        ret += tempo + "";
+        ret += Utilidades.padRight(pesoCidades.getDistancia() + "", TAMANHO_DISTANCIA);
+        ret += pesoCidades.getTempo() + "";
         return ret;
     }
 
@@ -145,7 +131,7 @@ public class Aresta
         String ret =
             nomeOrigem + "->" +
             nomeDestino +
-            "  " + tempo + "  " + distancia;
+            "  " + pesoCidades.getTempo() + "  " + pesoCidades.getDistancia();
         return ret;
     }
 }

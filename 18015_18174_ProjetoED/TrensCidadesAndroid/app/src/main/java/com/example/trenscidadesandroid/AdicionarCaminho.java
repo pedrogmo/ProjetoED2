@@ -17,6 +17,7 @@ import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.buckethash.BucketHash;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import com.example.trenscidadesandroid.classes.linha.Linha;
+import com.example.trenscidadesandroid.classes.pesocidades.PesoCidades;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -76,7 +77,7 @@ public class AdicionarCaminho extends AppCompatActivity {
                         int tempo = Integer.parseInt(etTempo.getText().toString().trim());
                         int distancia = Integer.parseInt(etDistancia.getText().toString().trim());
 
-                        Aresta aresta = new Aresta(origem, destino, tempo, distancia);
+                        Aresta aresta = new Aresta(origem, destino, new PesoCidades(tempo, distancia));
 
                         FileOutputStream fileout = openFileOutput("grafo.txt", MODE_APPEND);
                         OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);

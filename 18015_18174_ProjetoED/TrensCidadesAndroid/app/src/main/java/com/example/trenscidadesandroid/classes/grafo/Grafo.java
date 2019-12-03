@@ -6,6 +6,7 @@ package com.example.trenscidadesandroid.classes.grafo;
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.caminho.Caminho;
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
+import com.example.trenscidadesandroid.classes.pesocidades.PesoCidades;
 import com.example.trenscidadesandroid.classes.pilha.Pilha;
 import com.example.trenscidadesandroid.classes.vertice.Vertice;
 
@@ -14,6 +15,7 @@ import java.io.Serializable;
 public class Grafo
     implements Serializable
 {
+    //Classe para armazenar dados para o Dijkstra
     private class DistOriginal
     {
         public int verticePai;
@@ -26,36 +28,46 @@ public class Grafo
         }
     }
 
+    //Os modos de busca das cidades no grafo
     public enum ModoBusca
     {
         PorMenorDistancia, PorMenorTempo
     }
 
+    //Vetor de vértices do grafo
     private Vertice[] vertices;
+
+    //Vetor de [pai + peso], cujos índices são correspondetes aos do vetor de vértices
     private DistOriginal[] percurso;
-    private Aresta[][] adjMatrix;
+
+    //Matriz de pesocidades do grafo
+    private PesoCidades[][] adjMatrix;
+
+    //Quantidade de vértices efetivamente armazenados
     private int numVerts;
 
     private final int INFINITY = 1000000;
-    private int verticeAtual;           // global usada para indicar o vértice atualmente sendo visitado
-    private int doInicioAteAtual;       // global usada para ajustar menor caminho com Djikstra
+
+    //Atributo usado para indicar o vértice atualmente sendo visitado
+    private int verticeAtual;
+
+    //Atributo usado para ajustar menor caminho com Djikstra
+    private int doInicioAteAtual;
+
+    //O modo de busca atual do grafo
     private ModoBusca modoBusca;
 
+    //Construtor que inicializa os vetores e a matriz a partir do total de vértices
     public Grafo(
         int totalVertices)
     {
         numVerts = 0;
         vertices = new Vertice[totalVertices];
-        adjMatrix = new Aresta[totalVertices][totalVertices];
-
-        //Põe null em cada posição da matriz
-        for (int j = 0; j < totalVertices; j++)
-            for (int k = 0; k < totalVertices; k++)
-                adjMatrix[j][k] = null;
-
+        adjMatrix = new PesoCidades[totalVertices][totalVertices];
         percurso = new DistOriginal[totalVertices];
     }
 
+    //Adiciona um vértice ao vetor e incrementa a quantidade
     public void novoVertice(
         Cidade informacao) throws Exception
     {
@@ -63,10 +75,11 @@ public class Grafo
         numVerts++;
     }
 
+    //Adiciona uma aresta à matriz
     public void novaAresta(
         Aresta aresta)
     {
-        adjMatrix[aresta.getOrigem().getCodigo()][aresta.getDestino().getCodigo()] = aresta;
+        adjMatrix[aresta.getOrigem().getCodigo()][aresta.getDestino().getCodigo()] = aresta.getPesoCidades();
     }
 
     public void removerVertice(
@@ -105,15 +118,15 @@ public class Grafo
     }
 
     private int getPeso(
-        Aresta aresta)
+        PesoCidades pesoCidades)
     {
         int peso = INFINITY;
-        if (aresta != null)
+        if (pesoCidades != null)
         {
             if (modoBusca == ModoBusca.PorMenorDistancia)
-                peso = aresta.getDistancia();
+                peso = pesoCidades.getDistancia();
             else if (modoBusca == ModoBusca.PorMenorTempo)
-                peso = aresta.getTempo();
+                peso = pesoCidades.getTempo();
         }
         return peso;
     }
@@ -235,7 +248,7 @@ public class Grafo
             atual = pilha.desempilhar();
             if (anterior != null)
             {
-                Aresta a = adjMatrix[anterior.getCodigo()][atual.getCodigo()];
+                Aresta a = new Aresta(anterior, atual, adjMatrix[anterior.getCodigo()][atual.getCodigo()]);
                 ret.adicionar(a);
             }
             anterior = atual;

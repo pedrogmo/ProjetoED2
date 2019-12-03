@@ -1,6 +1,5 @@
 package com.example.trenscidadesandroid.classes.desenhadora;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,10 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.trenscidadesandroid.R;
@@ -66,7 +62,7 @@ public class Desenhadora
     {
         for (Aresta aresta : caminho.getListaArestas())
         {
-            if (aresta.getDistancia() < DIST_LINHA)
+            if (aresta.getPesoCidades().getDistancia() < DIST_LINHA)
                 this.paint.setColor(COR_LINHA_CURTA);
             else
                 this.paint.setColor(COR_LINHA_LONGA);
