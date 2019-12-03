@@ -76,27 +76,29 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btnBuscar"
         android:layout_marginTop="10dp"/>
-    <TextView
-        android:id="@+id/tvResultados"
+    <TableLayout
+        android:id="@+id/tlResultados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resultados\n\n"
         android:textSize="20dp"
         android:layout_below="@+id/ivCanvas"
-        android:layout_marginLeft="40dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
     <Button
         android:id="@+id/btnAdicionarCidade"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="+ Cidade"
         android:layout_marginLeft="30dp"
-        android:layout_below="@+id/tvResultados"/>
+        android:layout_below="@+id/tlResultados"/>
     <Button
         android:id="@+id/btnAdicionarCaminho"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="+ Caminho"
-        android:layout_below="@+id/tvResultados"
+        android:layout_below="@+id/tlResultados"
         android:layout_toRightOf="@+id/btnAdicionarCidade"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"/>

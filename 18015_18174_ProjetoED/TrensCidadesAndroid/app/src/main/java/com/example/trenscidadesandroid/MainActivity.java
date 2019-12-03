@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Desenhadora desenhadora;
     private ImageView ivCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
-    private TextView tvResultados;
+    private TableLayout tlResultados;
     private Grafo grafo;
     private Lista<Cidade> cidadesLidas;
     private RadioButton rbTempo, rbDistancia;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
         ivCanvas = findViewById(R.id.ivCanvas);
-        tvResultados = findViewById(R.id.tvResultados);
+        tlResultados = findViewById(R.id.tlResultados);
         rbTempo = findViewById(R.id.rbTempo);
         rbDistancia = findViewById(R.id.rbDistancia);
 
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity
 
                     //Busca-se o caminho passando a origem, o destino e o modo de busca
                     Caminho c = grafo.getCaminho(origem, destino, modoBusca);
-                    tvResultados.setText("Resultados\n\n");
+                    tlResultados.removeAllViews();
                     desenhadora.limpar();
 
                     if (c.isVazio())
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity
                     else
                     {
                         //Desenha o caminho e escreve as rotas no TextView
-                        desenhadora.desenhaCaminho(c, tvResultados);
+                        desenhadora.desenhaCaminho(c, tlResultados);
                         Toast.makeText(getApplicationContext(), "Caminho encontrado", Toast.LENGTH_SHORT).show();
                     }
 

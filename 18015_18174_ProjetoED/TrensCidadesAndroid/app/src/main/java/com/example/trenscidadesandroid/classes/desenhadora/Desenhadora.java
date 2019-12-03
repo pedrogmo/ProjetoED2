@@ -3,6 +3,7 @@
 
 package com.example.trenscidadesandroid.classes.desenhadora;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +11,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.trenscidadesandroid.R;
@@ -19,6 +23,12 @@ import com.example.trenscidadesandroid.classes.caminho.Caminho;
 
 public class Desenhadora
 {
+    //Os diferentes tipos de célula presentes na tabela de resultado
+    private enum TipoCelula
+    {
+        Cabecalho, Valor, Total
+    }
+
     //Canvas usado para desenhar no componente
     private Canvas canvas;
 
@@ -37,6 +47,9 @@ public class Desenhadora
     //Cores da linha
     private static final int COR_LINHA_LONGA = 0xFF800080;
     private static final int COR_LINHA_CURTA = Color.RED;
+    private static final int COR_CABECALHO_TABELA = Color.DKGRAY;
+    private static final int COR_TEXTO_CABECALHO = Color.WHITE;
+    private static final int COR_TOTAL_TABELA = Color.LTGRAY;
 
     //Propriedades do formato (cor)
     private Paint paint;
@@ -67,11 +80,44 @@ public class Desenhadora
         imvMapa.setImageDrawable(new BitmapDrawable(resources, bmpDesenho));
     }
 
-    //Desenha no mapa o caminho e exibe os dados no TextView passado
+    private void adicionarTexto(
+        TableRow tr,
+        String texto,
+        TipoCelula tipoCelula)
+    {
+        TextView tv = new TextView(tr.getContext());
+        if (tipoCelula == TipoCelula.Cabecalho)
+        {
+            tv.setBackgroundColor(COR_CABECALHO_TABELA);
+            tv.setTextSize(20.0f);
+            tv.setTextColor(COR_TEXTO_CABECALHO);
+        }
+        else if (tipoCelula == TipoCelula.Total)
+        {
+            tv.setBackgroundColor(COR_TOTAL_TABELA);
+            tv.setTextSize(17.0f);
+        }
+
+        tv.setText(texto);
+        tv.setPadding(15, 15, 15, 15);
+        tr.addView(tv);
+    }
+
+    //Desenha no mapa o caminho e exibe os dados no TableLayout passado
     public void desenhaCaminho(
         Caminho caminho,
-        TextView textView)
+        TableLayout tabela)
     {
+        Context contexto = tabela.getContext();
+
+        //Adiciona-se uma linha de tabela para ser o cabeçalho
+        TableRow tr = new TableRow(contexto);
+        adicionarTexto(tr, "Origem", TipoCelula.Cabecalho);
+        adicionarTexto(tr, "Destino", TipoCelula.Cabecalho);
+        adicionarTexto(tr, "Distância", TipoCelula.Cabecalho);
+        adicionarTexto(tr, "Tempo", TipoCelula.Cabecalho);
+        tabela.addView(tr);
+
         //Para cada aresta presente no caminho
         for (Aresta aresta : caminho.getListaArestas())
         {
@@ -90,12 +136,28 @@ public class Desenhadora
                 paint
             );
 
-            //Adiciona o conteúdo da aresta no textView
-            textView.append(aresta.toString() + "\n");
+            //Adiciona-se uma linha de tabela com os dados [origem, destino, distância, tempo]
+            tr = new TableRow(contexto);
+            adicionarTexto(tr, aresta.getOrigem().getNome(), TipoCelula.Valor);
+            adicionarTexto(tr, aresta.getDestino().getNome(), TipoCelula.Valor);
+            adicionarTexto(tr, aresta.getPesoCidades().getDistancia() + "", TipoCelula.Valor);
+            adicionarTexto(tr, aresta.getPesoCidades().getTempo() + "", TipoCelula.Valor);
+            tabela.addView(tr);
         }
 
-        textView.append("\nDistância total: " + caminho.getDistanciaTotal() + "\n");
-        textView.append("Tempo total: " + caminho.getTempoTotal() + "\n");
+        //Linha de tabela com distância total do caminho
+        tr = new TableRow(contexto);
+        adicionarTexto(tr, "Distância", TipoCelula.Total);
+        adicionarTexto(tr, "total: ", TipoCelula.Total);
+        adicionarTexto(tr, caminho.getDistanciaTotal() + "", TipoCelula.Total);
+        tabela.addView(tr);
+
+        //Linha de tabela com tempo total do caminho
+        tr = new TableRow(contexto);
+        adicionarTexto(tr, "Tempo", TipoCelula.Total);
+        adicionarTexto(tr, "total: ", TipoCelula.Total);
+        adicionarTexto(tr, caminho.getTempoTotal() + "", TipoCelula.Total);
+        tabela.addView(tr);
     }
     public void limpar()
     {
