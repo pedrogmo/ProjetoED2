@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 
 import com.example.trenscidadesandroid.R;
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
@@ -57,7 +58,8 @@ public class Desenhadora
     }
 
     public void desenhaCaminho(
-        Caminho caminho)
+        Caminho caminho,
+        TableLayout tbResult)
     {
 
         for (Aresta aresta : caminho.getListaArestas())

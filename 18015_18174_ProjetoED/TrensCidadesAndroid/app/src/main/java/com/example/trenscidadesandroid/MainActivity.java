@@ -202,8 +202,7 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
                     {
-                        desenhadora.desenhaCaminho(c);
-                        c.getListaArestas();
+                        desenhadora.desenhaCaminho(c, tbCaminhos);
                         Toast.makeText(getApplicationContext(), "Caminho encontrado", Toast.LENGTH_SHORT).show();
                     }
 
