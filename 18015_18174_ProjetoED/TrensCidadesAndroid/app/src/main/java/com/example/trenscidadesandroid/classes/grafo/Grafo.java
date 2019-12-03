@@ -222,11 +222,14 @@ public class Grafo
             ++cont;
         }
 
+
         //Se não foi possível achar caminho, retornamos o caminho vazio
         if ((cont == 1) && (percurso[finalDoPercurso].peso == INFINITY))
             return ret;
 
-        Cidade anterior = null, atual = null;
+        Cidade anterior = vertices[inicioDoPercurso].getInfo();
+        Cidade atual = null;
+
         while (!pilha.isVazia())
         {
             atual = pilha.desempilhar();

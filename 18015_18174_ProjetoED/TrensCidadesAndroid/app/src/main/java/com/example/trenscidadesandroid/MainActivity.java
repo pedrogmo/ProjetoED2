@@ -1,7 +1,11 @@
 package com.example.trenscidadesandroid;
 
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,9 +35,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-
-//Gustavo Henrique de Meira - 18015
-//Pedro Gomes Moreira - 18174
 
 public class MainActivity extends AppCompatActivity
 {
@@ -69,7 +70,11 @@ public class MainActivity extends AppCompatActivity
 
         cidadesLidas = new Lista<Cidade>();
 
-        desenhadora = new Desenhadora(this.ivCanvas, getResources());
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        final int width = displayMetrics.widthPixels;
+
+        desenhadora = new Desenhadora(this.ivCanvas, getResources(), width);
 
         bhCidade = new BucketHash<Cidade>();
         final ArrayList<String> listaNomesCidades = new ArrayList<String>();
@@ -169,7 +174,8 @@ public class MainActivity extends AppCompatActivity
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                try
+                {
                     String stringCidadeOrigem = spDeOnde.getSelectedItem().toString(),
                             stringCidadeDestino = spParaOnde.getSelectedItem().toString();
 
