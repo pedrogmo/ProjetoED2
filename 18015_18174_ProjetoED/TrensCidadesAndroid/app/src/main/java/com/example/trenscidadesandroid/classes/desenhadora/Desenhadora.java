@@ -35,8 +35,7 @@ public class Desenhadora
 
     public Desenhadora(
         ImageView imvMapa,
-        Resources resources,
-        int largura)
+        Resources resources)
     {
         //this.TOTAL_X = largura;
         //this.TOTAL_Y = this.TOTAL_X / PROPORCAO_IMAGEM;

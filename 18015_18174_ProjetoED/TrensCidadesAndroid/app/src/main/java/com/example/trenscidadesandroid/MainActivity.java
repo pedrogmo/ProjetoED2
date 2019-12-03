@@ -67,25 +67,26 @@ public class MainActivity extends AppCompatActivity
         rbTempo = findViewById(R.id.rbTempo);
         rbDistancia = findViewById(R.id.rbDistancia);
 
+        //Radio button é marcado como default
         rbTempo.setChecked(true);
 
         cidadesLidas = new Lista<Cidade>();
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        final int width = displayMetrics.widthPixels;
 
-        desenhadora = new Desenhadora(this.ivCanvas, getResources(), width);
+        //Instanciamento da desenhadora de grafo
+        desenhadora = new Desenhadora(this.ivCanvas, getResources());
 
         bhCidade = new BucketHash<Cidade>();
         final ArrayList<String> listaNomesCidades = new ArrayList<String>();
 
         try
         {
+            //try que tentará abrir um arquivo. Caso não exista, cairá no catch
             try
             {
                 FileInputStream f = openFileInput("cidades.txt");
             }
+            //Como o arquivo não existe, cria-o com o método escreverCidades()
             catch(FileNotFoundException exc){escreverCidades();}
 
             FileInputStream fileIn = openFileInput("cidades.txt");
@@ -93,6 +94,8 @@ public class MainActivity extends AppCompatActivity
             BufferedReader leitor = new BufferedReader(inputRead);
 
             String recebeString;
+            //Lê-se as cidades e as adiciona na lista de cidades lidas,
+            //para instanciarmos o grafo com o número de cidades na lista futuramente
             while((recebeString = leitor.readLine()) != null)
             {
                 Cidade cd = new Cidade(new Linha(recebeString));
@@ -100,8 +103,10 @@ public class MainActivity extends AppCompatActivity
             }
 
             leitor.close();
+            //Instância do grafo com a qtd de elementos na lista
             grafo = new Grafo(cidadesLidas.getQuantidade());
 
+            //foreach que adiciona as cidades na lista de nomes das cidades, BucketHash e inclui um novo vértice da cidade no grafo
             for(Cidade cd: cidadesLidas)
             {
                 listaNomesCidades.add(cd.toString());
@@ -109,10 +114,12 @@ public class MainActivity extends AppCompatActivity
                 grafo.novoVertice(cd);
             }
 
+            //try que tentará abrir um arquivo. Caso não exista, cairá no catch
             try
             {
                 FileInputStream f = openFileInput("grafo.txt");
             }
+            //Como o arquivo não existe, cria-o com o método escreverCidades()
             catch(FileNotFoundException exc){escreverGrafo();}
 
             fileIn = openFileInput("grafo.txt");
@@ -156,6 +163,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+                //Serializa a tabela de hash para a tela de adição de cidades
                 Intent i = new Intent(getApplicationContext(), AdicionarCidade.class);
                 i.putExtra("hash", (Serializable) bhCidade);
                 startActivity(i);
@@ -165,6 +173,7 @@ public class MainActivity extends AppCompatActivity
         btnAdicionarCaminho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Serializa a tabela de hash para a tela de adição de caminhos e a lista dos nomes para os spinners na tela contidos
                 Intent i = new Intent(getApplicationContext(), AdicionarCaminho.class);
                 i.putExtra("listaNomesCidades", (Serializable) listaNomesCidades);
                 i.putExtra("hash", (Serializable) bhCidade);
@@ -177,25 +186,31 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 try
                 {
+                    //Obtem-se as opções escolhidas
                     String stringCidadeOrigem = spDeOnde.getSelectedItem().toString(),
                             stringCidadeDestino = spParaOnde.getSelectedItem().toString();
 
+                    //Separa-se o código do nome por um split
                     String[] vetor1 = stringCidadeOrigem.split("-");
                     String[] vetor2 = stringCidadeDestino.split("-");
 
+                    // Obtem-se os nomes das cidades
                     String  cidadeOrigem = vetor1[1].substring(1),
                             cidadeDestino = vetor2[1].substring(1);
 
+                    //Busca, pelos seus nomes, os respectivos códigos das cidades no BucketHash
                      Cidade origem = bhCidade.buscar(new Cidade(cidadeOrigem)),
                             destino = bhCidade.buscar(new Cidade(cidadeDestino));
 
                     Grafo.ModoBusca modoBusca;
 
+                    //Verifica qual o modo de busca selecionado
                     if (rbTempo.isChecked())
                         modoBusca = Grafo.ModoBusca.PorMenorTempo;
                     else
                         modoBusca = Grafo.ModoBusca.PorMenorDistancia;
 
+                    //Busca-se o caminho passando a origem, o destino e o modo de busca
                     Caminho c = grafo.getCaminho(origem, destino, modoBusca);
                     tvResultados.setText("Resultados\n\n");
                     desenhadora.limpar();
@@ -204,6 +219,7 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
                     {
+                        //Desenha o caminho e escreve as rotas no TextView
                         desenhadora.desenhaCaminho(c, tvResultados);
                         Toast.makeText(getApplicationContext(), "Caminho encontrado", Toast.LENGTH_SHORT).show();
                     }
