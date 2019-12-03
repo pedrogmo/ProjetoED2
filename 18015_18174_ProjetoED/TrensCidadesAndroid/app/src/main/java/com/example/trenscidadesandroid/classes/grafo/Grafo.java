@@ -118,7 +118,7 @@ public class Grafo
         return peso;
     }
 
-    //Método que busca o melhor caminho da origem ao destino, priorizado  por distancia ou tempo(ModoBusca)
+    //Método que busca o melhor caminho da origem ao destino, priorizado  por distância ou tempo (ModoBusca)
     public Caminho getCaminho(
         Cidade origem,
         Cidade destino,
@@ -128,6 +128,7 @@ public class Grafo
 
         int inicioDoPercurso = origem.getCodigo();
         int finalDoPercurso = destino.getCodigo();
+
         for (int j = 0; j < numVerts; j++)
             vertices[j].foiVisitado = false;
 
@@ -136,17 +137,14 @@ public class Grafo
         {
             // anotamos no vetor percurso a distância entre o inicioDoPercurso e cada vértice
             // se não há ligação direta, o valor da distância será infinity
-            int tempDist = getPeso(adjMatrix[inicioDoPercurso][j]);
-            percurso[j] = new DistOriginal(inicioDoPercurso, tempDist);
+            int peso = getPeso(adjMatrix[inicioDoPercurso][j]);
+            percurso[j] = new DistOriginal(inicioDoPercurso, peso);
         }
 
-        for (int nTree = 0; nTree < numVerts; nTree++)
+        for (int vert = 0; vert < numVerts; vert++)
         {
             // Procuramos a saída não visitada do vértice inicioDoPercurso com o menor peso
             int indiceDoMenor = obterMenor();
-
-            // e anotamos esse menor peso
-            int pesoMinimo = percurso[indiceDoMenor].peso;
 
             // o vértice com o menor peso passa a ser o vértice atual
             // para compararmos com o peso calculada em AjustarMenorCaminho()
@@ -210,19 +208,23 @@ public class Grafo
         Pilha<Cidade> pilha = new Pilha<Cidade>();
 
         int onde = finalDoPercurso;
+
         int cont = 0;
         while (onde != inicioDoPercurso)
         {
-            onde = percurso[onde].verticePai;
-
             try
             {
                 pilha.empilhar(vertices[onde].getInfo());
             }
             catch(Exception exc){}
 
-            cont++;
+            onde = percurso[onde].verticePai;
+            ++cont;
         }
+
+        //Se não foi possível achar caminho, retornamos o caminho vazio
+        if ((cont == 1) && (percurso[finalDoPercurso].peso == INFINITY))
+            return ret;
 
         Cidade anterior = null, atual = null;
         while (!pilha.isVazia())
