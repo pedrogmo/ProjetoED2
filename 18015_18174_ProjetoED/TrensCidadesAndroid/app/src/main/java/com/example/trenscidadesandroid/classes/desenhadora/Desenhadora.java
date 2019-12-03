@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.trenscidadesandroid.R;
@@ -22,9 +23,9 @@ public class Desenhadora
     private Resources resources;
     private Canvas canvas;
 
-    private static float TOTAL_X;
-    private static float TOTAL_Y;
-    private static final float PROPORCAO_IMAGEM = 717.0f / 578.0f;
+    private final static float TOTAL_X = 717.0f;
+    private final static float TOTAL_Y = 578.0f;
+    //private static final float PROPORCAO_IMAGEM = 717.0f / 578.0f;
     private static final float ESPESSURA = 5.0f;
     private static final int DIST_LINHA = 200;
     private static final int COR_LINHA_LONGA = 0xFF800080;
@@ -36,8 +37,8 @@ public class Desenhadora
         Resources resources,
         int largura)
     {
-        this.TOTAL_X = largura;
-        this.TOTAL_Y = this.TOTAL_X / PROPORCAO_IMAGEM;
+        //this.TOTAL_X = largura;
+        //this.TOTAL_Y = this.TOTAL_X / PROPORCAO_IMAGEM;
 
         this.imvMapa = imvMapa;
         this.resources = resources;
@@ -71,6 +72,9 @@ public class Desenhadora
                 aresta.getDestino().getY() * TOTAL_Y,
                 paint
             );
+
+            Log.d("RENO", aresta.getOrigem().getX() * TOTAL_X + "");
+
         }
     }
 }

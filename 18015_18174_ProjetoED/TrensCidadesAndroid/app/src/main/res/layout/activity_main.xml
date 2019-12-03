@@ -66,8 +66,9 @@
     </RadioGroup>
     <ImageView
         android:id="@+id/ivCanvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="717px"
+        android:layout_height="578px"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/btnBuscar"/>
     <TextView
         android:id="@+id/tvResultados"
