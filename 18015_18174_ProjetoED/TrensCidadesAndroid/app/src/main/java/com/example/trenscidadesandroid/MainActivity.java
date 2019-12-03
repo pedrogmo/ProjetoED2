@@ -200,6 +200,12 @@ public class MainActivity extends AppCompatActivity
                      Cidade origem = bhCidade.buscar(new Cidade(cidadeOrigem)),
                             destino = bhCidade.buscar(new Cidade(cidadeDestino));
 
+                     if (origem.equals(destino))
+                     {
+                         Toast.makeText(getApplicationContext(), "Cidades iguais", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+
                     Grafo.ModoBusca modoBusca;
 
                     //Verifica qual o modo de busca selecionado
@@ -214,6 +220,7 @@ public class MainActivity extends AppCompatActivity
                     desenhadora.limpar();
 
                     if (c.isVazio())
+                        //Se não se achou um caminho
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
                     {

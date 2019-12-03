@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_alignParentRight="@id/tvDeAdicionarCaminho"/>
+        android:layout_alignParentRight="@id/tvDeAdicionarCaminho"
+        android:layout_marginLeft="30dp"/>
     <TextView
         android:id="@+id/tvDeAdicionarCaminho"
         android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/spDeOndeAdicionarCaminho"/>
+        android:layout_below="@id/spDeOndeAdicionarCaminho"
+        android:layout_marginLeft="30dp"/>
     <TextView
         android:id="@+id/tvParaAdicionarCaminho"
         android:layout_width="wrap_content"
@@ -45,8 +47,7 @@
         android:text="Distância"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/spParaOndeAdicionarCaminho"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_marginTop="20dp" />
     <EditText
         android:id="@+id/etDistancia"
         android:layout_width="300dp"
@@ -54,7 +55,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/tvDistancia"
         android:layout_centerHorizontal="true"
-        />
+        android:inputType="numberDecimal"/>
     <TextView
         android:id="@+id/tvTempo"
         android:layout_width="wrap_content"
@@ -63,8 +64,7 @@
         android:text="Tempo"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/etDistancia"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_marginTop="20dp" />
     <EditText
         android:id="@+id/etTempo"
         android:layout_width="300dp"
@@ -72,7 +72,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/tvTempo"
         android:layout_centerHorizontal="true"
-        />
+        android:inputType="numberDecimal"/>
     <Button
         android:id="@+id/btnAdicionarCaminhoAC"
         android:layout_height="wrap_content"

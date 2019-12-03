@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_alignParentRight="@id/tvDe"/>
+        android:layout_alignParentRight="@id/tvDe"
+        android:layout_marginLeft="30dp"/>
     <TextView
         android:id="@+id/tvDe"
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/spDeOndeMain"/>
+        android:layout_below="@id/spDeOndeMain"
+        android:layout_marginLeft="30dp"/>
     <TextView
         android:id="@+id/tvPara"
         android:layout_width="wrap_content"
@@ -36,15 +38,6 @@
         android:text="Para"
         android:textSize="20dp"
         android:layout_alignTop="@id/spParaOndeMain"/>
-    <Button
-        android:id="@+id/btnBuscar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buscar"
-        android:textSize="20dp"
-        android:layout_below="@+id/tvPara"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"/>
     <RadioGroup
         android:id="@+id/rgOpcao"
         android:layout_width="wrap_content"
@@ -52,24 +45,37 @@
         android:orientation="horizontal"
         android:layout_below="@+id/tvPara"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/btnBuscar">
+        android:layout_centerHorizontal="true">
         <RadioButton
             android:id="@+id/rbTempo"
-            android:text="Tempo"
+            android:text="Menor Tempo"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>
         <RadioButton
             android:id="@+id/rbDistancia"
-            android:text="Distância"
+            android:text="Menor Distância"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>
     </RadioGroup>
+
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:textSize="20dp"
+        android:layout_below="@+id/rgOpcao"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_centerHorizontal="true"/>
+
     <ImageView
         android:id="@+id/ivCanvas"
         android:layout_width="717px"
         android:layout_height="578px"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnBuscar"/>
+        android:layout_below="@+id/btnBuscar"
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/tvResultados"
         android:layout_width="wrap_content"
@@ -82,16 +88,18 @@
         android:id="@+id/btnAdicionarCidade"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Adicionar Cidade"
+        android:text="+ Cidade"
         android:layout_marginLeft="30dp"
         android:layout_below="@+id/tvResultados"/>
     <Button
         android:id="@+id/btnAdicionarCaminho"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Adicionar Caminho"
+        android:text="+ Caminho"
         android:layout_below="@+id/tvResultados"
-        android:layout_toRightOf="@+id/btnAdicionarCidade"/>
+        android:layout_toRightOf="@+id/btnAdicionarCidade"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"/>
 
 
 </RelativeLayout>
