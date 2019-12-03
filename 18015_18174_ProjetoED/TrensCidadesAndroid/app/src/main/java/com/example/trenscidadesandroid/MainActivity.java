@@ -197,10 +197,16 @@ public class MainActivity extends AppCompatActivity
 
                     Caminho c = grafo.getCaminho(origem, destino, modoBusca);
 
+                    desenhadora.limpar();
                     if (c.isVazio())
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
+                    {
                         desenhadora.desenhaCaminho(c);
+                        c.getListaArestas();
+                        Toast.makeText(getApplicationContext(), "Caminho encontrado", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
                 catch (Exception e){Toast.makeText(getApplicationContext(), "Busca não foi possível", Toast.LENGTH_SHORT).show();}
 

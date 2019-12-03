@@ -31,6 +31,7 @@ public class Desenhadora
     private static final int COR_LINHA_LONGA = 0xFF800080;
     private static final int COR_LINHA_CURTA = Color.RED;
     private Paint paint; //propriedades do formato (cor)
+    private Bitmap imagem;
 
     public Desenhadora(
         ImageView imvMapa,
@@ -46,7 +47,7 @@ public class Desenhadora
         this.paint = new Paint();
         this.paint.setStrokeWidth(ESPESSURA);
 
-        Bitmap imagem = BitmapFactory.decodeResource(this.resources, R.drawable.mapa);
+        imagem = BitmapFactory.decodeResource(this.resources, R.drawable.mapa);
         Bitmap tempBitmap = Bitmap.createBitmap(imagem.getWidth(), imagem.getHeight(), Bitmap.Config.RGB_565);
 
         canvas = new Canvas(tempBitmap);
@@ -58,6 +59,7 @@ public class Desenhadora
     public void desenhaCaminho(
         Caminho caminho)
     {
+
         for (Aresta aresta : caminho.getListaArestas())
         {
             if (aresta.getDistancia() < DIST_LINHA)
@@ -66,15 +68,19 @@ public class Desenhadora
                 this.paint.setColor(COR_LINHA_LONGA);
 
             canvas.drawLine(
-                aresta.getOrigem().getX() * TOTAL_X,
-                aresta.getOrigem().getY() * TOTAL_Y,
-                aresta.getDestino().getX() * TOTAL_X,
-                aresta.getDestino().getY() * TOTAL_Y,
+                aresta.getOrigem().getX() * TOTAL_X * 2,
+                aresta.getOrigem().getY() * TOTAL_Y * 2,
+                aresta.getDestino().getX() * TOTAL_X * 2,
+                aresta.getDestino().getY() * TOTAL_Y * 2,
                 paint
             );
 
-            Log.d("RENO", aresta.getOrigem().getX() * TOTAL_X + "");
+
 
         }
+    }
+    public void limpar()
+    {
+        canvas.drawBitmap(imagem, 0, 0, null);
     }
 }
