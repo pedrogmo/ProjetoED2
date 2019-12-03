@@ -1,6 +1,10 @@
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
 package com.example.trenscidadesandroid.classes.utilildades;
 
 import java.lang.reflect.Method;
+
 //Classe com métodos auxiliares ao projeto
 public class Utilidades
 {

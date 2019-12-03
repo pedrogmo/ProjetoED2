@@ -1,10 +1,9 @@
-package com.example.trenscidadesandroid.classes.pilha;
-
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
-import com.example.trenscidadesandroid.classes.lista.Lista;
+package com.example.trenscidadesandroid.classes.pilha;
 
+import com.example.trenscidadesandroid.classes.lista.Lista;
 import java.io.Serializable;
 
 //Classe com conceito de Pilha modelada sobre uma Lista

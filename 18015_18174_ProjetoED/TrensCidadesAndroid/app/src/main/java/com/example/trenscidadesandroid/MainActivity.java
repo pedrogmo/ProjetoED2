@@ -1,11 +1,10 @@
-package com.example.trenscidadesandroid;
-
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
 
+package com.example.trenscidadesandroid;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 

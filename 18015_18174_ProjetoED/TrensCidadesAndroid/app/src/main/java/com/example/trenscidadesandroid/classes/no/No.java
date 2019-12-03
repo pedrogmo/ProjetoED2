@@ -1,7 +1,9 @@
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
 package com.example.trenscidadesandroid.classes.no;
 
 import com.example.trenscidadesandroid.classes.utilildades.Utilidades;
-
 import java.io.Serializable;
 
 //Classe Nó de informação genérica

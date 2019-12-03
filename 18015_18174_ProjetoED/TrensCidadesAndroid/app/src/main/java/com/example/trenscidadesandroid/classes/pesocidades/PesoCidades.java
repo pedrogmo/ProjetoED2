@@ -1,7 +1,7 @@
-package com.example.trenscidadesandroid.classes.pesocidades;
-
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
+
+package com.example.trenscidadesandroid.classes.pesocidades;
 
 //Classe que guarda os diferentes pesos entre cidades
 public class PesoCidades

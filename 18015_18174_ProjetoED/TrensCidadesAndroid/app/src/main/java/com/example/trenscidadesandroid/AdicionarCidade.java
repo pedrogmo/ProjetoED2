@@ -1,3 +1,6 @@
+//Gustavo Henrique de Meira - 18015
+//Pedro Gomes Moreira - 18174
+
 package com.example.trenscidadesandroid;
 
 import android.content.Intent;
@@ -15,7 +18,6 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174

@@ -1,7 +1,7 @@
-package com.example.trenscidadesandroid.classes.grafo;
-
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
+
+package com.example.trenscidadesandroid.classes.grafo;
 
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
 import com.example.trenscidadesandroid.classes.caminho.Caminho;
@@ -75,7 +75,7 @@ public class Grafo
         numVerts++;
     }
 
-    //Adiciona uma aresta à matriz
+    //Adiciona peso à matriz, na posição certa conforme as cidades da Aresta recebida
     public void novaAresta(
         Aresta aresta)
     {
@@ -85,18 +85,23 @@ public class Grafo
     public void removerVertice(
         int indiceVertice)
     {
-        if (indiceVertice != numVerts - 1)
+        //Se o índice está dentro do intervalo válido
+        if (indiceVertice >= 0 && indiceVertice < numVerts)
         {
-            for (int j = indiceVertice; j < numVerts - 1; j++)   // remove vértice do vetor
-                vertices[j] = vertices[j + 1];
+            if (indiceVertice != numVerts - 1)
+            {
+                //Mover o vetor uma posição para trás a partir do índice removido
+                for (int j = indiceVertice; j < numVerts - 1; j++)
+                    vertices[j] = vertices[j + 1];
 
-            // remove vértice da matriz
-            for (int row = indiceVertice; row < numVerts; row++)
-                moverLinhas(row, numVerts - 1);
-            for (int col = indiceVertice; col < numVerts; col++)
-                moverColunas(col, numVerts - 1);
+                //Remover vértice da matriz, removendo sua linha e sua coluna
+                for (int row = indiceVertice; row < numVerts; row++)
+                    moverLinhas(row, numVerts - 1);
+                for (int col = indiceVertice; col < numVerts; col++)
+                    moverColunas(col, numVerts - 1);
+            }
+            numVerts--;
         }
-        numVerts--;
     }
 
     private void moverLinhas(
@@ -105,7 +110,8 @@ public class Grafo
     {
         if (linha != numVerts - 1)
             for (int col = 0; col < tamanho; col++)
-                adjMatrix[linha][col] = adjMatrix[linha + 1][col];  // desloca para excluir
+                //Desloca para excluir
+                adjMatrix[linha][col] = adjMatrix[linha + 1][col];
     }
 
     private void moverColunas(
@@ -114,15 +120,20 @@ public class Grafo
     {
         if (coluna != numVerts - 1)
             for (int linha = 0; linha < tamanho; linha++)
-                adjMatrix[linha][coluna] = adjMatrix[linha][coluna + 1]; // desloca para excluir
+                //Desloca para excluir
+                adjMatrix[linha][coluna] = adjMatrix[linha][coluna + 1];
     }
 
+    //Método privativo que retorna o peso de uma posição da matriz passada
     private int getPeso(
         PesoCidades pesoCidades)
     {
+        //Começa inicialmente com INFINITY, que representa uma aresta inexistente
         int peso = INFINITY;
+
         if (pesoCidades != null)
         {
+            //A partir do modoBusca atual, retornar distância ou tempo do PesoCidades
             if (modoBusca == ModoBusca.PorMenorDistancia)
                 peso = pesoCidades.getDistancia();
             else if (modoBusca == ModoBusca.PorMenorTempo)
@@ -137,34 +148,39 @@ public class Grafo
         Cidade destino,
         ModoBusca mb) throws Exception
     {
+        //Definição do modoBusca atual
         this.modoBusca = mb;
 
+        //Índices das duas cidades
         int inicioDoPercurso = origem.getCodigo();
         int finalDoPercurso = destino.getCodigo();
 
+        //Resetar os vértices para não visitados
         for (int j = 0; j < numVerts; j++)
             vertices[j].foiVisitado = false;
 
+        //Primeiro vértice do percurso marcado como visitado
         vertices[inicioDoPercurso].foiVisitado = true;
+
         for (int j = 0; j < numVerts; j++)
         {
-            // anotamos no vetor percurso a distância entre o inicioDoPercurso e cada vértice
-            // se não há ligação direta, o valor da distância será infinity
+            //Anotar no vetor percurso a distância entre o inicioDoPercurso e cada vértice
+            //Se não há ligação direta, o valor da distância será infinity
             int peso = getPeso(adjMatrix[inicioDoPercurso][j]);
             percurso[j] = new DistOriginal(inicioDoPercurso, peso);
         }
 
         for (int vert = 0; vert < numVerts; vert++)
         {
-            // Procuramos a saída não visitada do vértice inicioDoPercurso com o menor peso
+            //Procuramos a saída não visitada do vértice inicioDoPercurso com o menor peso
             int indiceDoMenor = obterMenor();
 
-            // o vértice com o menor peso passa a ser o vértice atual
-            // para compararmos com o peso calculada em AjustarMenorCaminho()
+            //O vértice com o menor peso passa a ser o vértice atual
+            //para compararmos com o peso calculada em ajustarMenorCaminho()
             verticeAtual = indiceDoMenor;
             doInicioAteAtual = percurso[indiceDoMenor].peso;
 
-            // visitamos o vértice com a menor distância desde o inicioDoPercurso
+            //Visitar o vértice com a menor distância desde o inicioDoPercurso
             vertices[verticeAtual].foiVisitado = true;
             ajustarMenorCaminho();
         }
@@ -212,17 +228,23 @@ public class Grafo
             }
     }
 
-    //percorre do final do dijkstra até o topo
+    //Percorre do final do dijkstra até o topo e retorna o Caminho
     private Caminho getCaminho(
         int inicioDoPercurso,
         int finalDoPercurso) throws Exception
     {
-        Caminho ret = new Caminho();
+        //Objeto de retorno
+        Caminho caminhoFinal = new Caminho();
+
+        //Pilha para armazenar as cidades para desempilhá-las posteriormente
         Pilha<Cidade> pilha = new Pilha<Cidade>();
 
-        int onde = finalDoPercurso;
+        //A partir do final do percurso, empilha-se as cidades que levam a ela,
+        //incrementando um contador
 
+        int onde = finalDoPercurso;
         int cont = 0;
+
         while (onde != inicioDoPercurso)
         {
             try
@@ -236,24 +258,29 @@ public class Grafo
         }
 
 
-        //Se não foi possível achar caminho, retornamos o caminho vazio
+        //Se não foi possível achar caminho, retorna-se o caminho vazio
         if ((cont == 1) && (percurso[finalDoPercurso].peso == INFINITY))
-            return ret;
+            return caminhoFinal;
+
+        //Desempilham-se as cidades em duas cidades auxiliares para fazer as ligações
 
         Cidade anterior = vertices[inicioDoPercurso].getInfo();
         Cidade atual = null;
 
         while (!pilha.isVazia())
         {
+            //Atual recebe o topo da pilha
             atual = pilha.desempilhar();
-            if (anterior != null)
-            {
-                Aresta a = new Aresta(anterior, atual, adjMatrix[anterior.getCodigo()][atual.getCodigo()]);
-                ret.adicionar(a);
-            }
+
+            //Faz-se a ligação entre a cidade anterior e atual, adiconando a aresta ao caminho final
+            Aresta a = new Aresta(anterior, atual, adjMatrix[anterior.getCodigo()][atual.getCodigo()]);
+            caminhoFinal.adicionar(a);
+
+            //Anterior passa a ser a cidade atual
             anterior = atual;
         }
 
-        return ret;
+        //Retorna-se o caminho final montado
+        return caminhoFinal;
     }
 }

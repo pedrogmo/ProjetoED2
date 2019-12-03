@@ -1,7 +1,7 @@
-package com.example.trenscidadesandroid.classes.vertice;
-
 //Gustavo Henrique de Meira - 18015
 //Pedro Gomes Moreira - 18174
+
+package com.example.trenscidadesandroid.classes.vertice;
 
 import com.example.trenscidadesandroid.classes.cidade.Cidade;
 
