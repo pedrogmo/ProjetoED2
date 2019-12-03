@@ -1,5 +1,6 @@
 package com.example.trenscidadesandroid.classes.desenhadora;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.example.trenscidadesandroid.R;
 import com.example.trenscidadesandroid.classes.aresta.Aresta;
@@ -58,8 +61,8 @@ public class Desenhadora
     }
 
     public void desenhaCaminho(
-        Caminho caminho,
-        TableLayout tbResult)
+            Caminho caminho,
+            TextView textView)
     {
 
         for (Aresta aresta : caminho.getListaArestas())
@@ -76,7 +79,6 @@ public class Desenhadora
                 aresta.getDestino().getY() * TOTAL_Y * 2,
                 paint
             );
-
 
 
         }

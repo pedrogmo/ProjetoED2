@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     private Desenhadora desenhadora;
     private ImageView ivCanvas;
     private Button btnBuscar, btnAdicionarCidade, btnAdicionarCaminho;
-    private TableLayout tbCaminhos;
+    private TextView tvResultados;
     private Grafo grafo;
     private Lista<Cidade> cidadesLidas;
     private RadioButton rbTempo, rbDistancia;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         btnAdicionarCidade = findViewById(R.id.btnAdicionarCidade);
         btnAdicionarCaminho = findViewById(R.id.btnAdicionarCaminho);
         ivCanvas = findViewById(R.id.ivCanvas);
-        tbCaminhos = findViewById(R.id.tbCaminhos);
+        tvResultados = findViewById(R.id.tvResultados);
         rbTempo = findViewById(R.id.rbTempo);
         rbDistancia = findViewById(R.id.rbDistancia);
 
@@ -202,7 +203,7 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
                     {
-                        desenhadora.desenhaCaminho(c, tbCaminhos);
+                        desenhadora.desenhaCaminho(c, tvResultados);
                         Toast.makeText(getApplicationContext(), "Caminho encontrado", Toast.LENGTH_SHORT).show();
                     }
 
