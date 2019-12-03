@@ -9,13 +9,17 @@ import java.io.Serializable;
 public class Linha
     implements Serializable
 {
+    //Conteúdo string interno da Linha
     private String conteudo;
 
+    //Construtor com string
     public Linha(
         String conteudo) throws Exception
     {
         setConteudo(conteudo);
     }
+
+    //Getter e setter
 
     public String getConteudo()
     {
