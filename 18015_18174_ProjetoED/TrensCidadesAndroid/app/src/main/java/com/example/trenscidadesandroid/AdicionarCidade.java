@@ -19,9 +19,7 @@ import com.example.trenscidadesandroid.classes.cidade.Cidade;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
-//Gustavo Henrique de Meira - 18015
-//Pedro Gomes Moreira - 18174
-
+//Activity para adicionar nova cidade
 public class AdicionarCidade extends AppCompatActivity
 {
     private EditText etNome, etCoordenadaX, etCoordenadaY;
@@ -33,16 +31,19 @@ public class AdicionarCidade extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_cidade);
 
+        //Definição dos campos a partir do ID
         etNome = findViewById(R.id.etNome);
         etCoordenadaX = findViewById(R.id.etCoordenadaX);
         etCoordenadaY = findViewById(R.id.etCoordenadaY);
         btnAdicionar = findViewById(R.id.btnConcluirCidade);
 
+        //Recebe o BucketHash serializado
         bhCidade = (BucketHash<Cidade>) getIntent().getExtras().getSerializable("hash");
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Se os campos não estão vazios
                 if (!etNome.getText().toString().trim().equals("") &&
                     !etCoordenadaX.getText().toString().trim().equals("") &&
                     !etCoordenadaY.getText().toString().trim().equals(""))
@@ -55,22 +56,27 @@ public class AdicionarCidade extends AppCompatActivity
 
                     try
                     {
+                        //Valores atribuídos às variáveis
                         nome = etNome.getText().toString().trim();
                         x = Float.parseFloat(etCoordenadaX.getText().toString().trim());
                         y = Float.parseFloat(etCoordenadaY.getText().toString().trim());
                     }
                     catch(Exception exc)
                     {
+                        //Se houve erro, mensagem ao usuário
                         Toast.makeText(
                             getApplicationContext(),
                             "Dados inválidos",
                             Toast.LENGTH_SHORT
                         ).show();
+
+                        //Sai do evento click
                         return;
                     }
 
                     try
                     {
+                        //Instanciação de cidade com os dados
                         cd = new Cidade(
                             bhCidade.getQuantidade(),
                             nome,
@@ -80,6 +86,7 @@ public class AdicionarCidade extends AppCompatActivity
                     }
                     catch(Exception exc)
                     {
+                        //Se houve erro, mostra a exeção vinda da Cidade
                         Toast.makeText(
                             getApplicationContext(),
                             exc.getMessage(),
@@ -87,10 +94,13 @@ public class AdicionarCidade extends AppCompatActivity
                         ).show();
                         return;
                     }
+
+                    //Se cidade não existe no BucketHash
                     if (bhCidade.buscar(cd) == null)
                     {
                         try
                         {
+                            //Abre arquivo de saída no modo append, para adicionar cidade ao final
                             FileOutputStream fileout = openFileOutput("cidades.txt", MODE_APPEND);
                             OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                             outputWriter.write("\n" + cd.paraArquivo());
@@ -98,11 +108,13 @@ public class AdicionarCidade extends AppCompatActivity
 
                             Toast.makeText(getApplicationContext(), "Inserido com sucesso", Toast.LENGTH_SHORT).show();
 
+                            //Volta para a MainActivity
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
 
                         catch (Exception exc)
                         {
+                            //Se lançou exceção, erro de leitura
                             Toast.makeText(
                                 getApplicationContext(),
                                 "Erro na leitura do arquivo",
@@ -114,6 +126,7 @@ public class AdicionarCidade extends AppCompatActivity
                     }
                     else
                     {
+                        //Caso cidade já exista no BucketHash
                         Toast.makeText(
                             getApplicationContext(),
                             "Cidade já existente",
@@ -123,6 +136,7 @@ public class AdicionarCidade extends AppCompatActivity
                 }
                 else
                 {
+                    //Se há campos vazios
                     Toast.makeText(
                         getApplicationContext(),
                         "Há campos vazios",
@@ -132,5 +146,4 @@ public class AdicionarCidade extends AppCompatActivity
             }
         });
     }
-    }
-
+}
