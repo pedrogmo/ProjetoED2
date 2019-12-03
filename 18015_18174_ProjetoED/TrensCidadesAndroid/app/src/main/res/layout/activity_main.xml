@@ -74,7 +74,7 @@
         android:id="@+id/tvResultados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resultados"
+        android:text="Resultados\n\n"
         android:textSize="20dp"
         android:layout_below="@+id/ivCanvas"
         android:layout_marginLeft="40dp"/>

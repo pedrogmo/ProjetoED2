@@ -141,7 +141,10 @@ public class Aresta
 
     public String toString()
     {
-        String ret = origem.getNome() + " | " + destino.getNome() + " | " + tempo + " | " + distancia;
+        String ret =
+            Utilidades.padRight(origem.getNome(), Cidade.TAMANHO_NOME) + "->" +
+            Utilidades.padRight(destino.getNome(), Cidade.TAMANHO_NOME) +
+            "|" + tempo + " | " + distancia;
         return ret;
     }
 }

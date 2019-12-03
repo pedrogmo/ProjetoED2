@@ -64,7 +64,6 @@ public class Desenhadora
             Caminho caminho,
             TextView textView)
     {
-
         for (Aresta aresta : caminho.getListaArestas())
         {
             if (aresta.getDistancia() < DIST_LINHA)
@@ -80,8 +79,11 @@ public class Desenhadora
                 paint
             );
 
-
+            textView.append(aresta.toString() + "\n");
         }
+
+        textView.append("\nDistância total: " + caminho.getDistanciaTotal() + "\n");
+        textView.append("Tempo total: " + caminho.getTempoTotal() + "\n");
     }
     public void limpar()
     {

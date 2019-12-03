@@ -197,8 +197,9 @@ public class MainActivity extends AppCompatActivity
                         modoBusca = Grafo.ModoBusca.PorMenorDistancia;
 
                     Caminho c = grafo.getCaminho(origem, destino, modoBusca);
-
+                    tvResultados.setText("Resultados\n\n");
                     desenhadora.limpar();
+
                     if (c.isVazio())
                         Toast.makeText(getApplicationContext(), "Caminho impossível", Toast.LENGTH_SHORT).show();
                     else
