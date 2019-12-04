@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -244,6 +243,7 @@ public class MainActivity extends AppCompatActivity
     {
         try
         {
+            //Abre arquivo modo criação para escrever
             FileOutputStream fileout = openFileOutput("cidades.txt", MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
             outputWriter.write("" +
@@ -320,6 +320,7 @@ public class MainActivity extends AppCompatActivity
     {
         try
         {
+            //Abre arquivo modo criação para escrever
             FileOutputStream fileout = openFileOutput("grafo.txt", MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
             outputWriter.write("" +
